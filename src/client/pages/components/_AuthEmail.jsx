@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { auth } from '../../../config/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../config/firebase';
 import {
   getData,
   addData,
@@ -8,7 +8,7 @@ import {
   updateData,
 } from '../../../server/db/db';
 
-const AuthEmail = () => {
+function AuthEmail() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -48,6 +48,6 @@ const AuthEmail = () => {
       <button onClick={signIn}>Sign In</button>
     </div>
   );
-};
+}
 
 export default AuthEmail;
