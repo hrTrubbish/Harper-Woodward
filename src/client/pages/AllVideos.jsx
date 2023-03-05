@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AllVideos = () => {
+export default function AllVideos () {
   return (
     <div className="p-6">
       <div className="grid gap-4 grid-cols-2 grid-rows-auto">
@@ -32,5 +32,3 @@ const AllVideos = () => {
     </div>
   );
 };
-
-export default AllVideos;

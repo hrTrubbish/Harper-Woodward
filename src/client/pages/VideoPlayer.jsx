@@ -1,6 +1,6 @@
 import React from 'react';
 
-const VideoPlayer = () => {
+export default function VideoPlayer () {
   return (
     <div className="flex">
       <div className="flex w-2/3 border-solid border-2 border-inherit p-6">
@@ -28,5 +28,3 @@ const VideoPlayer = () => {
     </div>
   );
 };
-
-export default VideoPlayer;

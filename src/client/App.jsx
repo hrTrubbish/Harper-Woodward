@@ -8,7 +8,7 @@ import LivePage from './pages/LivePage.jsx';
 import AllVideos from './pages/AllVideos.jsx';
 import VideoPlayer from './pages/VideoPlayer.jsx';
 
-const App = () => {
+export default function App () {
   return (
     <>
       <Header />
@@ -26,5 +26,3 @@ const App = () => {
     </>
   );
 };
-
-export default App;
