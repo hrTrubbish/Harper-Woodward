@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/components/_Home';
+import Home from './pages/Home.jsx';
 import Header from './pages/components/common/Header.jsx';
 // import { AuthEmail } from './pages/components/_AuthEmail';
 // import { AuthGoogle } from './pages/components/_AuthGoogle';
@@ -13,11 +13,10 @@ const App = () => {
       <div className="App">
         {/* <AuthEmail />
         <AuthGoogle /> */}
-        {/* <Routes>
+        <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/live" element={<Live />} />
-        </Routes> */}
-      <LivePage/>
+          <Route path="/live" element={<LivePage />} />
+        </Routes>
       </div>
     </>
   );
