@@ -12,7 +12,7 @@ const Header = () => {
       <div className="header-bottom">
         <nav id="main-nav">
           <Link to='/live'>livestream</Link>
-          <a href="">videos</a>
+          <Link to='/videos'>videos</Link>
           <a href="">tickets</a>
         </nav>
       </div>
