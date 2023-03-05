@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   auth,
   googleProvider,
-} from '../../config/firebase';
+} from '../../../config/firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
@@ -11,7 +11,7 @@ import {
 
 // signInWithRedirect, signInWithPopup
 
-export const AuthGoogle = () => {
+const AuthGoogle = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -54,3 +54,5 @@ export const AuthGoogle = () => {
     </div>
   );
 };
+
+export default AuthGoogle;
