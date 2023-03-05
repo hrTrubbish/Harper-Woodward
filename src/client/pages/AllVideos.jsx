@@ -1,7 +1,7 @@
 import React from 'react';
 import YouTubeEmbed from './components/video_player/YouTubeEmbed.jsx'
 
-export default function AllVideos () {
+export default function AllVideos() {
   return (
     <div className="p-6">
       <div className="grid gap-4 grid-cols-2 grid-rows-auto">
@@ -44,4 +44,4 @@ export default function AllVideos () {
       </div>
     </div>
   );
-};
+}

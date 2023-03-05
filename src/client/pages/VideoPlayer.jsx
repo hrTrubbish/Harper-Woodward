@@ -1,7 +1,7 @@
 import React from 'react';
 import YouTubeEmbed from './components/video_player/YouTubeEmbed.jsx'
 
-export default function VideoPlayer () {
+export default function VideoPlayer() {
   return (
     <div className="flex">
       <div className="flex w-2/3 border-solid border-2 border-inherit p-6">
@@ -43,4 +43,4 @@ export default function VideoPlayer () {
       </div>
     </div>
   );
-};
+}

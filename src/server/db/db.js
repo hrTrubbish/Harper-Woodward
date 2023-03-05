@@ -1,4 +1,3 @@
-import { db } from '../../config/firebase';
 import {
   collection,
   getDocs,
@@ -8,6 +7,7 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
+import { db } from '../../config/firebase';
 
 const testCollectionRef = collection(db, 'test');
 const testCollectionRefWithTag = doc(
@@ -29,9 +29,9 @@ export const getData = async () => {
     // console.log(data);
 
     // Get Real Data in Array Format
-    const tableData = data.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
+    const tableData = data.docs.map((document) => ({
+      ...document.data(),
+      id: document.id,
     }));
     console.log(tableData);
   } catch (err) {

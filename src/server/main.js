@@ -1,7 +1,7 @@
 const express = require('express');
 const ViteExpress = require('vite-express');
-const router = require('./routes');
 const morgan = require('morgan');
+const router = require('./routes');
 require('dotenv').config();
 
 const app = express();
@@ -15,8 +15,6 @@ app.get('/hello', (req, res) => {
   res.send('Hello Vite + React!');
 });
 
-ViteExpress.listen(app, process.env.PORT, () =>
-  console.log(
-    `Server is listening on port ${process.env.PORT}...`,
-  ),
-);
+ViteExpress.listen(app, process.env.PORT, () => console.log(
+  `Server is listening on port ${process.env.PORT}...`,
+));

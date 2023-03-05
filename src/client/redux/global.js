@@ -27,7 +27,8 @@ const globalSlice = createSlice({
   name: 'global',
   initialState,
   reducers: {
-    // reducers are actions that update the state. action.payload is the arguments being passed in. You can mutate the state directly
+    // reducers are actions that update the state.
+    // action.payload is the arguments being passed in. You can mutate the state directly
     updateCurrentUser: (state, action) => {
       state.userId = action.payload;
     },
