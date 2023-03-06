@@ -13,7 +13,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <div className="App">
+      <div className="App bg-hero-pattern bg-no-repeat bg-cover bg-center bg-fixed">
         {/* <AuthEmail />
         <AuthGoogle /> */}
         <Routes>
