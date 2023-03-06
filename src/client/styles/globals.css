@@ -31,6 +31,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
   font-family: 'Roboto Slab', serif;
+  color: #D5CEA3;
 }
 ol, ul {
 	list-style: none;
@@ -58,7 +59,8 @@ table {
 
 #header {
   align-items: center;
-  background-color: #3C2A21;
+  /* background-color: #3C2A21; */
+  background-color: #251B1A;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   display: flex;
   flex-direction: column;
@@ -74,8 +76,8 @@ table {
 
 .header-top {
   align-items: center;
-  border-bottom: 2px solid #1A120B;
-  background-color: #3C2A21;
+  /* border-bottom: 2px solid #1A120B; */
+  background-color: #251B1A;
   color: #D5CEA3;
   display: flex;
   height: 60%;
@@ -92,8 +94,9 @@ table {
 
 .header-bottom {
   align-items: center;
-  border-bottom: 2px solid #1A120B;
+  /* border-bottom: 2px solid #1A120B; */
   background-color:#D5CEA3;
+  color:#251B1A;
   display: flex;
   height: 40%;
   justify-content: center;
