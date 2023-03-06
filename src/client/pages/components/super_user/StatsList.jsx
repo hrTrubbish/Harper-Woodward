@@ -9,13 +9,13 @@ export default function StatsList({ stats }) {
         {/* {stats.map((stat) => {
           return <ul><StatsItem key={stat._id} id={stat._id} stat={stat}/></ul>
         })} */}
-        <div className="border-solid border-2 border-black">stats 1</div>
-        <div className="border-solid border-2 border-black">stats 2</div>
-        <div className="border-solid border-2 border-black">stats 3</div>
-        <div className="border-solid border-2 border-black">stats 4</div>
-        <div className="border-solid border-2 border-black">stats 5</div>
-        <div className="border-solid border-2 border-black">stats 6</div>
-        <div className="border-solid border-2 border-black">stats 7</div>
+        <StatsItem className="border-solid border-2 border-black">stats 1</StatsItem>
+        <StatsItem className="border-solid border-2 border-black">stats 2</StatsItem>
+        <StatsItem className="border-solid border-2 border-black">stats 3</StatsItem>
+        <StatsItem className="border-solid border-2 border-black">stats 4</StatsItem>
+        <StatsItem className="border-solid border-2 border-black">stats 5</StatsItem>
+        <StatsItem className="border-solid border-2 border-black">stats 6</StatsItem>
+        <StatsItem className="border-solid border-2 border-black">stats 7</StatsItem>
       </div>
     </div>
   );
