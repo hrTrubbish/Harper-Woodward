@@ -6,7 +6,11 @@ module.exports = {
   ],
   darkMode: 'media',
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'hero-pattern': "url('./src/client/styles/img/campfire.jpg')",
+      },
+    },
   },
   variants: {},
   plugins: [],
