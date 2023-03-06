@@ -1,8 +1,8 @@
-const adminController = require('./admin.controller');
-const scheduleController = require('./schedule.controller');
-const tourController = require('./tours.controller');
-const videoController = require('./videos.controller');
-const transactionController = require('./transactions.controller');
+const adminController = require('./admin');
+const scheduleController = require('./schedule');
+const tourController = require('./tours');
+const videoController = require('./videos');
+const transactionController = require('./transactions');
 
 module.exports = {
   adminController,

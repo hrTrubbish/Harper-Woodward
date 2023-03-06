@@ -1,8 +1,8 @@
-const adminModel = require('./admin.model');
-const scheduleModel = require('./schedule.model');
-const tourModel = require('./tours.model');
-const videoModel = require('./videos.model');
-const transactionModel = require('./transactions.model');
+const adminModel = require('./admin');
+const scheduleModel = require('./schedule');
+const tourModel = require('./tours');
+const videoModel = require('./videos');
+const transactionModel = require('./transactions');
 
 module.exports = {
   adminModel,
