@@ -4,7 +4,7 @@ export default function SuperUser() {
   return (
     <div className="flex mt-5 h-5/6 ">
       <div className="flex flex-col w-1/2 h-3/6 ml-8 mr-8 border-solid border-2 border-rose-100">
-        <button className="text-3xl">
+        <button type="button" className="text-3xl">
           Start Livestream
         </button>
       </div>

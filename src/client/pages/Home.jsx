@@ -1,4 +1,6 @@
 import React from 'react';
+import YouTubeEmbed from './components/video_player/YouTubeEmbed.jsx';
+import TourDateList from './components/home/TourDateList.jsx';
 
 export default function Home() {
   return (
@@ -7,7 +9,10 @@ export default function Home() {
         <span className="text-3xl self-center">
           featured video
         </span>
-        <video className="h-90 mr-5 ml-5 border-dotted border-2 border" />
+        <YouTubeEmbed
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="Dancing in a Bar"
+        />
         <div className="flex justify-between mr-5 ml-5">
           <span className="font-bold text-3xl">
             Dancing in a Bar
@@ -21,7 +26,7 @@ export default function Home() {
       <div className="info flex flex-col p-10 border-t-2">
         <span className="text-3xl self-center">info</span>
         <div className="flex justify-around h-60">
-          <img className="w-3/12 border-dotted border-2" />
+          <img className="w-3/12 border-dotted border-2" alt="" />
           <div className="flex flex-col self-center">
             <span>
               THIS IS SOME INFO ABOUT BROOKS GARTH
@@ -32,14 +37,15 @@ export default function Home() {
       </div>
       <div className="tour flex flex-col p-10 border-t-2">
         <span className="text-3xl self-center">tour</span>
+        <TourDateList />
       </div>
       <div className="merch flex flex-col p-10 border-t-2">
         <span className="text-3xl self-center">merch</span>
         <div className="flex justify-around mb-20 p-5">
-          <img className="h-20 w-20 border-solid border-2 border" />
-          <img className="h-20 w-20 border-solid border-2 border" />
-          <img className="h-20 w-20 border-solid border-2 border" />
-          <img className="h-20 w-20 border-solid border-2 border" />
+          <img className="h-20 w-20 border-solid border-2 border" alt="" />
+          <img className="h-20 w-20 border-solid border-2 border" alt="" />
+          <img className="h-20 w-20 border-solid border-2 border" alt="" />
+          <img className="h-20 w-20 border-solid border-2 border" alt="" />
         </div>
       </div>
     </div>
