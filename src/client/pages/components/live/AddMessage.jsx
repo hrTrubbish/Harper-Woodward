@@ -36,7 +36,7 @@ export default function AddMessage({ handleMessage }) {
           placeholder="Message here"
           onChange={handleInputChange}
         />
-        <input type="submit" value="Post"></input>
+        <input type="submit" value="Post" className="cursor-pointer border-solid border-2 border-black m-2 mt-4 p-2" />
       </div>
     </form>
   );

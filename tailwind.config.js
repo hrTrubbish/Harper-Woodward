@@ -10,6 +10,9 @@ module.exports = {
       backgroundImage: {
         'hero-pattern': "url('./src/client/styles/img/campfire.jpg')",
       },
+      cursor: {
+        fancy: 'url(hand.cur), pointer',
+      },
     },
   },
   variants: {},
