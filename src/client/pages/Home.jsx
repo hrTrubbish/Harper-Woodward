@@ -1,5 +1,6 @@
 import React from 'react';
 import YouTubeEmbed from './components/video_player/YouTubeEmbed.jsx';
+import TourDateList from './components/home/TourDateList.jsx';
 
 export default function Home() {
   return (
@@ -36,6 +37,7 @@ export default function Home() {
       </div>
       <div className="tour flex flex-col p-10 border-t-2">
         <span className="text-3xl self-center">tour</span>
+        <TourDateList />
       </div>
       <div className="merch flex flex-col p-10 border-t-2">
         <span className="text-3xl self-center">merch</span>
