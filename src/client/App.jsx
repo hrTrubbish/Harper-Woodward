@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import Header from './pages/components/common/Header.jsx';
@@ -14,7 +14,6 @@ export default function App() {
     <>
       <Header />
       <div className="App">
-        {/* <VideoPlayer */}
         {/* <AuthEmail />
         <AuthGoogle /> */}
         <Routes>
