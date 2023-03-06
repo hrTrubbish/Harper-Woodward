@@ -1,8 +1,16 @@
 const router = require('express').Router();
-// const yourRoutes = require('./yourFile')
-// router.use('/auth' <---- include only beginning here, yourRoutes)
+const authRoutes = require('./auth');
+const tourRoutes = require('./tours');
+const scheduleRoutes = require('./schedule');
+const adminRoutes = require('./admin');
+const transactionRoutes = require('./transactions');
+const videoRoutes = require('./videos');
 
-// in yourFile -> you need to have const router = require... and also export default router
-// then you can router.post / router.get in yourFile
+// router.use('/auth', authRoutes);
+// router.use('/tours', tourRoutes);
+// router.use('/schedule', scheduleRoutes);
+router.use('/admin', adminRoutes);
+// router.use('/transactions', transactionRoutes);
+// router.use('/videos', videoRoutes);
 
 module.exports = router;
