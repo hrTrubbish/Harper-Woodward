@@ -1,4 +1,4 @@
-const { collection, getDocs, doc, setDoc } = require('firebase/firestore');
+const { collection, getDocs, doc, setDoc, updateDoc, deleteDoc } = require('firebase/firestore');
 
 const dbPromise = require('../../config/firebase');
 
@@ -24,10 +24,22 @@ module.exports = {
       console.error(err);
     }
   },
-  updateVideo: async () => {
-    console.log('in videos updateVideo')
+  updateVideo: async (id, updatedBody) => {
+    try {
+      const db = await dbPromise;
+      const videoRef = doc(db, 'videos', id);
+      await updateDoc(videoRef, updatedBody);
+    } catch (err) {
+      console.error(err);
+    }
   },
-  deleteVideo: async () => {
-    console.log('in videos deleteVideo')
+  deleteVideo: async (id) => {
+    try {
+      const db = await dbPromise;
+      const videoRef = doc(db, 'videos', id);
+      await deleteDoc(videoRef);
+    } catch (err) {
+      console.error(err);
+    }
   },
 };

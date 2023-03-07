@@ -6,30 +6,31 @@ module.exports = {
       const videos = await model.getAllVideos();
       res.status(200).send(videos);
     } catch (err) {
-      console.log(err, 'err');
+      console.error(err);
     }
   },
   post: async (req, res) => {
     try {
-      console.log('in videos addVideo')
       model.addVideo(req.body);
-      res.status(201).send('in addVideos')
+      res.status(201).send({ body: req.body, message: 'video added!' });
     } catch (err) {
-      console.log(err, 'err');
+      console.error(err);
     }
   },
   patch: async (req, res) => {
     try {
-      console.log('in videos updateVideo')
+      model.updateVideo(req.params.videoId, req.body);
+      res.status(200).send('asset updated');
     } catch (err) {
-      console.log(err, 'err');
+      console.error(err);
     }
   },
   delete: async (req, res) => {
     try {
-      console.log('in videos deleteVideo')
+      model.deleteVideo(req.params.videoId);
+      res.status(200).send('deleted!');
     } catch (err) {
-      console.log(err, 'err');
+      console.error(err);
     }
   },
 };
