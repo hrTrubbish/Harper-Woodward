@@ -3,11 +3,13 @@ import StatsList from './components/super_user/StatsList.jsx';
 
 export default function SuperUser() {
   return (
-    <div className="flex h-screen w-screen">
-      <div className="flex w-1/2 m-8 border-solid border-2 border-current">
-        <button type="button" className="flex-1 text-3xl">Start Livestream</button>
+    <div className="h-screen">
+      <div className="flex">
+        <div className="flex justify-center w-1/2">
+          <button type="button" className="bg-garthbeige hover:bg-brown-200 text-garthbrown font-bold py-2 px-4 rounded p-6 m-8 self-center">Start Livestream</button>
+        </div>
+        <StatsList />
       </div>
-      <StatsList />
     </div>
   );
 }
