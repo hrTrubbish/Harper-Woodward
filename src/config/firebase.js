@@ -1,7 +1,5 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+const firebase = require('firebase/app');
+const { getFirestore } = require('firebase/firestore');
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAhUitqkMWsvY05hPgdSS7-z941xwNZSWU',
@@ -13,7 +11,7 @@ const firebaseConfig = {
   measurementId: 'G-ENY3R8JZP8',
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
-export const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const db = getFirestore();
+
+module.exports = db;
