@@ -15,6 +15,8 @@ app.get('/hello', (req, res) => {
   res.send('Hello Vite + React!');
 });
 
-ViteExpress.listen(app, process.env.PORT, () => console.log(
-  `Server is listening on port ${process.env.PORT}...`,
-));
+ViteExpress.listen(app, process.env.PORT, () => {
+  console.log(
+    `Server is listening on port ${process.env.PORT}...`,
+  );
+});
