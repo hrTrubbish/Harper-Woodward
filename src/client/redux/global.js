@@ -7,15 +7,15 @@ import axios from 'axios';
 const initialState = {
   userId: null,
   isLoading: true,
+  tours: [],
 };
 
 // EXAMPLE FETCHING FUNCTION
-// export const someFunction = createAsyncThunk(
-//   'global/someFunction',
+// export const fetchTours = createAsyncThunk(
+//   'global/fetchTours',
 //   // first parameter can be anything
-//   async (_, thunkAPI) => {
+//   async () => {
 //     // thunk allows you to access other state files
-//     const anotherState = thunkAPI.getState().rr;
 
 //     const res = await axios({});
 
@@ -33,17 +33,17 @@ const globalSlice = createSlice({
       state.userId = action.payload;
     },
   },
-  extraReducers: (builder) => {
-    // builder.addCase(someFunction.pending, (state) => {
-    //   state.isLoading = false;
-    // });
-    // builder.addCase(someFunction.fulfilled, (state) => {
-    //   // update state when fulfilled here
-    // });
-    // builder.addCase(someFunction.rejected, (state) => {
-    //   state.isLoading = false;
-    // });
-  },
+  // extraReducers: (builder) => {
+  //   builder.addCase(fetchTours.pending, (state) => {
+  //     state.isLoading = false;
+  //   });
+  //   builder.addCase(fetchTours.fulfilled, (state, action) => {
+  //     state.tours = action.payload
+  //   });
+  //   builder.addCase(fetchTours.rejected, (state) => {
+  //     state.isLoading = false;
+  //   });
+  // },
 });
 
 export const { updateCurrentUser } = globalSlice.actions;
