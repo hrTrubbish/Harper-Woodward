@@ -59,7 +59,7 @@ table {
 
 #header {
   align-items: center;
-  background-color: #251B1A;
+  background-color: #251B1B;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   display: flex;
   flex-direction: column;
@@ -75,7 +75,7 @@ table {
 
 .header-top {
   align-items: center;
-  background-color: #251B1A;
+  background-color: #251B1B;
   color: #D5CEA3;
   display: flex;
   height: 60%;
@@ -93,7 +93,7 @@ table {
 .header-bottom {
   align-items: center;
   background-color:#D5CEA3;
-  color:#251B1A;
+  color:#251B1B;
   display: flex;
   height: 40%;
   justify-content: center;
