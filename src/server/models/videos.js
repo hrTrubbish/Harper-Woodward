@@ -5,6 +5,7 @@ const {
   setDoc,
   updateDoc,
   deleteDoc,
+  serverTimestamp,
 } = require('firebase/firestore');
 
 const dbPromise = require('../../config/firebase');
@@ -24,13 +25,17 @@ module.exports = {
       return err;
     }
   },
-  addVideo: async (videoBody) => {
+  addVideo: async (payload) => {
     try {
       const db = await dbPromise;
       const videoRef = collection(db, 'videos');
       // doc takes a second param, the name of a document ID
       // if you wish to provide it. otherwise it randomly generates one.
-      return setDoc(doc(videoRef), videoBody);
+      return setDoc(doc(videoRef), {
+        ...payload,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
     } catch (err) {
       return err;
     }
