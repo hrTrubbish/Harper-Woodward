@@ -25,6 +25,17 @@ module.exports = {
       throw new Error(error);
     }
   },
+  getOne: async (id) => {
+    try {
+      const db = await dbPromise;
+      const scheduleRef = doc(db, 'schedules', id);
+      const schedule = await getDoc(scheduleRef);
+
+      return { id: schedule.id, ...schedule.data() };
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
   post: async (payload) => {
     try {
       const db = await dbPromise;
