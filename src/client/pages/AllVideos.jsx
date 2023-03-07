@@ -10,7 +10,7 @@ export default function AllVideos() {
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
             title="Dancing in a Bar"
           />
-          <div className="border-solid border-2 border-current p-2 text-center">
+          <div className="border-solid border-t-2 border-current p-2 text-center">
             <h2>Dancing in a Bar</h2>
           </div>
         </div>
@@ -19,7 +19,7 @@ export default function AllVideos() {
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
             title="Dancing in a Bar"
           />
-          <div className="border-solid border-2 border-current p-2 text-center">
+          <div className="border-solid border-t-2 border-current p-2 text-center">
             <h2>Dancing in a Bar</h2>
           </div>
         </div>
@@ -28,7 +28,7 @@ export default function AllVideos() {
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
             title="Dancing in a Bar"
           />
-          <div className="border-solid border-2 border-current p-2 text-center">
+          <div className="border-solid border-t-2 border-current p-2 text-center">
             <h2>Dancing in a Bar</h2>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function AllVideos() {
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
             title="Dancing in a Bar"
           />
-          <div className="border-solid border-2 border-current p-2 text-center">
+          <div className="border-solid border-t-2 border-current p-2 text-center">
             <h2>Dancing in a Bar</h2>
           </div>
         </div>

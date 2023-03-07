@@ -14,8 +14,7 @@ export default function LivePage() {
           <p>{`Views: ${500000}`}</p>
         </div>
       </div>
-
-      <div className="border-2 border-current mt-2 mb-2 flex flex-col justify-end w-3/12 p-6">
+      <div className="border-2 border-current mt-4 mb-2 flex flex-col justify-end w-3/12 p-6">
         <ViewerMessageList />
         <div className="p-6">
           <AddMessage />
