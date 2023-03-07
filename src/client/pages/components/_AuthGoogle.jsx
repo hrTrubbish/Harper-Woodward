@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import {
-  auth,
-  googleProvider,
-} from '../../config/firebase';
-import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from 'firebase/auth';
+import {
+  auth,
+  googleProvider,
+} from '../../../config/firebase';
 
 // signInWithRedirect, signInWithPopup
 
-export const AuthGoogle = () => {
+export default function AuthGoogle() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -53,4 +53,4 @@ export const AuthGoogle = () => {
       <button onClick={logOutGoogle}>Log Out Google</button>
     </div>
   );
-};
+}

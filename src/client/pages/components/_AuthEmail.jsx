@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
-import { auth } from '../../config/firebase';
+import React, { useState, useEffect } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../config/firebase';
+import {
+  getData,
+  addData,
+  delData,
+  updateData,
+} from '../../../server/db/db';
 
-export const AuthEmail = () => {
+function AuthEmail() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,6 +26,13 @@ export const AuthEmail = () => {
     }
   };
 
+  useEffect(() => {
+    getData();
+    // addData();
+    // delData();
+    // updateData();
+  }, []);
+
   return (
     <div>
       <input
@@ -35,4 +48,6 @@ export const AuthEmail = () => {
       <button onClick={signIn}>Sign In</button>
     </div>
   );
-};
+}
+
+export default AuthEmail;
