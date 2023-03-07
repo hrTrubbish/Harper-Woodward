@@ -18,7 +18,7 @@ module.exports = {
   getOne: async (req, res) => {
     try {
       const response = await scheduleModel.getOne(
-        req.params.id,
+        req.params.streamId,
       );
       return res.status(200).send({
         success: true,
@@ -32,24 +32,23 @@ module.exports = {
     }
   },
   post: async (req, res) => {
-    console.log(req.body);
-    // try {
-    //   const response = await scheduleModel.post(req.body);
-    //   return res.status(201).send({
-    //     success: true,
-    //     message: 'Successfully created schedule',
-    //     response,
-    //   });
-    // } catch (error) {
-    //   return res
-    //     .status(500)
-    //     .send({ success: false, message: error.message });
-    // }
+    try {
+      const response = await scheduleModel.post(req.body);
+      return res.status(201).send({
+        success: true,
+        message: 'Successfully created schedule',
+        response,
+      });
+    } catch (error) {
+      return res
+        .status(500)
+        .send({ success: false, message: error.message });
+    }
   },
   patch: async (req, res) => {
     try {
       const response = await scheduleModel.patch(
-        req.params.id,
+        req.params.streamId,
         req.body,
       );
       return res.status(203).send({
@@ -66,7 +65,7 @@ module.exports = {
   remove: async (req, res) => {
     try {
       const response = await scheduleModel.remove(
-        req.params.id,
+        req.params.streamId,
       );
       return res.status(203).send({
         success: true,

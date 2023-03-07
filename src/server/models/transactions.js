@@ -36,22 +36,11 @@ module.exports = {
         'transactions',
       );
 
-      const newtransactionRef = await setDoc(
-        doc(transactionsRef),
-        {
-          ...payload,
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp(),
-        },
-      );
-
-      const newtransaction = await getDoc(
-        newtransactionRef,
-      );
-      return {
-        id: newtransaction.id,
-        ...newtransaction.data(),
-      };
+      return setDoc(doc(transactionsRef), {
+        ...payload,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
     } catch (error) {
       throw new Error(error);
     }

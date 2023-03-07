@@ -42,17 +42,11 @@ module.exports = {
       const db = await dbPromise;
       const schedulesRef = collection(db, 'schedules');
 
-      const newScheduleRef = await setDoc(
-        doc(schedulesRef),
-        {
-          ...payload,
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp(),
-        },
-      );
-
-      const newSchedule = await getDoc(newScheduleRef);
-      return { id: newSchedule.id, ...newSchedule.data() };
+      return setDoc(doc(schedulesRef), {
+        ...payload,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
     } catch (error) {
       throw new Error(error);
     }

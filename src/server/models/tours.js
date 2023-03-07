@@ -42,14 +42,11 @@ module.exports = {
       const db = await dbPromise;
       const toursRef = collection(db, 'tours');
 
-      const newtourRef = await setDoc(doc(toursRef), {
+      return setDoc(doc(toursRef), {
         ...payload,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       });
-
-      const newtour = await getDoc(newtourRef);
-      return { id: newtour.id, ...newtour.data() };
     } catch (error) {
       throw new Error(error);
     }

@@ -8,7 +8,7 @@ const videoRoutes = require('./videos');
 
 // router.use('/auth', authRoutes);
 router.use('/tours', tourRoutes);
-router.use('/schedule', scheduleRoutes);
+router.use('/schedules', scheduleRoutes);
 router.use('/admin', adminRoutes);
 router.use('/transactions', transactionRoutes);
 router.use('/videos', videoRoutes);

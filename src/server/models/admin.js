@@ -32,20 +32,11 @@ module.exports = {
       const db = await dbPromise;
       const superUsersRef = collection(db, 'superUsers');
 
-      const newsuperUserRef = await setDoc(
-        doc(superUsersRef),
-        {
-          ...payload,
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp(),
-        },
-      );
-
-      const newsuperUser = await getDoc(newsuperUserRef);
-      return {
-        id: newsuperUser.id,
-        ...newsuperUser.data(),
-      };
+      return setDoc(doc(superUsersRef), {
+        ...payload,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
     } catch (error) {
       throw new Error(error);
     }

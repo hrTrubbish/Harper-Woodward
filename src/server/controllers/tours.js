@@ -18,7 +18,7 @@ module.exports = {
   getOne: async (req, res) => {
     try {
       const response = await tourModel.getOne(
-        req.params.id,
+        req.params.tourId,
       );
       return res.status(200).send({
         success: true,
@@ -48,7 +48,7 @@ module.exports = {
   patch: async (req, res) => {
     try {
       const response = await tourModel.patch(
-        req.params.id,
+        req.params.tourId,
         req.body,
       );
       return res.status(203).send({
@@ -65,7 +65,7 @@ module.exports = {
   remove: async (req, res) => {
     try {
       const response = await tourModel.remove(
-        req.params.id,
+        req.params.tourId,
       );
       return res.status(203).send({
         success: true,

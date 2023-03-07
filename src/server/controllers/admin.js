@@ -32,7 +32,7 @@ module.exports = {
   patch: async (req, res) => {
     try {
       const response = await adminModel.patch(
-        req.params.id,
+        req.params.userId,
         req.body,
       );
       return res.status(203).send({
