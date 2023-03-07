@@ -4,7 +4,7 @@ import TourDateList from './components/home/TourDateList.jsx';
 
 export default function Home() {
   return (
-    <div className="flex flex-col border-t-2">
+    <div className="flex flex-col">
       <div className="featured flex flex-col p-10">
         <span className="text-3xl self-center">
           featured video
@@ -23,10 +23,10 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="info flex flex-col p-10 border-t-2">
+      <div className="info flex flex-col p-10">
         <span className="text-3xl self-center">info</span>
         <div className="flex justify-around h-60">
-          <img className="w-3/12 border-dotted border-2" alt="" />
+          <img className="w-3/12 border-dotted border-2 border-current" alt="" />
           <div className="flex flex-col self-center">
             <span>
               THIS IS SOME INFO ABOUT BROOKS GARTH
@@ -35,17 +35,17 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="tour flex flex-col p-10 border-t-2">
+      <div className="tour flex flex-col p-10 border-t-2 border-current">
         <span className="text-3xl self-center">tour</span>
         <TourDateList />
       </div>
-      <div className="merch flex flex-col p-10 border-t-2">
+      <div className="merch flex flex-col p-10 border-t-2 border-current">
         <span className="text-3xl self-center">merch</span>
         <div className="flex justify-around mb-20 p-5">
-          <img className="h-20 w-20 border-solid border-2 border" alt="" />
-          <img className="h-20 w-20 border-solid border-2 border" alt="" />
-          <img className="h-20 w-20 border-solid border-2 border" alt="" />
-          <img className="h-20 w-20 border-solid border-2 border" alt="" />
+          <img className="h-20 w-20 border-solid border-2 border-current" alt="" />
+          <img className="h-20 w-20 border-solid border-2 border-current" alt="" />
+          <img className="h-20 w-20 border-solid border-2 border-current" alt="" />
+          <img className="h-20 w-20 border-solid border-2 border-current" alt="" />
         </div>
       </div>
     </div>

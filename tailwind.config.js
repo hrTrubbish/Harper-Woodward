@@ -14,6 +14,13 @@ module.exports = {
         fancy: 'url(hand.cur), pointer',
       },
     },
+    borderColor: theme => ({
+      ...theme('colors'),
+      DEFAULT: theme('colors.gray.300', 'currentColor'),
+      primary: '#3490dc',
+      secondary: '#ffed4a',
+      danger: '#e3342f',
+    }),
   },
   variants: {},
   plugins: [],

@@ -5,8 +5,8 @@ import ViewerMessageList from './components/live/ViewerMessageList.jsx';
 export default function LivePage() {
   return (
     <div className="flex h-5/6">
-      <div className="flex flex-col w-8/12 h-3/6 ml-8 mr-8 border-black">
-        <video className="border-4 border-black"/>
+      <div className="flex flex-col w-8/12 h-3/6 ml-8 mr-8 border-current mt-2">
+        <video className="border-2 border-current mt-2"/>
         <div className="text-3xl">
           *Live* Brooks Garth free show to raise awareness about dangling commas
         </div>
@@ -15,7 +15,7 @@ export default function LivePage() {
         </div>
       </div>
 
-      <div className="border-2 border-black flex flex-col justify-end w-3/12 p-6">
+      <div className="border-2 border-current mt-2 mb-2 flex flex-col justify-end w-3/12 p-6">
         <ViewerMessageList />
         <div className="p-6">
           <AddMessage />
