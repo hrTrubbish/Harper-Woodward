@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const controller = require('../controllers/videos.js')
+const controller = require('../controllers/videos');
 
 router.get('/', controller.get);
 router.post('/create', controller.post);
