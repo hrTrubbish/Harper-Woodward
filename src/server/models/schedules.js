@@ -14,14 +14,14 @@ module.exports = {
   get: async () => {
     try {
       const db = await dbPromise;
-      const tourRef = collection(db, 'tours');
-      const tourSnapShot = await getDocs(tourRef);
-      const tours = tourSnapShot.docs.map((d) => ({
+      const scheduleRef = collection(db, 'schedules');
+      const scheduleSnapShot = await getDocs(scheduleRef);
+      const schedules = scheduleSnapShot.docs.map((d) => ({
         id: d.id,
         ...d.data(),
       }));
 
-      return tours;
+      return schedules;
     } catch (error) {
       throw new Error(error);
     }
@@ -29,10 +29,10 @@ module.exports = {
   getOne: async (id) => {
     try {
       const db = await dbPromise;
-      const tourRef = doc(db, 'tours', id);
-      const tour = await getDoc(tourRef);
+      const scheduleRef = doc(db, 'schedules', id);
+      const schedule = await getDoc(scheduleRef);
 
-      return { id: tour.id, ...tour.data() };
+      return { id: schedule.id, ...schedule.data() };
     } catch (error) {
       throw new Error(error);
     }
@@ -40,9 +40,9 @@ module.exports = {
   post: async (payload) => {
     try {
       const db = await dbPromise;
-      const toursRef = collection(db, 'tours');
+      const schedulesRef = collection(db, 'schedules');
 
-      return setDoc(doc(toursRef), {
+      return setDoc(doc(schedulesRef), {
         ...payload,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
@@ -54,16 +54,16 @@ module.exports = {
   patch: async (id, payload) => {
     try {
       const db = await dbPromise;
-      const tourRef = doc(db, 'tours', id);
-      await updateDoc(tourRef, {
+      const scheduleRef = doc(db, 'schedules', id);
+      await updateDoc(scheduleRef, {
         ...payload,
         updatedAt: serverTimestamp(),
       });
 
-      const updatedtour = await getDoc(tourRef);
+      const updatedSchedule = await getDoc(scheduleRef);
       return {
-        id: updatedtour.id,
-        ...updatedtour.data(),
+        id: updatedSchedule.id,
+        ...updatedSchedule.data(),
       };
     } catch (error) {
       throw new Error(error);
@@ -72,8 +72,8 @@ module.exports = {
   remove: async (id) => {
     try {
       const db = await dbPromise;
-      const tourRef = doc(db, 'tours', id);
-      await deleteDoc(tourRef);
+      const scheduleRef = doc(db, 'schedules', id);
+      await deleteDoc(scheduleRef);
       return { id };
     } catch (error) {
       throw new Error(error);

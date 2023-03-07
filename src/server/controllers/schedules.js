@@ -1,12 +1,12 @@
-const { tourModel } = require('../models');
+const { scheduleModel } = require('../models');
 
 module.exports = {
   get: async (req, res) => {
     try {
-      const response = await tourModel.get();
+      const response = await scheduleModel.get();
       return res.status(200).send({
         success: true,
-        message: 'Successfully fetched tour',
+        message: 'Successfully fetched schedule',
         response,
       });
     } catch (error) {
@@ -17,12 +17,12 @@ module.exports = {
   },
   getOne: async (req, res) => {
     try {
-      const response = await tourModel.getOne(
-        req.params.tourId,
+      const response = await scheduleModel.getOne(
+        req.params.streamId,
       );
       return res.status(200).send({
         success: true,
-        message: 'Successfully fetched one tour',
+        message: 'Successfully fetched one schedule',
         response,
       });
     } catch (error) {
@@ -33,10 +33,10 @@ module.exports = {
   },
   post: async (req, res) => {
     try {
-      const response = await tourModel.post(req.body);
+      const response = await scheduleModel.post(req.body);
       return res.status(201).send({
         success: true,
-        message: 'Successfully created tour',
+        message: 'Successfully created schedule',
         response,
       });
     } catch (error) {
@@ -47,13 +47,13 @@ module.exports = {
   },
   patch: async (req, res) => {
     try {
-      const response = await tourModel.patch(
-        req.params.tourId,
+      const response = await scheduleModel.patch(
+        req.params.streamId,
         req.body,
       );
       return res.status(203).send({
         success: true,
-        message: 'Successfully updated tour',
+        message: 'Successfully updated schedule',
         response,
       });
     } catch (error) {
@@ -64,12 +64,12 @@ module.exports = {
   },
   remove: async (req, res) => {
     try {
-      const response = await tourModel.remove(
-        req.params.tourId,
+      const response = await scheduleModel.remove(
+        req.params.streamId,
       );
       return res.status(203).send({
         success: true,
-        message: 'Successfully deleted tour',
+        message: 'Successfully deleted schedule',
         response,
       });
     } catch (error) {
