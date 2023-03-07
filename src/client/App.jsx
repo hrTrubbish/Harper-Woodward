@@ -15,16 +15,22 @@ export default function App() {
   return (
     <div className="App">
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/live" element={<LivePage />} />
-        <Route path="/videos" element={<AllVideos />} />
-        <Route path="/video-player" element={<VideoPlayer />} />
-        <Route path="/superuser" element={<SuperUser />} />
-        <Route path="/superuser" element={<SuperUser />} />
-      </Routes>
-    </div>
+      <div id="App" className="bg-hero-pattern bg-no-repeat bg-cover bg-center bg-fixed">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/live" element={<LivePage />} />
+          <Route path="/videos" element={<AllVideos />} />
+          <Route
+            path="/video-player"
+            element={<VideoPlayer />}
+          />
+          <Route
+            path="/superuser"
+            element={<SuperUser />}
+          />
+          <Route path="/checkout" element={<Payment />} />
+        </Routes>
+      </div>
+    </>
   );
 }

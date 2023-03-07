@@ -69,4 +69,5 @@ const videosSchema = {
   views: 'number',
   createdAt: 'timestamp',
   updatedAt: 'timestamp',
+  url: 'string',
 };
