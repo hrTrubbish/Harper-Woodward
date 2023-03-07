@@ -3,6 +3,7 @@ const scheduleController = require('./schedules');
 const tourController = require('./tours');
 const videoController = require('./videos');
 const transactionController = require('./transactions');
+const stripeController = require('./stripe');
 
 module.exports = {
   adminController,
@@ -10,4 +11,5 @@ module.exports = {
   tourController,
   videoController,
   transactionController,
+  stripeController,
 };
