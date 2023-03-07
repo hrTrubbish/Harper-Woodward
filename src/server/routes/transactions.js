@@ -1,6 +1,9 @@
-// const router = require('express').Router();
+const router = require('express').Router();
+const {
+  transactionController: { get, post },
+} = require('../controllers');
 
-// router.get('/');
-// router.post('/create');
+router.get('/', get);
+router.post('/create', post);
 
-// module.exports = router;
+module.exports = router;

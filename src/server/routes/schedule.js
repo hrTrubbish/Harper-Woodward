@@ -1,9 +1,11 @@
-// const router = require('express').Router();
-// const {scheduleControllers} = require('../controllers');
+const router = require('express').Router();
+const {
+  scheduleController: { get, post, patch, remove },
+} = require('../controllers');
 
-// router.get('/');
-// router.post('/create');
-// router.patch('/update/:streamId');
-// router.delete('/delete/:streamId');
+router.get('/', get);
+router.post('/create', post);
+router.patch('/update/:streamId', patch);
+router.delete('/delete/:streamId', remove);
 
-// module.exports = router;
+module.exports = router;
