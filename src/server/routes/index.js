@@ -1,7 +1,7 @@
 const router = require('express').Router();
 // const authRoutes = require('./auth');
 const tourRoutes = require('./tours');
-const scheduleRoutes = require('./schedule');
+const scheduleRoutes = require('./schedules');
 const adminRoutes = require('./admin');
 const transactionRoutes = require('./transactions');
 const videoRoutes = require('./videos');
