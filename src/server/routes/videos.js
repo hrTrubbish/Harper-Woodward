@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const controller = require('../controllers/videos');
+const { videoController } = require('../controllers');
 
-router.get('/', controller.get);
-router.post('/create', controller.post);
-router.patch('/update/:videoId', controller.patch);
-router.delete('/delete/:videoId', controller.delete);
+router.get('/', videoController.get);
+router.post('/create', videoController.post);
+router.patch('/update/:videoId', videoController.patch);
+router.delete('/delete/:videoId', videoController.delete);
 
 module.exports = router;

@@ -1,9 +1,9 @@
-const model = require('../models/videos');
+const { videoModel } = require('../models');
 
 module.exports = {
   get: async (req, res) => {
     try {
-      const videos = await model.getAllVideos();
+      const videos = await videoModel.getAllVideos();
       return res.status(200).send(videos);
     } catch (err) {
       return err;
@@ -11,7 +11,7 @@ module.exports = {
   },
   post: async (req, res) => {
     try {
-      await model.addVideo(req.body);
+      await videoModel.addVideo(req.body);
       return res
         .status(201)
         .send({ body: req.body, message: 'video added!' });
@@ -21,7 +21,10 @@ module.exports = {
   },
   patch: async (req, res) => {
     try {
-      await model.updateVideo(req.params.videoId, req.body);
+      await videoModel.updateVideo(
+        req.params.videoId,
+        req.body,
+      );
       return res.status(200).send('asset updated');
     } catch (err) {
       return err;
@@ -29,7 +32,7 @@ module.exports = {
   },
   delete: async (req, res) => {
     try {
-      await model.deleteVideo(req.params.videoId);
+      await videoModel.deleteVideo(req.params.videoId);
       return res.status(200).send('deleted!');
     } catch (err) {
       return err;
