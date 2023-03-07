@@ -5,6 +5,7 @@ const {
   doc,
   setDoc,
   updateDoc,
+  serverTimestamp,
 } = require('firebase/firestore');
 const dbPromise = require('../../config/firebase');
 
@@ -33,7 +34,11 @@ module.exports = {
 
       const newsuperUserRef = await setDoc(
         doc(superUsersRef),
-        payload,
+        {
+          ...payload,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+        },
       );
 
       const newsuperUser = await getDoc(newsuperUserRef);
@@ -49,7 +54,10 @@ module.exports = {
     try {
       const db = await dbPromise;
       const superUserRef = doc(db, 'superUsers', id);
-      await updateDoc(superUserRef, payload);
+      await updateDoc(superUserRef, {
+        ...payload,
+        updatedAt: serverTimestamp(),
+      });
 
       const updatedsuperUser = await getDoc(superUserRef);
       return {

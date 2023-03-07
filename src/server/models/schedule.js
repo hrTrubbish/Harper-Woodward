@@ -6,6 +6,7 @@ const {
   setDoc,
   updateDoc,
   deleteDoc,
+  serverTimestamp,
 } = require('firebase/firestore');
 const dbPromise = require('../../config/firebase');
 
@@ -43,7 +44,11 @@ module.exports = {
 
       const newScheduleRef = await setDoc(
         doc(schedulesRef),
-        payload,
+        {
+          ...payload,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+        },
       );
 
       const newSchedule = await getDoc(newScheduleRef);
@@ -56,7 +61,10 @@ module.exports = {
     try {
       const db = await dbPromise;
       const scheduleRef = doc(db, 'schedules', id);
-      await updateDoc(scheduleRef, payload);
+      await updateDoc(scheduleRef, {
+        ...payload,
+        updatedAt: serverTimestamp(),
+      });
 
       const updatedSchedule = await getDoc(scheduleRef);
       return {

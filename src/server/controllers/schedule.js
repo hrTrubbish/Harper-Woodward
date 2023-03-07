@@ -32,18 +32,19 @@ module.exports = {
     }
   },
   post: async (req, res) => {
-    try {
-      const response = await scheduleModel.post(req.body);
-      return res.status(201).send({
-        success: true,
-        message: 'Successfully created schedule',
-        response,
-      });
-    } catch (error) {
-      return res
-        .status(500)
-        .send({ success: false, message: error.message });
-    }
+    console.log(req.body);
+    // try {
+    //   const response = await scheduleModel.post(req.body);
+    //   return res.status(201).send({
+    //     success: true,
+    //     message: 'Successfully created schedule',
+    //     response,
+    //   });
+    // } catch (error) {
+    //   return res
+    //     .status(500)
+    //     .send({ success: false, message: error.message });
+    // }
   },
   patch: async (req, res) => {
     try {

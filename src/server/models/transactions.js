@@ -4,6 +4,7 @@ const {
   getDocs,
   doc,
   setDoc,
+  serverTimestamp,
 } = require('firebase/firestore');
 const dbPromise = require('../../config/firebase');
 
@@ -37,7 +38,11 @@ module.exports = {
 
       const newtransactionRef = await setDoc(
         doc(transactionsRef),
-        payload,
+        {
+          ...payload,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+        },
       );
 
       const newtransaction = await getDoc(

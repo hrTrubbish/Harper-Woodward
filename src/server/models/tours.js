@@ -6,6 +6,7 @@ const {
   setDoc,
   updateDoc,
   deleteDoc,
+  serverTimestamp,
 } = require('firebase/firestore');
 const dbPromise = require('../../config/firebase');
 
@@ -41,10 +42,11 @@ module.exports = {
       const db = await dbPromise;
       const toursRef = collection(db, 'tours');
 
-      const newtourRef = await setDoc(
-        doc(toursRef),
-        payload,
-      );
+      const newtourRef = await setDoc(doc(toursRef), {
+        ...payload,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
 
       const newtour = await getDoc(newtourRef);
       return { id: newtour.id, ...newtour.data() };
@@ -56,7 +58,10 @@ module.exports = {
     try {
       const db = await dbPromise;
       const tourRef = doc(db, 'tours', id);
-      await updateDoc(tourRef, payload);
+      await updateDoc(tourRef, {
+        ...payload,
+        updatedAt: serverTimestamp(),
+      });
 
       const updatedtour = await getDoc(tourRef);
       return {
