@@ -11,6 +11,6 @@ const videoRoutes = require('./videos');
 // router.use('/schedule', scheduleRoutes);
 router.use('/admin', adminRoutes);
 // router.use('/transactions', transactionRoutes);
-// router.use('/videos', videoRoutes);
+router.use('/videos', videoRoutes);
 
 module.exports = router;
