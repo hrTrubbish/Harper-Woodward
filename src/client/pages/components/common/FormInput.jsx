@@ -4,7 +4,7 @@ export default function FormInput({
   labelText, name, type, placeholder, onChange, value,
 }) {
   return (
-    <div>
+    <div className="flex flex-col">
       <label htmlFor={name}>{labelText}</label>
       <input
         type={type}

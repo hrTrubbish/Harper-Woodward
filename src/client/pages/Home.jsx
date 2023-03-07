@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+// import {useSelector, useDispatch} from 'react-redux'
+// import { fetchTours} from '../redux/global'
 import YouTubeEmbed from './components/video_player/YouTubeEmbed.jsx';
 import TourDateList from './components/home/TourDateList.jsx';
 
 export default function Home() {
+  // const dispatch = useDispatch()
+  // const { tours} = useSelector((state) => state.global)
+
+
+  // useEffect(() => {
+  //   dispatch(fetchTours())
+  // })
+
   return (
     <div className="flex flex-col">
       <div className="featured flex flex-col p-10">
