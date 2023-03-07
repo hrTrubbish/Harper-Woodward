@@ -6,6 +6,7 @@ const {
   doc,
   setDoc,
   updateDoc,
+  serverTimestamp,
 } = require('firebase/firestore');
 
 const exampleVideos = require('../examples/exampleVideos');
@@ -13,6 +14,8 @@ const db = require('../../config/firebase');
 
 // iterate through examplevideos
 // for each video obj, add to db
+
+// TODO: DELETE VIDEOS COLLECTION BEFORE ADDING
 async function seedVideos(videos) {
   const videosCollection = collection(db, 'videos');
   videos.forEach(async (video) => {

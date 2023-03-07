@@ -1,14 +1,18 @@
 /* eslint-disable no-unused-expressions */
+const { serverTimestamp } = require('firebase/firestore');
+
 module.exports = [
   {
     title: 'celebratory stream',
     description: 'we won woohoo',
     event: 'liveshow to raise awareness of people who don\'t wear belts',
     eventDate: '2023-03-01T13:51:50.417-07:00',
-    videoLength: '3600',
-    views: '12220000',
-    createdAt: '2023-03-01T13:51:50.417-07:00',
-    updatedAt: '2023-03-01T13:51:50.417-07:00',
+    videoLength: 3600,
+    views: 12220000,
+    // createdAt: '2023-03-01T13:51:50.417-07:00',
+    // updatedAt: '2023-03-01T13:51:50.417-07:00',
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
     url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   },
   {
@@ -16,10 +20,10 @@ module.exports = [
     description: 'we won woohoo',
     event: 'liveshow to raise awareness of people who don\'t shower daily',
     eventDate: '2023-03-01T13:51:50.417-07:00',
-    videoLength: '123400',
-    views: '52220000',
-    createdAt: '2023-03-01T13:51:50.417-07:00',
-    updatedAt: '2023-03-01T13:51:50.417-07:00',
+    videoLength: 123400,
+    views: 52220000,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
     url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   },
   {
@@ -27,10 +31,10 @@ module.exports = [
     description: 'we won woohoo',
     event: 'stream to raise awareness of people who don\'t wear deodorant',
     eventDate: '2023-03-01T13:51:50.417-07:00',
-    videoLength: '73600',
-    views: '1',
-    createdAt: '2023-03-01T13:51:50.417-07:00',
-    updatedAt: '2023-03-01T13:51:50.417-07:00',
+    videoLength: 73600,
+    views: 1,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
     url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   },
   {
@@ -38,10 +42,10 @@ module.exports = [
     description: 'we won woohoo',
     event: 'liveshow to raise awareness of people who don\'t wash their hands',
     eventDate: '2023-03-01T13:51:50.417-07:00',
-    videoLength: '86400',
-    views: '9',
-    createdAt: '2023-03-01T13:51:50.417-07:00',
-    updatedAt: '2023-03-01T13:51:50.417-07:00',
+    videoLength: 86400,
+    views: 9,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
     url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   },
 ];
