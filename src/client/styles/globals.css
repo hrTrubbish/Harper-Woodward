@@ -114,7 +114,7 @@ table {
   background-color:#D5CEA3;
   color:#251B1B;
   display: flex;
-  height: 30%;
+  height: 20%;
   justify-content: center;
   width: 100%;
 }
@@ -142,15 +142,41 @@ table {
   }
 
   .header-top {
+    border: 1px solid #D5CEA3;
     flex-direction: column;
     height: auto;
     padding: 1em;
   }
 
   #logo {
-    margin-bottom: 1em;
+    font-size: 3em;
+    /* margin-bottom: 1em; */
+    text-align: center;
+    width: 100%;
+  }
+
+  .header-left,
+  .header-right {
+    display: none;
+  }
+
+  #feat-header {
+    margin-bottom: 15px;
+  }
+
+  #feat-title {
+    font-size: 1.75em !important;
+    font-weight: normal !important;
+    margin: 10px 0;
     text-align: center;
   }
+
+  #feat-details span{
+    font-size: .75em !important;
+    text-align: center;
+    width: 100%;
+  }
+
 
   #main-nav {
     margin-top: 1em;
@@ -164,5 +190,9 @@ table {
     display: flex;
     flex-direction: column;
     justify-content: center
+  }
+
+  .header-bottom {
+    padding: 0 20px;
   }
 }
