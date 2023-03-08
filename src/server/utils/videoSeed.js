@@ -10,7 +10,7 @@ const {
 } = require('firebase/firestore');
 
 const exampleVideos = require('../examples/exampleVideos');
-const db = require('../../config/firebase');
+const db = require('../../config/firebaseBE');
 
 // iterate through examplevideos
 // for each video obj, add to db
