@@ -1,8 +1,6 @@
 import { DateTime } from 'luxon';
 
-
 const convertToUTC = (timeInput) => {
-
   const timeValue = timeInput.value;
 
   const today = DateTime.local();
@@ -12,11 +10,11 @@ const convertToUTC = (timeInput) => {
     hour: selectedTime.hour,
     minute: selectedTime.minute,
     second: selectedTime.second,
-    millisecond: selectedTime.millisecond
+    millisecond: selectedTime.millisecond,
   }).toUTC();
 
   const timestamp = combined.toMillis();
-  return timestamp
-}
+  return timestamp;
+};
 
-export {convertToUTC}
+export { convertToUTC };

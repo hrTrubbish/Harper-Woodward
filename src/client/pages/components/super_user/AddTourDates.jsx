@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FormInput from '../common/FormInput.jsx';
+import { convertToUTC } from '../../../../client/utils/utils.js';
 
 const initialFormInput = {
   venue: 'string',
@@ -14,15 +15,15 @@ const initialFormInput = {
   ],
 };
 
-export default function AddTourDates({ handleSchedule }) {
-  const [formInput, setFormInput] = useState(
-    initialFormInput,
-  );
-  const [tiers, setTiers] = useState({
-    tierName: '',
-    price: 0,
-    quantity: 0,
-  });
+const initialTier = {
+  tierName: '',
+  price: 0,
+  quantity: 0,
+};
+
+export default function AddTourDates() {
+  const [formInput, setFormInput] = useState(initialFormInput);
+  const [currentTier, setCurrentTier] = useState(initialTier);
 
   const clearForm = () => {
     setFormInput(initialFormInput);
@@ -35,18 +36,38 @@ export default function AddTourDates({ handleSchedule }) {
     });
   };
 
-  const addTier = () => {};
-  // form inputs use time input control
-  // firestore uses UTC timestamps
+  // const handleTimeChange = (event) => {
+  //   setFormInput({
+  //     ...formInput,
+  //     date: convertToUTC(event.target.value),
+  //   });
+  // };
 
-  // convert from input to Firestore
+  const handleTierChange = (event) => {
+    setCurrentTier({
+      ...currentTier,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const addTier = () => {
+    formInput.pricing.push(currentTier);
+    setCurrentTier(initialTier);
+  };
+
   return (
     <div className="w-1/3">
       <form
         aria-label="form"
         onSubmit={(e) => {
           e.preventDefault();
-          clearForm();
+          // formInput.date = convertToUTC(formInput.date);
+          setFormInput({
+            ...formInput,
+            date: convertToUTC(e.target.value),
+          });
+          console.log('date: ', formInput.date);
+          // clearForm();
         }}
       >
         <FormInput
@@ -73,33 +94,37 @@ export default function AddTourDates({ handleSchedule }) {
           placeholder="Enter date"
           onChange={handleInputChange}
         />
-
         <FormInput
           labelText="Pricing tier name"
           type="text"
           name="tierName"
-          value={formInput.pricing[0].tierName}
+          value={currentTier.tierName}
           placeholder="Enter pricing tier"
-          onChange={handleInputChange}
+          onChange={handleTierChange}
         />
         <FormInput
           labelText="Price"
           type="number"
           name="price"
-          value={formInput.pricing.price}
+          value={currentTier.price}
           placeholder="Enter price"
-          onChange={handleInputChange}
+          onChange={handleTierChange}
         />
         <FormInput
           labelText="Quantity"
           type="number"
           name="quantity"
-          value={formInput.pricing.quantity}
+          value={currentTier.quantity}
           placeholder="Enter quantity"
-          onChange={handleInputChange}
+          onChange={handleTierChange}
         />
-        <button type="button" onClick={addTier}>
-          Add
+        <button
+          type="button"
+          onClick={() => {
+            addTier();
+          }}
+        >
+          Add pricing tier
         </button>
         <input type="submit" value="Submit answer" />
       </form>
