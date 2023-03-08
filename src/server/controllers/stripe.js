@@ -5,11 +5,12 @@ const logger = require('../middleware/logger');
 
 module.exports = {
   checkout: async (req, res) => {
+    const { type, amount } = req.query;
     const price = await stripe.prices.create({
       currency: 'usd',
-      unit_amount: 69,
+      unit_amount: Number(amount) * 100,
       product_data: {
-        name: 'Your upcoming stream access',
+        name: `Your upcoming ${type} access`,
       },
     });
     try {
@@ -30,7 +31,6 @@ module.exports = {
       );
 
       // TODO: Move transactions and update statistics here to save to db
-      // need to send statuses and redirect
       res.redirect(303, session.url);
     } catch (error) {
       logger.error(error);
