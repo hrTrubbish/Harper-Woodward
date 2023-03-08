@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import StatsList from './components/super_user/StatsList.jsx';
+import VideosTab from './components/super_user/VideosTab.jsx';
 import ScheduleStreams from './components/super_user/ScheduleStreams.jsx';
 import AddTourDates from './components/super_user/AddTourDates.jsx';
 import NavigationDrawer from './components/super_user/NavigationDrawer.jsx';
@@ -19,6 +20,7 @@ export default function SuperUser() {
           <Route exact path="/add-tour-dates" element={<AddTourDates />} />
         </Routes>
       </div>
+      <VideosTab />
     </div>
   );
 }
