@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import * as mediasoupClient from 'mediasoup-client';
 import StatsList from './components/super_user/StatsList.jsx';
+import ScheduleStreams from './components/super_user/ScheduleStreams.jsx';
+import AddTourDates from './components/super_user/AddTourDates.jsx';
 
 export default function SuperUser() {
   // STATE DATA
@@ -187,7 +189,9 @@ export default function SuperUser() {
           Start Livestream
         </button>
       </div>
-      <StatsList />
+      <div>
+        <AddTourDates />
+      </div>
     </div>
   );
 }

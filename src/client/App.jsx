@@ -7,18 +7,18 @@ import AllVideos from './pages/AllVideos.jsx';
 import VideoPlayer from './pages/VideoPlayer.jsx';
 import SuperUser from './pages/SuperUser.jsx';
 import Payment from './pages/Payment.jsx';
-// import { AuthEmail } from './pages/components/_AuthEmail';
-// import { AuthGoogle } from './pages/components/_AuthGoogle';
+import { LogIn } from './pages/components/_LogIn.jsx';
+import { SignUp } from './pages/components/_SignUp.jsx';
 
 export default function App() {
   return (
     <>
       <Header />
       <div id="App" className="bg-hero-pattern bg-no-repeat bg-cover bg-center bg-fixed">
-        {/* <AuthEmail />
-        <AuthGoogle /> */}
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/live" element={<LivePage />} />
           <Route path="/videos" element={<AllVideos />} />
           <Route
