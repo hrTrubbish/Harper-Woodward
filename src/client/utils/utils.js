@@ -17,4 +17,4 @@ const convertToUTC = (timeInput) => {
   return timestamp;
 };
 
-export { convertToUTC };
+export default { convertToUTC };

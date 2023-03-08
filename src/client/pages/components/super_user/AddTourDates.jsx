@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import FormInput from '../common/FormInput.jsx';
-import { convertToUTC } from '../../../../client/utils/utils.js';
+// import { convertToUTC } from '../../../../client/utils/utils.js';
 
 const initialFormInput = {
-  venue: 'string',
-  location: 'string',
-  date: 'timestamp',
+  venue: '',
+  location: '',
+  date: '',
   pricing: [
     {
-      tierName: 'string',
-      price: 'number',
-      quantity: 'number',
+      tierName: '',
+      price: '',
+      quantity: '',
     },
   ],
 };
@@ -62,10 +62,10 @@ export default function AddTourDates() {
         onSubmit={(e) => {
           e.preventDefault();
           // formInput.date = convertToUTC(formInput.date);
-          setFormInput({
-            ...formInput,
-            date: convertToUTC(e.target.value),
-          });
+          // setFormInput({
+          //   ...formInput,
+          //   date: convertToUTC(e.target.value),
+          // });
           console.log('date: ', formInput.date);
           // clearForm();
         }}
