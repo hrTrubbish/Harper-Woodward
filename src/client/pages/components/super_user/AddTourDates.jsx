@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FormInput from '../common/FormInput.jsx';
-import { convertToUTC } from '../../../../client/utils/utils.js';
+import { convertToUTC } from '../../../utils/helpers';
 
 const initialFormInput = {
   venue: 'string',
@@ -22,8 +22,11 @@ const initialTier = {
 };
 
 export default function AddTourDates() {
-  const [formInput, setFormInput] = useState(initialFormInput);
-  const [currentTier, setCurrentTier] = useState(initialTier);
+  const [formInput, setFormInput] = useState(
+    initialFormInput,
+  );
+  const [currentTier, setCurrentTier] =
+    useState(initialTier);
 
   const clearForm = () => {
     setFormInput(initialFormInput);
