@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function MovieListItem({ tour }) {
+export default function TourDateListItem({ tour }) {
   return (
     <div className="text-center">
       <div>{`${tour?.date} - ${tour?.venue} - ${tour?.location}`}</div>
