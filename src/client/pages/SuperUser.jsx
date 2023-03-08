@@ -183,12 +183,14 @@ export default function SuperUser() {
         <button
           id="stream-btn"
           type="button"
-          className="text-3xl"
+          className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded m-8 self-center"
           onClick={handleStream}
         >
           Start Livestream
         </button>
       </div>
+      <StatsList />
+
       <div>
         <AddTourDates />
       </div>

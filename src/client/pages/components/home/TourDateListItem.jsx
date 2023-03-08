@@ -1,16 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function MovieListItem({ tour, handleBuy }) {
-  const { town, venue, date } = tour;
-
+export default function MovieListItem({ tour }) {
   return (
-    <>
-      <div>{date}</div>
-      <div>
-        <div>{venue}</div>
-        <div>{town}</div>
+    <div className="text-center">
+      <div>{`${tour?.date} - ${tour?.venue} - ${tour?.location}`}</div>
+      <div className="flex justify-center gap-3">
+        <div>{tour?.description}</div>
+        {tour?.isAvailable && (
+          <Link
+            to={{
+              pathname: '/checkout',
+              search: `?tour=${tour?.id}`,
+            }}
+          >
+            Purchase Access
+          </Link>
+        )}
       </div>
-      <button type="button" onClick={handleBuy}>Buy Tickets</button>
-    </>
+    </div>
   );
 }

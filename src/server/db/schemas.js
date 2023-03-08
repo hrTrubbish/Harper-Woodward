@@ -9,8 +9,10 @@ const usersSchema = {
 
 const tourDatesSchema = {
   venue: 'string',
+  description: 'string',
   location: 'string',
-  date: 'timestamp',
+  date: 'string',
+  isAvailable: 'boolean',
   pricing: [
     {
       tierName: 'string',
@@ -23,11 +25,11 @@ const tourDatesSchema = {
 };
 
 const schedulesSchema = {
-  title: 'string',
+  eventName: 'string',
   description: 'string',
-  startTime: 'timestamp',
-  endTime: 'timestamp',
-  timezone: 'string',
+  startTime: 'string',
+  endTime: 'string',
+  date: 'string',
   attendees: 'number',
   maxAttendees: 'number',
   pricing: 'number',
@@ -53,8 +55,10 @@ const superUserStatisticsSchema = {
 const transactionsSchema = {
   userId: 'reference',
   amount: 'number',
+  eventType: 'string',
   streamId: 'reference',
   tourId: 'reference',
+  tier: 'string',
   paymentType: 'string',
   createdAt: 'timestamp',
   updatedAt: 'timestamp',
