@@ -3,18 +3,23 @@ import FormInput from '../common/FormInput.jsx';
 import FormTextarea from '../common/FormTextarea.jsx';
 
 const initialFormInput = {
-  title: 'string',
-  description: 'string',
-  startTime: 'timestamp',
-  endTime: 'timestamp',
-  timezone: 'string',
-  attendees: 'number',
-  maxAttendees: 'number',
-  pricing: 'number',
+  title: '',
+  description: '',
+  startTime: '',
+  endTime: '',
+  timezone: '',
+  attendees: '',
+  maxAttendees: '',
+  pricing: '',
+  isEnded: false,
 };
 
-export default function ScheduleStreams({ handleSchedule }) {
-  const [formInput, setFormInput] = useState(initialFormInput);
+export default function ScheduleStreams({
+  handleSchedule,
+}) {
+  const [formInput, setFormInput] = useState(
+    initialFormInput,
+  );
 
   const clearForm = () => {
     setFormInput(initialFormInput);
@@ -99,10 +104,7 @@ export default function ScheduleStreams({ handleSchedule }) {
         placeholder="Enter price"
         onChange={handleInputChange}
       />
-      <input
-        type="submit"
-        value="Submit answer"
-      />
+      <input type="submit" value="Submit answer" />
     </form>
   );
 }
