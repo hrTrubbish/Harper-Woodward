@@ -62,7 +62,7 @@ export default function Home() {
       <StreamInfo streams={streams} />
 
       <div className="tour flex flex-col p-10 border-t-2 border-current">
-        <span className="text-3xl self-center">tour</span>
+        <span className="text-3xl self-center">tours</span>
         <TourDateList tours={tours} />
       </div>
       <div className="merch flex flex-col p-10 border-t-2 border-current">
