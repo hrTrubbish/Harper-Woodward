@@ -3,31 +3,34 @@ import {
   getDocs, collection, deleteDoc, doc,
 } from 'firebase/firestore';
 import { db } from '../../../../config/firebaseFE';
+import AddVideoForm from './AddVideoForm.jsx';
 
 // renders list of all videos from DB collection and allows superuser CRUD functionality
 export default function VideosTab() {
   const [videos, setVideos] = useState([]);
 
-  useEffect(() => {
-    async function fetchVideos() {
-      try {
-        const snapshot = await getDocs(collection(db, 'videos'));
-        const data = snapshot.docs.map((d) => ({ data: d.data(), id: d.id }));
-        setVideos(data);
-      } catch (err) {
-        return err;
-      }
+  async function fetchVideos() {
+    try {
+      const snapshot = await getDocs(collection(db, 'videos'));
+      const data = snapshot.docs.map((d) => ({ data: d.data(), id: d.id }));
+      setVideos(data);
+    } catch (err) {
+      return err;
     }
+  }
+
+  useEffect(() => {
     fetchVideos();
-  }, [videos]);
+  }, []);
 
   const deleteVideo = async (id) => {
     const videoRef = doc(db, 'videos', id);
     await deleteDoc(videoRef);
+    fetchVideos();
   };
 
   return (
-    <section className="h-max border-solid border-2 border-current">
+    <section className="max-h-screen border-solid border-2 border-current">
       <h1 className="border-solid border-2 border-red">VIDEOS TAB</h1>
       <ul>
         {videos?.map((video) => (
@@ -45,6 +48,7 @@ export default function VideosTab() {
           </li>
         ))}
       </ul>
+      <AddVideoForm />
     </section>
   );
 }
