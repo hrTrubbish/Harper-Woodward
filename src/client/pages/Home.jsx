@@ -5,6 +5,7 @@ import YouTubeEmbed from './components/video_player/YouTubeEmbed.jsx';
 import {
   TourDateList,
   StreamInfo,
+  Merch,
 } from './components/home';
 
 export default function Home() {
@@ -68,26 +69,8 @@ export default function Home() {
         <span className="text-3xl self-center">tours</span>
         <TourDateList tours={tours} />
       </div>
-      <div className="merch flex flex-col p-10 border-t-2 border-current">
-        <span className="text-3xl self-center">merch</span>
-        <div className="flex justify-around mb-20 p-5">
-          <img
-            className="h-20 w-20 border-solid border-2 border-current"
-            alt=""
-          />
-          <img
-            className="h-20 w-20 border-solid border-2 border-current"
-            alt=""
-          />
-          <img
-            className="h-20 w-20 border-solid border-2 border-current"
-            alt=""
-          />
-          <img
-            className="h-20 w-20 border-solid border-2 border-current"
-            alt=""
-          />
-        </div>
+      <div>
+        <Merch />
       </div>
     </div>
   );
