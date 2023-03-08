@@ -8,6 +8,7 @@ const router = require('./routes');
 
 // ====== CONSTANTS =========================
 const app = express();
+const signaling_server = require('./signaling_server');
 
 // ====== MIDDLEWARE ========================
 app.use(morganMiddleware);
