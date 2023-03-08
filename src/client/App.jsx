@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import Header from './pages/components/common/Header.jsx';
@@ -9,8 +9,13 @@ import SuperUser from './pages/SuperUser.jsx';
 import Payment from './pages/Payment.jsx';
 import { LogIn } from './pages/components/_LogIn.jsx';
 import { SignUp } from './pages/components/_SignUp.jsx';
+import { AuthContext } from './pages/components/_AuthProvider.jsx';
 
 export default function App() {
+  const { currEmail } = useContext(AuthContext);
+
+  console.log(currEmail);
+
   return (
     <>
       <Header />
@@ -27,7 +32,7 @@ export default function App() {
           />
           <Route
             path="/superuser"
-            element={<SuperUser />}
+            element={currEmail === 'wangchanghua13@gmail.com' || currEmail === 'fakeemail@qq.com' ? <SuperUser /> : <div className="flex justify-center">No Authorization</div>}
           />
           <Route path="/checkout" element={<Payment />} />
         </Routes>

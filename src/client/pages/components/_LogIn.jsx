@@ -1,8 +1,13 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { AuthContext } from './_AuthProvider.jsx';
 
 export function LogIn() {
-  const { handleLogInWithEmail, userId, status } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const {
+    handleLogInWithEmail, userId, status, currEmail,
+  } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,6 +16,10 @@ export function LogIn() {
     e.preventDefault();
     handleLogInWithEmail(email, password);
   };
+
+  if (status === 'authenticated' && userId && (currEmail === 'fakeemail@qq.com' || currEmail === 'wangchanghua13@gmail.com')) {
+    return navigate('/superuser');
+  }
 
   return (
     <div>

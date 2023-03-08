@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   status: 'checking',
+  currEmail: '',
   userId: null,
 };
 
@@ -22,21 +23,23 @@ function AuthProvider({ children }) {
   const [session, setSession] = useState(initialState);
 
   useEffect(() => {
-    authStateChange(setSession);
+    authStateChange(setSession, session.currEmail);
   }, []);
 
   const handleLogOut = async () => {
     emailLogOut();
     setSession({
       userId: null,
+      currEmail: '',
       status: 'no-authenticated',
     });
   };
 
-  const validateAuth = (userId) => {
+  const validateAuth = (userId, currEmail) => {
     if (userId) {
       return setSession({
         userId,
+        currEmail,
         status: 'authenticated',
       });
     }
@@ -50,8 +53,9 @@ function AuthProvider({ children }) {
 
   const handleLogInWithGoogle = async () => {
     checking();
-    const userId = await googleSignUpAndLogIn();
-    validateAuth(userId);
+    const user = await googleSignUpAndLogIn();
+    validateAuth(user.uid, user.email);
+    return user.email;
   };
 
   const handleLogInWithEmail = async (email, password) => {
@@ -60,7 +64,7 @@ function AuthProvider({ children }) {
       email,
       password,
     });
-    validateAuth(userId);
+    validateAuth(userId, email);
   };
 
   const handleSignUpWithEmail = async (email, password) => {
@@ -69,7 +73,7 @@ function AuthProvider({ children }) {
       email,
       password,
     });
-    validateAuth(userId);
+    validateAuth(userId, email);
   };
 
   return (
