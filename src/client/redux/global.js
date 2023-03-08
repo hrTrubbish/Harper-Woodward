@@ -2,48 +2,60 @@ import {
   createSlice,
   createAsyncThunk,
 } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { get } from '../api/firestore-services';
 
 const initialState = {
   userId: null,
   isLoading: true,
   tours: [],
+  streams: [],
 };
 
-// EXAMPLE FETCHING FUNCTION
-// export const fetchTours = createAsyncThunk(
-//   'global/fetchTours',
-//   // first parameter can be anything
-//   async () => {
-//     // thunk allows you to access other state files
+export const getTours = createAsyncThunk(
+  'global/fetchTours',
+  async () => {
+    try {
+      const res = await get('tours');
+      return res;
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+);
 
-//     const res = await axios({});
-
-//     return res.data;
-//   },
-// );
+export const getStreams = createAsyncThunk(
+  'global/fetchStreams',
+  async () => {
+    try {
+      const res = await get('schedules');
+      return res;
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+);
 
 const globalSlice = createSlice({
   name: 'global',
   initialState,
   reducers: {
-    // reducers are actions that update the state.
-    // action.payload is the arguments being passed in. You can mutate the state directly
     updateCurrentUser: (state, action) => {
       state.userId = action.payload;
     },
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(fetchTours.pending, (state) => {
-  //     state.isLoading = false;
-  //   });
-  //   builder.addCase(fetchTours.fulfilled, (state, action) => {
-  //     state.tours = action.payload
-  //   });
-  //   builder.addCase(fetchTours.rejected, (state) => {
-  //     state.isLoading = false;
-  //   });
-  // },
+  extraReducers: (builder) => {
+    builder.addCase(getTours.fulfilled, (state, action) => {
+      state.tours = action.payload.res;
+      state.isLoading = false;
+    });
+    builder.addCase(
+      getStreams.fulfilled,
+      (state, action) => {
+        state.streams = action.payload.res;
+        state.isLoading = false;
+      },
+    );
+  },
 });
 
 export const { updateCurrentUser } = globalSlice.actions;

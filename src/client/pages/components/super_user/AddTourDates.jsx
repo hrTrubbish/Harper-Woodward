@@ -1,107 +1,156 @@
 import React, { useState } from 'react';
-import FormInput from '../common/FormInput.jsx';
+import { FormInput, FormTextarea } from '../common';
+import { post } from '../../../api/firestore-services';
 
-const initialFormInput = {
-  venue: 'string',
-  location: 'string',
-  date: 'timestamp',
-  pricing: [
-    {
-      tierName: 'string',
-      price: 'number',
-      quantity: 'number',
-    },
-  ],
+const initialForm = {
+  venue: '',
+  description: '',
+  location: '',
+  date: '',
 };
 
-export default function AddTourDates({ handleSchedule }) {
-  const [formInput, setFormInput] = useState(
-    initialFormInput,
-  );
-  const [tiers, setTiers] = useState({
-    tierName: '',
-    price: 0,
-    quantity: 0,
-  });
+const initialTier = {
+  tierName: '',
+  price: '',
+  quantity: '',
+};
 
-  const clearForm = () => {
-    setFormInput(initialFormInput);
+export default function AddTourDates() {
+  const [form, setForm] = useState(initialForm);
+  const [tier, setTier] = useState(initialTier);
+  const [tiers, setTiers] = useState([]);
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
 
-  const handleInputChange = (event) => {
-    setFormInput({
-      ...formInput,
-      [event.target.name]: event.target.value,
-    });
+  const handleTierChange = (e) => {
+    const { name, value } = e.target;
+    setTier({ ...tier, [name]: value });
   };
 
-  const addTier = () => {};
-  // form inputs use time input control
-  // firestore uses UTC timestamps
+  const addTier = () => {
+    const found = tiers.find(
+      (i) => i.tierName === tier.tierName,
+    );
+    if (found) return;
+    const newTier = {
+      ...tier,
+      price: Number(tier.price),
+      quantity: Number(tier.quantity),
+    };
+    setTiers([...tiers, newTier]);
+    setTier(initialTier);
+  };
 
-  // convert from input to Firestore
+  const removeTier = (tierName) => {
+    setTiers(tiers.filter((i) => i.tierName !== tierName));
+  };
+
+  const handleAddEvent = async (e) => {
+    e.preventDefault();
+    const payload = {
+      ...form,
+      pricing: tiers,
+      isAvailable: true,
+    };
+
+    const res = await post(payload, 'tours');
+    if (res.success) {
+      setForm(initialForm);
+      setTiers([]);
+    }
+  };
+
   return (
-    <div className="w-1/3">
-      <form
-        aria-label="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          clearForm();
-        }}
-      >
+    <div className="md:max-w-xl">
+      <form aria-label="form" onSubmit={handleAddEvent}>
         <FormInput
           labelText="Venue"
           type="text"
           name="venue"
-          value={formInput.venue}
+          value={form.venue}
           placeholder="Enter venue here"
-          onChange={handleInputChange}
+          onChange={handleInput}
+        />
+        <FormTextarea
+          labelText="Description"
+          type="text"
+          name="description"
+          value={form.description}
+          placeholder="Enter a description"
+          onChange={handleInput}
         />
         <FormInput
           labelText="Location"
           type="text"
           name="location"
-          value={formInput.location}
+          value={form.location}
           placeholder="Enter location"
-          onChange={handleInputChange}
+          onChange={handleInput}
         />
         <FormInput
           labelText="Date"
-          type="time"
+          type="date"
           name="date"
-          value={formInput.date}
+          value={form.date}
           placeholder="Enter date"
-          onChange={handleInputChange}
+          onChange={handleInput}
         />
-
-        <FormInput
-          labelText="Pricing tier name"
-          type="text"
-          name="tierName"
-          value={formInput.pricing[0].tierName}
-          placeholder="Enter pricing tier"
-          onChange={handleInputChange}
-        />
-        <FormInput
-          labelText="Price"
-          type="number"
-          name="price"
-          value={formInput.pricing.price}
-          placeholder="Enter price"
-          onChange={handleInputChange}
-        />
-        <FormInput
-          labelText="Quantity"
-          type="number"
-          name="quantity"
-          value={formInput.pricing.quantity}
-          placeholder="Enter quantity"
-          onChange={handleInputChange}
-        />
-        <button type="button" onClick={addTier}>
-          Add
-        </button>
-        <input type="submit" value="Submit answer" />
+        <div className="flex flex-wrap gap-2">
+          <div className="w-1/4">
+            <FormInput
+              labelText="Tier"
+              type="text"
+              name="tierName"
+              value={tier.tierName}
+              placeholder="Tier name"
+              onChange={handleTierChange}
+            />
+          </div>
+          <div className="flex-grow">
+            <FormInput
+              labelText="Price"
+              type="number"
+              name="price"
+              value={tier.price}
+              placeholder="Tier pricing"
+              onChange={handleTierChange}
+            />
+          </div>
+          <div className="flex-grow">
+            <FormInput
+              labelText="Quantity"
+              type="number"
+              name="quantity"
+              value={tier.quantity}
+              placeholder="Tickets to sell"
+              onChange={handleTierChange}
+            />
+          </div>
+          <button type="button" onClick={addTier}>
+            Add Tier
+          </button>
+        </div>
+        {tiers.map((t) => (
+          <div key={t.tierName} className="flex gap-2">
+            <p>{`Tier name: ${t.tierName}, Price: ${t.price}, Quantity: ${t.quantity}`}</p>
+            <button
+              type="button"
+              onClick={() => removeTier(t.tierName)}
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+        <div className="flex justify-end">
+          <input
+            type="submit"
+            value="ADD EVENT"
+            className="cursor-pointer"
+          />
+        </div>
       </form>
     </div>
   );

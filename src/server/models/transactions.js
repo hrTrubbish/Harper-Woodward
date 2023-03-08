@@ -6,7 +6,7 @@ const {
   setDoc,
   serverTimestamp,
 } = require('firebase/firestore');
-const dbPromise = require('../../config/firebase');
+const dbPromise = require('../../config/firebaseBE');
 
 module.exports = {
   get: async () => {
