@@ -6,6 +6,7 @@ const initialForm = {
   eventName: '',
   description: '',
   startTime: '',
+  date: '',
   endTime: '',
   maxAttendees: '',
   pricing: '',
@@ -53,6 +54,14 @@ export default function ScheduleStreams() {
           name="description"
           value={form.description}
           placeholder="Describe livestream event"
+          onChange={handleInput}
+        />
+        <FormInput
+          labelText="Date"
+          type="date"
+          name="date"
+          value={form.date}
+          placeholder="Enter date"
           onChange={handleInput}
         />
         <div className="flex gap-2 justify-end">

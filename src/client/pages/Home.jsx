@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTours, getStreams } from '../redux/global';
 import YouTubeEmbed from './components/video_player/YouTubeEmbed.jsx';
-import TourDateList from './components/home/TourDateList.jsx';
+import {
+  TourDateList,
+  StreamInfo,
+} from './components/home';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -54,6 +57,10 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Stream section */}
+      <StreamInfo streams={streams} />
+
       <div className="tour flex flex-col p-10 border-t-2 border-current">
         <span className="text-3xl self-center">tour</span>
         <TourDateList tours={tours} />

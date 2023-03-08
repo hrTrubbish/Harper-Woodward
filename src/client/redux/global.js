@@ -16,7 +16,6 @@ export const getTours = createAsyncThunk(
   async () => {
     try {
       const res = await get('tours');
-      console.log(res, 'tours');
       return res;
     } catch (err) {
       throw new Error(err);
@@ -29,7 +28,6 @@ export const getStreams = createAsyncThunk(
   async () => {
     try {
       const res = await get('schedules');
-      console.log(res, 'schedules');
       return res;
     } catch (err) {
       throw new Error(err);

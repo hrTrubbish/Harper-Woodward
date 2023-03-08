@@ -28,6 +28,7 @@ const schedulesSchema = {
   description: 'string',
   startTime: 'string',
   endTime: 'string',
+  date: 'string',
   attendees: 'number',
   maxAttendees: 'number',
   pricing: 'number',
