@@ -1,16 +1,12 @@
 import React from 'react';
 
-export default function MovieListItem({ tour, handleBuy }) {
-  const { town, venue, date } = tour;
+export default function MovieListItem({ tour }) {
+  const { date, description, venue, location } = tour;
 
   return (
-    <>
-      <div>{date}</div>
-      <div>
-        <div>{venue}</div>
-        <div>{town}</div>
-      </div>
-      <button type="button" onClick={handleBuy}>Buy Tickets</button>
-    </>
+    <div className="text-center">
+      <div>{`${date} - ${venue} - ${location}`}</div>
+      <div>{description}</div>
+    </div>
   );
 }

@@ -1,14 +1,20 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getEvents } from '../redux/global';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTours, getStreams } from '../redux/global';
 import YouTubeEmbed from './components/video_player/YouTubeEmbed.jsx';
 import TourDateList from './components/home/TourDateList.jsx';
 
 export default function Home() {
   const dispatch = useDispatch();
+  const { tours, streams } = useSelector(
+    (state) => state.global,
+  );
 
   useEffect(() => {
-    dispatch(getEvents());
+    Promise.all([
+      dispatch(getTours()),
+      dispatch(getStreams()),
+    ]);
   }, []);
 
   return (
@@ -32,7 +38,9 @@ export default function Home() {
         </div>
       </div>
       <div className="info flex flex-col p-10">
-        <span className="text-3xl self-center">info</span>
+        <span className="text-3xl self-center mb-4">
+          info
+        </span>
         <div className="flex justify-around h-60">
           <img
             className="w-3/12 border-dotted border-2 border-current"
@@ -48,7 +56,7 @@ export default function Home() {
       </div>
       <div className="tour flex flex-col p-10 border-t-2 border-current">
         <span className="text-3xl self-center">tour</span>
-        <TourDateList />
+        <TourDateList tours={tours} />
       </div>
       <div className="merch flex flex-col p-10 border-t-2 border-current">
         <span className="text-3xl self-center">merch</span>

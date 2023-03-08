@@ -35,10 +35,10 @@ export default function AddTourDates() {
       (i) => i.tierName === tier.tierName,
     );
     if (found) return;
-    const { price, quantity } = tier;
     const newTier = {
-      price: Number(price),
-      quantity: Number(quantity),
+      ...tier,
+      price: Number(tier.price),
+      quantity: Number(tier.quantity),
     };
     setTiers([...tiers, newTier]);
     setTier(initialTier);

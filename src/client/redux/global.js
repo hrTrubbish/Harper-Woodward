@@ -11,14 +11,25 @@ const initialState = {
   streams: [],
 };
 
-export const getEvents = createAsyncThunk(
+export const getTours = createAsyncThunk(
   'global/fetchTours',
   async () => {
     try {
-      const res = await Promise.all([
-        get('schedules'),
-        get('tours'),
-      ]);
+      const res = await get('tours');
+      console.log(res, 'tours');
+      return res;
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+);
+
+export const getStreams = createAsyncThunk(
+  'global/fetchStreams',
+  async () => {
+    try {
+      const res = await get('schedules');
+      console.log(res, 'schedules');
       return res;
     } catch (err) {
       throw new Error(err);
@@ -35,22 +46,17 @@ const globalSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getEvents.pending, (state) => {
+    builder.addCase(getTours.fulfilled, (state, action) => {
+      state.tours = action.payload.res;
       state.isLoading = false;
     });
     builder.addCase(
-      getEvents.fulfilled,
+      getStreams.fulfilled,
       (state, action) => {
-        const streams = action.payload[0].res;
-        const tours = action.payload[1].res;
-        state.streams = streams;
-        state.tours = tours;
+        state.streams = action.payload.res;
         state.isLoading = false;
       },
     );
-    builder.addCase(getEvents.rejected, (state) => {
-      state.isLoading = false;
-    });
   },
 });
 
