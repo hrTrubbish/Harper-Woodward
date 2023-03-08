@@ -28,6 +28,7 @@ export default function ScheduleStreams() {
       pricing: Number(pricing),
       ...fields,
       attendees: 0,
+      isAvailable: true,
     };
     const res = await post(payload, 'schedules');
     if (res.success) {

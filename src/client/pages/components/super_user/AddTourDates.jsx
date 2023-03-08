@@ -54,6 +54,7 @@ export default function AddTourDates() {
       ...form,
       pricing: tiers,
       isAvailable: true,
+      isSoldout: false,
     };
 
     const res = await post(payload, 'tours');
