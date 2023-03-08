@@ -9,6 +9,7 @@ const initialState = {
   isLoading: true,
   tours: [],
   streams: [],
+  featuredVideo: 'https://www.youtube.com/embed/HydiRr_EOYU',
 };
 
 export const getTours = createAsyncThunk(
@@ -42,6 +43,9 @@ const globalSlice = createSlice({
     updateCurrentUser: (state, action) => {
       state.userId = action.payload;
     },
+    updateFeaturedVideo: (state, action) => {
+      state.featuredVideo = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getTours.fulfilled, (state, action) => {
@@ -58,5 +62,5 @@ const globalSlice = createSlice({
   },
 });
 
-export const { updateCurrentUser } = globalSlice.actions;
+export const { updateCurrentUser, updateFeaturedVideo } = globalSlice.actions;
 export default globalSlice.reducer;
