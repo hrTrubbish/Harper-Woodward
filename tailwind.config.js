@@ -1,5 +1,5 @@
 module.exports = {
-  important: true,
+  // important: true,
   mode: 'jit',
   content: [
     './index.html',
