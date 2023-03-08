@@ -6,19 +6,13 @@ const initialFormInput = {
   venue: '',
   location: '',
   date: '',
-  pricing: [
-    {
-      tierName: '',
-      price: '',
-      quantity: '',
-    },
-  ],
+  pricing: [],
 };
 
 const initialTier = {
   tierName: '',
-  price: 0,
-  quantity: 0,
+  price: '',
+  quantity: '',
 };
 
 export default function AddTourDates() {
@@ -51,8 +45,13 @@ export default function AddTourDates() {
   };
 
   const addTier = () => {
-    formInput.pricing.push(currentTier);
+    // formInput.pricing.push(currentTier);
+    setFormInput({
+      ...formInput,
+      pricing: [...formInput.pricing, currentTier],
+    });
     setCurrentTier(initialTier);
+    console.log(formInput);
   };
 
   return (
@@ -66,7 +65,7 @@ export default function AddTourDates() {
           //   ...formInput,
           //   date: convertToUTC(e.target.value),
           // });
-          console.log('date: ', formInput.date);
+          console.log('date: ', formInput);
           // clearForm();
         }}
       >
