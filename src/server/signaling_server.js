@@ -132,6 +132,7 @@ io.on('connection', async (socket) => {
     }
   });
 
+  // HOST SPECIFIC STREAM SOCKET EVENTS
   socket.on('transport-connect', async ({ dtlsParameters }) => {
     console.log('DTLS PARAMS: ', { dtlsParameters });
     await producerTransport.connect({ dtlsParameters });
@@ -155,6 +156,57 @@ io.on('connection', async (socket) => {
     callback({
       id: producer.id,
     });
+  });
+
+  // AUDIENCE SPECIFIC STREAM SOCKET EVENTS
+  socket.on('transport-recv-connect', async ({ dtlsParameters }) => {
+    console.log('DTLS PARAMS: ', { dtlsParameters });
+    await consumerTransport.connect({ dtlsParameters });
+  });
+
+  socket.on('consume', async ({ rtpCapabilities }, callback) => {
+    try {
+      if (router.canConsume({
+        producerId: producer.id,
+        rtpCapabilities,
+      })) {
+        consumer = await consumerTransport.consume({
+          producerId: producer.id,
+          rtpCapabilities,
+          paused: true,
+        });
+
+        consumer.on('transportclose', () => {
+          console.log('consumer transport closed');
+        });
+
+        consumer.on('producerclose', () => {
+          console.log('producer of consumer closed');
+        });
+
+        const params = {
+          id: consumer.id,
+          producerId: producer.id,
+          kind: consumer.kind,
+          rtpParameters: consumer.rtpParameters,
+        };
+
+        // send new consumer stream to client
+        callback({ params });
+      }
+    } catch (error) {
+      console.error(`error starting recieve stream consume: ${error}`);
+      callback({
+        params: {
+          error,
+        },
+      });
+    }
+  });
+
+  socket.on('consumer-resume', async () => {
+    console.log('resume consumer stream');
+    await consumer.resume();
   });
 });
 

@@ -54,8 +54,8 @@ export default function SuperUser() {
     console.log('producer: ', producer);
   };
 
-  const createSendTransport = () => {
-    socket.emit('createWebRtcTransport', { sender: true }, ({ params }) => {
+  const createSendTransport = async () => {
+    await socket.emit('createWebRtcTransport', { sender: true }, ({ params }) => {
       if (params.error) {
         console.error('error creating webRTC transport: ', params.error);
         return;
@@ -166,7 +166,7 @@ export default function SuperUser() {
     const newSocket = io('http://localhost:3001');
 
     newSocket.on('connection-success', ({ socketId }) => {
-      console.log(socketId);
+      console.log(`host: ${socketId}`);
     });
     setSocket(newSocket);
 
@@ -190,7 +190,6 @@ export default function SuperUser() {
         </button>
       </div>
       <StatsList />
-
       <div>
         <AddTourDates />
       </div>
