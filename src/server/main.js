@@ -2,6 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const ViteExpress = require('vite-express');
+const cors = require('cors');
 const morganMiddleware = require('./middleware/morgan');
 const logger = require('./middleware/logger');
 const router = require('./routes');
@@ -10,6 +11,7 @@ const router = require('./routes');
 const app = express();
 
 // ====== MIDDLEWARE ========================
+app.use(cors());
 app.use(morganMiddleware);
 app.use(express.json({ limit: '32mb' }));
 

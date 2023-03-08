@@ -21,5 +21,7 @@ module.exports = {
       { devDependencies: true },
     ],
     'react/prop-types': 'off',
+    // redux throws error with this
+    'no-param-reassign': 0,
   },
 };
