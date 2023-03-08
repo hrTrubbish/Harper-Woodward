@@ -18,7 +18,7 @@ export default function Header() {
         ) : (
           <div className="header-right">
             <Link to="/login" id="login">login</Link>
-            <Link to="/signup">sign up</Link>
+            {/* <Link to="/signup">sign up</Link>  ----- move signup to login page */}
           </div>
         )}
       </div>
