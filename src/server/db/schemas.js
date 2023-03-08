@@ -54,6 +54,7 @@ const superUserStatisticsSchema = {
 const transactionsSchema = {
   userId: 'reference',
   amount: 'number',
+  eventType: 'string',
   streamId: 'reference',
   tourId: 'reference',
   paymentType: 'string',

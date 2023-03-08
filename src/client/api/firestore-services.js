@@ -3,16 +3,39 @@ import {
   getDoc,
   getDocs,
   doc,
+  query,
+  orderBy,
   setDoc,
+  limit,
+  startAfter,
   updateDoc,
   deleteDoc,
   serverTimestamp,
 } from 'firebase/firestore';
 import { db } from './firestore-instance';
 
-export const get = async (table) => {
+export const get = async (
+  table,
+  count = 10,
+  start = null,
+) => {
   try {
-    const dbRef = collection(db, table);
+    let dbRef = collection(db, table);
+    if (start) {
+      dbRef = query(
+        collection(db, table),
+        orderBy('createdAt', 'desc'),
+        startAfter(start),
+        limit(count),
+      );
+    } else {
+      dbRef = query(
+        collection(db, table),
+        orderBy('createdAt', 'desc'),
+        limit(count),
+      );
+    }
+
     const dbSnapShot = await getDocs(dbRef);
     const res = dbSnapShot.docs.map((d) => ({
       id: d.id,

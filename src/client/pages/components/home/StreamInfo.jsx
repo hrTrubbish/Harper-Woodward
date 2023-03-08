@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function StreamInfo({ streams }) {
   const upcomingStream = streams[0];
@@ -17,7 +18,17 @@ export default function StreamInfo({ streams }) {
           </span>
           <div>{`${upcomingStream?.startTime} - ${upcomingStream?.endTime}`}</div>
           <div>{`${upcomingStream?.maxAttendees} attendees`}</div>
-          <div>{upcomingStream?.description}</div>
+          <div className="w-3/4 flex flex-wrap">
+            {upcomingStream?.description}
+          </div>
+          <Link
+            to={{
+              pathname: '/checkout',
+              search: `?stream=${upcomingStream?.id}`,
+            }}
+          >
+            Purchase Access
+          </Link>
         </div>
         <img
           className="w-3/12 border-dotted border-2 border-current"
