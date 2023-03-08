@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
-import FormInput from '../common/FormInput.jsx';
+import { FormInput, FormTextarea } from '../common';
 import { post } from '../../../api/firestore-services';
 
-const initialFormState = {
+const initialForm = {
   venue: '',
+  description: '',
   location: '',
   date: '',
 };
 
-const initialTierState = {
+const initialTier = {
   tierName: '',
   price: '',
   quantity: '',
 };
 
 export default function AddTourDates() {
-  const [form, setForm] = useState(initialFormState);
-  const [tier, setTier] = useState(initialTierState);
+  const [form, setForm] = useState(initialForm);
+  const [tier, setTier] = useState(initialTier);
   const [tiers, setTiers] = useState([]);
 
   const handleInput = (e) => {
@@ -34,8 +35,13 @@ export default function AddTourDates() {
       (i) => i.tierName === tier.tierName,
     );
     if (found) return;
-    setTiers([...tiers, tier]);
-    setTier(initialTierState);
+    const { price, quantity } = tier;
+    const newTier = {
+      price: Number(price),
+      quantity: Number(quantity),
+    };
+    setTiers([...tiers, newTier]);
+    setTier(initialTier);
   };
 
   const removeTier = (tierName) => {
@@ -45,9 +51,10 @@ export default function AddTourDates() {
   const handleAddEvent = async (e) => {
     e.preventDefault();
     const payload = { ...form, pricing: tiers };
+
     const res = await post(payload, 'tours');
     if (res.success) {
-      setForm(initialFormState);
+      setForm(initialForm);
       setTiers([]);
     }
   };
@@ -61,6 +68,14 @@ export default function AddTourDates() {
           name="venue"
           value={form.venue}
           placeholder="Enter venue here"
+          onChange={handleInput}
+        />
+        <FormTextarea
+          labelText="Description"
+          type="text"
+          name="description"
+          value={form.description}
+          placeholder="Enter a description"
           onChange={handleInput}
         />
         <FormInput

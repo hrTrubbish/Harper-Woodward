@@ -9,8 +9,9 @@ const usersSchema = {
 
 const tourDatesSchema = {
   venue: 'string',
+  description: 'string',
   location: 'string',
-  date: 'timestamp',
+  date: 'string',
   pricing: [
     {
       tierName: 'string',
@@ -23,11 +24,10 @@ const tourDatesSchema = {
 };
 
 const schedulesSchema = {
-  title: 'string',
+  eventName: 'string',
   description: 'string',
-  startTime: 'timestamp',
-  endTime: 'timestamp',
-  timezone: 'string',
+  startTime: 'string',
+  endTime: 'string',
   attendees: 'number',
   maxAttendees: 'number',
   pricing: 'number',
