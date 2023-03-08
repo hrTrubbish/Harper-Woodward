@@ -28,7 +28,6 @@ export const getStreams = createAsyncThunk(
   async () => {
     try {
       const res = await get('schedules');
-      console.log(res);
       return res;
     } catch (err) {
       throw new Error(err);

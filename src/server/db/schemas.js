@@ -12,6 +12,7 @@ const tourDatesSchema = {
   description: 'string',
   location: 'string',
   date: 'string',
+  isAvailable: 'boolean',
   pricing: [
     {
       tierName: 'string',
@@ -57,6 +58,7 @@ const transactionsSchema = {
   eventType: 'string',
   streamId: 'reference',
   tourId: 'reference',
+  tier: 'string',
   paymentType: 'string',
   createdAt: 'timestamp',
   updatedAt: 'timestamp',

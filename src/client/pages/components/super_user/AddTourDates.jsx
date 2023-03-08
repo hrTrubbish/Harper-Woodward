@@ -50,7 +50,11 @@ export default function AddTourDates() {
 
   const handleAddEvent = async (e) => {
     e.preventDefault();
-    const payload = { ...form, pricing: tiers };
+    const payload = {
+      ...form,
+      pricing: tiers,
+      isAvailable: true,
+    };
 
     const res = await post(payload, 'tours');
     if (res.success) {

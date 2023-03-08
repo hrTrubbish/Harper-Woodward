@@ -18,7 +18,7 @@ export default function SuperUser() {
         <StatsList />
       </div>
       <div className="flex justify-end p-8">
-        <ScheduleStreams />
+        <AddTourDates />
       </div>
     </div>
   );
