@@ -119,6 +119,7 @@ export default function AddTourDates() {
           onChange={handleTierChange}
         />
         <button
+          className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 m-8 self-center"
           type="button"
           onClick={() => {
             addTier();
@@ -126,7 +127,11 @@ export default function AddTourDates() {
         >
           Add pricing tier
         </button>
-        <input type="submit" value="Submit answer" />
+        <input
+          className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded"
+          type="submit"
+          value="Submit answer"
+        />
       </form>
     </div>
   );
