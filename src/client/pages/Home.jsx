@@ -21,7 +21,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col max-w-7xl m-auto">
       <div className="featured flex flex-col p-10">
         <span className="text-3xl self-center">
           featured video
