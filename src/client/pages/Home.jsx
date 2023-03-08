@@ -28,13 +28,13 @@ export default function Home() {
     <div className="flex flex-col max-w-7xl m-auto">
       <div className="featured flex flex-col p-10">
         <span className="text-3xl self-center">
-          featured video
+          Featured Video
         </span>
         <YouTubeEmbed
           src={featuredVideo}
           title="Dancing in a Bar"
         />
-        <div className="flex justify-between mr-5 ml-5">
+        <div className="flex justify-between mr-5 ml-5" id="feat-vid-info">
           <span className="font-bold text-3xl">
             Dancing in a Bar
           </span>

@@ -107,3 +107,43 @@ table {
   justify-content: space-between;
   width: 50%;
 }
+
+/* Media query for mobile screens */
+@media (max-width: 767px) {
+  #logo {
+    margin-bottom: 2px;
+  }
+
+  #header {
+    height: auto;
+  }
+
+  #login {
+    padding-bottom: 12px;
+  }
+
+  .header-top {
+    flex-direction: column;
+    height: auto;
+    padding: 1em;
+  }
+
+  #logo {
+    margin-bottom: 1em;
+    text-align: center;
+  }
+
+  #main-nav {
+    margin-top: 1em;
+    width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 12px;
+  }
+
+  #feat-vid-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+  }
+}
