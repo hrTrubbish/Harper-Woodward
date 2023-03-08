@@ -1,108 +1,121 @@
 import React, { useState } from 'react';
-import FormInput from '../common/FormInput.jsx';
-import FormTextarea from '../common/FormTextarea.jsx';
+import { FormInput, FormTextarea } from '../common';
+import { post } from '../../../api/firestore-services';
 
-const initialFormInput = {
-  title: 'string',
-  description: 'string',
-  startTime: 'timestamp',
-  endTime: 'timestamp',
-  timezone: 'string',
-  attendees: 'number',
-  maxAttendees: 'number',
-  pricing: 'number',
+const initialForm = {
+  eventName: '',
+  description: '',
+  startTime: '',
+  date: '',
+  endTime: '',
+  maxAttendees: '',
+  pricing: '',
 };
 
-export default function ScheduleStreams({ handleSchedule }) {
-  const [formInput, setFormInput] = useState(initialFormInput);
+export default function ScheduleStreams() {
+  const [form, setForm] = useState(initialForm);
 
-  const clearForm = () => {
-    setFormInput(initialFormInput);
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
 
-  const handleInputChange = (event) => {
-    setFormInput({
-      ...formInput,
-      [event.target.name]: event.target.value,
-    });
+  const handleAddEvent = async (e) => {
+    e.preventDefault();
+    const { maxAttendees, pricing, ...fields } = form;
+    const payload = {
+      maxAttendees: Number(maxAttendees),
+      pricing: Number(pricing),
+      ...fields,
+      attendees: 0,
+    };
+    const res = await post(payload, 'schedules');
+    if (res.success) {
+      setForm(initialForm);
+    }
   };
 
   return (
-    <form
-      aria-label="form"
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSchedule(e, formInput);
-        clearForm();
-      }}
-    >
-      <FormInput
-        labelText="Title"
-        type="text"
-        name="title"
-        value={formInput.title}
-        placeholder="Enter title here"
-        onChange={handleInputChange}
-      />
-      <FormTextarea
-        labelText="Description"
-        name="description"
-        value={formInput.description}
-        placeholder="Describe livestream event"
-        onChange={handleInputChange}
-      />
-      <FormInput
-        labelText="Start time"
-        type="time"
-        name="startTime"
-        value={formInput.startTime}
-        placeholder="Enter start time"
-        onChange={handleInputChange}
-      />
-      <FormInput
-        labelText="End time"
-        type="time"
-        name="endTime"
-        value={formInput.endTime}
-        placeholder="Enter end time"
-        onChange={handleInputChange}
-      />
-      <FormInput
-        labelText="Time zone"
-        type="text"
-        name="timezone"
-        value={formInput.timezone}
-        placeholder="Enter timezone"
-        onChange={handleInputChange}
-      />
-      <FormInput
-        labelText="Attendees"
-        type="number"
-        name="attendees"
-        value={formInput.attendees}
-        placeholder="Enter number of attendees"
-        onChange={handleInputChange}
-      />
-      <FormInput
-        labelText="Max attendees"
-        type="number"
-        name="maxAttendees"
-        value={formInput.maxAttendees}
-        placeholder="Enter maximum number of attendees"
-        onChange={handleInputChange}
-      />
-      <FormInput
-        labelText="Pricing"
-        type="number"
-        name="pricing"
-        value={formInput.pricing}
-        placeholder="Enter price"
-        onChange={handleInputChange}
-      />
-      <input
-        type="submit"
-        value="Submit answer"
-      />
-    </form>
+    <div className="md:max-w-xl">
+      <div className="text-center">
+        Add your next stream
+      </div>
+      <form aria-label="form" onSubmit={handleAddEvent}>
+        <FormInput
+          labelText="Event"
+          type="text"
+          name="eventName"
+          value={form.eventName}
+          placeholder="Enter event name"
+          onChange={handleInput}
+        />
+        <FormTextarea
+          labelText="Description"
+          name="description"
+          value={form.description}
+          placeholder="Describe livestream event"
+          onChange={handleInput}
+        />
+        <FormInput
+          labelText="Date"
+          type="date"
+          name="date"
+          value={form.date}
+          placeholder="Enter date"
+          onChange={handleInput}
+        />
+        <div className="flex gap-2 justify-end">
+          <div className="w-1/4">
+            <FormInput
+              labelText="Start time"
+              type="time"
+              name="startTime"
+              value={form.startTime}
+              placeholder="Enter start time"
+              onChange={handleInput}
+            />
+          </div>
+          <div className="w-1/4">
+            <FormInput
+              labelText="End time"
+              type="time"
+              name="endTime"
+              value={form.endTime}
+              placeholder="Enter end time"
+              onChange={handleInput}
+            />
+          </div>
+        </div>
+        <div className="flex gap-2 justify-end">
+          <div className="w-1/4">
+            <FormInput
+              labelText="Max attendees"
+              type="number"
+              name="maxAttendees"
+              value={form.maxAttendees}
+              placeholder="Capacity"
+              onChange={handleInput}
+            />
+          </div>
+          <div className="w-1/4">
+            <FormInput
+              labelText="Pricing"
+              type="number"
+              name="pricing"
+              value={form.pricing}
+              placeholder="Enter price"
+              onChange={handleInput}
+            />
+          </div>
+        </div>
+        <div className="flex justify-end">
+          <input
+            type="submit"
+            value="Add"
+            className="cursor-pointer"
+          />
+        </div>
+      </form>
+    </div>
   );
 }
