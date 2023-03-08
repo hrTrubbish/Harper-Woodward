@@ -8,14 +8,14 @@ export default function Header() {
     <header id="header">
       <div className="header-top">
         <a href="www.google.com">tour info</a>
-        <Link to="/" id="logo">Brooks Garth</Link>
+        <Link to="/" id="logo" className="mb-4">Brooks Garth</Link>
         {status === 'authenticated' && userId ? (
           <button type="button" onClick={handleLogOut}>
             <Link to="/">Log Out</Link>
           </button>
         ) : (
           <>
-            <Link to="/login">login</Link>
+            <Link to="/login" id="login">login</Link>
             <Link to="/signup">Sign Up</Link>
           </>
         )}
