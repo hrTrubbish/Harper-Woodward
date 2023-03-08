@@ -7,7 +7,7 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
-import { db } from '../../config/firebase';
+import { db } from '../../config/firebaseBE';
 
 const testCollectionRef = collection(db, 'test');
 const testCollectionRefWithTag = doc(
