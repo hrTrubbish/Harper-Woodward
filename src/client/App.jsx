@@ -26,7 +26,7 @@ export default function App() {
             element={<VideoPlayer />}
           />
           <Route
-            path="/superuser"
+            path="/superuser/*"
             element={<SuperUser />}
           />
           <Route path="/checkout" element={<Payment />} />
