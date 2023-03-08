@@ -1,17 +1,15 @@
-import React, {useEffect} from 'react';
-// import {useSelector, useDispatch} from 'react-redux'
-// import { fetchTours} from '../redux/global'
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getEvents } from '../redux/global';
 import YouTubeEmbed from './components/video_player/YouTubeEmbed.jsx';
 import TourDateList from './components/home/TourDateList.jsx';
 
 export default function Home() {
-  // const dispatch = useDispatch()
-  // const { tours} = useSelector((state) => state.global)
+  const dispatch = useDispatch();
 
-
-  // useEffect(() => {
-  //   dispatch(fetchTours())
-  // })
+  useEffect(() => {
+    dispatch(getEvents());
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -36,7 +34,10 @@ export default function Home() {
       <div className="info flex flex-col p-10">
         <span className="text-3xl self-center">info</span>
         <div className="flex justify-around h-60">
-          <img className="w-3/12 border-dotted border-2 border-current" alt="" />
+          <img
+            className="w-3/12 border-dotted border-2 border-current"
+            alt=""
+          />
           <div className="flex flex-col self-center">
             <span>
               THIS IS SOME INFO ABOUT BROOKS GARTH
@@ -52,10 +53,22 @@ export default function Home() {
       <div className="merch flex flex-col p-10 border-t-2 border-current">
         <span className="text-3xl self-center">merch</span>
         <div className="flex justify-around mb-20 p-5">
-          <img className="h-20 w-20 border-solid border-2 border-current" alt="" />
-          <img className="h-20 w-20 border-solid border-2 border-current" alt="" />
-          <img className="h-20 w-20 border-solid border-2 border-current" alt="" />
-          <img className="h-20 w-20 border-solid border-2 border-current" alt="" />
+          <img
+            className="h-20 w-20 border-solid border-2 border-current"
+            alt=""
+          />
+          <img
+            className="h-20 w-20 border-solid border-2 border-current"
+            alt=""
+          />
+          <img
+            className="h-20 w-20 border-solid border-2 border-current"
+            alt=""
+          />
+          <img
+            className="h-20 w-20 border-solid border-2 border-current"
+            alt=""
+          />
         </div>
       </div>
     </div>
