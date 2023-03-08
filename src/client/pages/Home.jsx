@@ -12,6 +12,9 @@ export default function Home() {
   const { tours, streams } = useSelector(
     (state) => state.global,
   );
+  const { featuredVideo } = useSelector(
+    (state) => state.global,
+  );
 
   useEffect(() => {
     Promise.all([
@@ -27,7 +30,7 @@ export default function Home() {
           featured video
         </span>
         <YouTubeEmbed
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          src={featuredVideo}
           title="Dancing in a Bar"
         />
         <div className="flex justify-between mr-5 ml-5">

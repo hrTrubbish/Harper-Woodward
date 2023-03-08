@@ -1,5 +1,6 @@
 import React from 'react';
 import StatsList from './components/super_user/StatsList.jsx';
+import VideosTab from './components/super_user/VideosTab.jsx';
 import ScheduleStreams from './components/super_user/ScheduleStreams.jsx';
 import AddTourDates from './components/super_user/AddTourDates.jsx';
 
@@ -22,6 +23,7 @@ export default function SuperUser() {
           <AddTourDates />
         </div>
       </div>
+      <VideosTab />
     </div>
   );
 }
