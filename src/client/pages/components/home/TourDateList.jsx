@@ -1,12 +1,14 @@
 import React from 'react';
 import TourDateListItem from './TourDateListItem.jsx';
 
-export default function TourDateList({ tours, handleBuy }) {
+export default function TourDateList({ tours }) {
   return (
     <div>
-      {/* {tours.map((tour) => {
-        return <ul><TourDateListItem key={tour._id} id={tour._id} tour={tour} handleBuy={handleBuy}/></ul>
-      })} */}
+      {tours.map((tour) => (
+        <ul key={tour?.id} className="my-2">
+          <TourDateListItem tour={tour} />
+        </ul>
+      ))}
     </div>
   );
 }
