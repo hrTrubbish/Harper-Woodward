@@ -13,6 +13,7 @@ const tourDatesSchema = {
   location: 'string',
   date: 'string',
   isAvailable: 'boolean',
+  isSoldout: 'boolean',
   pricing: [
     {
       tierName: 'string',
@@ -29,6 +30,7 @@ const schedulesSchema = {
   description: 'string',
   startTime: 'string',
   endTime: 'string',
+  isAvailable: 'boolean',
   date: 'string',
   attendees: 'number',
   maxAttendees: 'number',
