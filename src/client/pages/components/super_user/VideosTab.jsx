@@ -4,10 +4,13 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../../../config/firebaseFE';
 import AddVideoForm from './AddVideoForm.jsx';
+import { useDispatch } from 'react-redux';
+import { updateFeaturedVideo } from '../../../redux/global';
 
 // renders list of all videos from DB collection and allows superuser CRUD functionality
 export default function VideosTab() {
   const [videos, setVideos] = useState([]);
+  const dispatch = useDispatch();
 
   async function fetchVideos() {
     try {
@@ -29,8 +32,12 @@ export default function VideosTab() {
     fetchVideos();
   };
 
+  const setFeatured = (url) => {
+    dispatch(updateFeaturedVideo(url));
+  };
+
   return (
-    <section className="w-1/3 max-h-screen border-solid border-2 border-current">
+    <section className="w-2/3 max-h-full border-solid border-2 border-current overflow-y-scroll">
       <h1 className="border-solid border-2 border-red">VIDEOS TAB</h1>
       <ul>
         {videos?.map((video) => (
@@ -45,10 +52,15 @@ export default function VideosTab() {
             >
               delete video
             </button>
+            <button
+              onClick={() => setFeatured(video?.data.url)}
+              type="button"
+            >
+              select this video as featured
+            </button>
           </li>
         ))}
       </ul>
-      <AddVideoForm />
     </section>
   );
 }

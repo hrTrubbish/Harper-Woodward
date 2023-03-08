@@ -13,7 +13,7 @@ module.exports = [
     // updatedAt: '2023-03-01T13:51:50.417-07:00',
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
-    url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    url: 'https://www.youtube.com/embed/SQs7iwpebfU',
   },
   {
     title: 'celebratory stream 1',
@@ -24,7 +24,7 @@ module.exports = [
     views: 52220000,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
-    url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    url: 'https://www.youtube.com/embed/FggesW8_Mtk',
   },
   {
     title: 'celebratory stream 2',
@@ -35,7 +35,7 @@ module.exports = [
     views: 1,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
-    url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    url: 'https://www.youtube.com/embed/LFdHS-gCJeo',
   },
   {
     title: '24 hour celebratory stream',
@@ -46,6 +46,6 @@ module.exports = [
     views: 9,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
-    url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    url: 'https://www.youtube.com/embed/-FlSP0wsF5U',
   },
 ];
