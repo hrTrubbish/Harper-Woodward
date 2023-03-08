@@ -1,10 +1,16 @@
 import React from 'react';
 
 export default function FormTextarea({
-  labelText, name, value, placeholder, onChange, maxLength = '1000', minLength = '0',
+  labelText,
+  name,
+  value,
+  placeholder,
+  onChange,
+  maxLength = '1000',
+  minLength = '0',
 }) {
   return (
-    <div>
+    <div className="w-full">
       <label htmlFor={name}>
         {labelText}
         <textarea
@@ -18,6 +24,7 @@ export default function FormTextarea({
           rows="5"
           cols="62"
           required
+          className="w-full block resize-none"
         />
       </label>
     </div>
