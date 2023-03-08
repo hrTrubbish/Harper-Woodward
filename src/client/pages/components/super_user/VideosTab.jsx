@@ -30,7 +30,7 @@ export default function VideosTab() {
   };
 
   return (
-    <section className="max-h-screen border-solid border-2 border-current">
+    <section className="w-1/3 max-h-screen border-solid border-2 border-current">
       <h1 className="border-solid border-2 border-red">VIDEOS TAB</h1>
       <ul>
         {videos?.map((video) => (
