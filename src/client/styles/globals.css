@@ -127,6 +127,13 @@ table {
   width: 50%;
 }
 
+
+@layer base {
+  .font-outline-2 {
+    -webkit-text-stroke: .5px #251B1B;
+  }
+}
+
 /* Media query for mobile screens */
 @media (max-width: 767px) {
   #logo {
