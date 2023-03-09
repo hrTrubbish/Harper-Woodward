@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header id="header">
       <div className="header-top">
-        <div className="header-left">
+        <div className="">
           <a href="www.google.com">tour info</a>
         </div>
         <Link to="/" id="logo" className="mb-4">Brooks Garth</Link>
@@ -19,7 +19,7 @@ export default function Header() {
             <Link to="/">Log Out</Link>
           </button>
         ) : (
-          <div className="header-right">
+          <div>
             <Link to="/login" id="login">login</Link>
             {/* <Link to="/signup">sign up</Link>  ----- move signup to login page */}
           </div>
@@ -27,6 +27,7 @@ export default function Header() {
       </div>
       <div className="header-bottom">
         <nav id="main-nav">
+          {status === 'authenticated' && userId === import.meta.env.VITE_SUPERUSER_UID ? <Link to="/superuser">Admin</Link> : null}
           <Link to="/live">livestream</Link>
           <Link to="/videos">videos</Link>
           <a href="www.google.com">tickets</a>
