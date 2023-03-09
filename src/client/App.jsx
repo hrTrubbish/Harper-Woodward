@@ -30,7 +30,7 @@ export default function App() {
           />
           <Route
             path="/superuser"
-            element={currEmail === 'wangchanghua13@gmail.com' || currEmail === 'fakeemail@qq.com' ? <SuperUser /> : <div className="flex justify-center">No Authorization</div>}
+            element={currEmail === import.meta.env.VITE_ADMIN_EMAIL || currEmail === import.meta.env.VITE_ADMIN_EMAIL_ALT ? <SuperUser /> : <div className="flex justify-center">No Authorization</div>}
           />
           <Route path="/checkout" element={<Payment />} />
         </Routes>

@@ -4,17 +4,8 @@ import { AuthContext } from '../_AuthProvider.jsx';
 
 export default function Header() {
   const {
-    status, userId, handleLogOut, setSession,
+    status, userId, handleLogOut,
   } = useContext(AuthContext);
-
-  // const handleLogOutEraseUser = () => {
-  //   setSession({
-  //     status: 'checking',
-  //     currEmail: '',
-  //     userId: null,
-  //   });
-  //   handleLogOut();
-  // };
 
   return (
     <header id="header">
