@@ -15,7 +15,8 @@ export const googleSignUpAndLogIn = async () => {
       FirebaseAuth,
       googleProvider,
     );
-    return response.user.uid;
+
+    return response.user;
   } catch (err) {
     return console.error(err);
   }
@@ -30,7 +31,7 @@ export const emailSignUp = async ({ email, password }) => {
     );
     return resp.user.uid;
   } catch (e) {
-    return alert(e.message);
+    return console.error(e.message);
   }
 };
 
@@ -41,15 +42,16 @@ export const emailLogIn = async ({ email, password }) => {
       email,
       password,
     );
+
     return response.user.uid;
-  } catch (err) {
-    return alert(e.message);
+  } catch (e) {
+    return console.error(e.message);
   }
 };
 
-export const authStateChange = (setSession) => {
+export const authStateChange = (setSession, currEmail) => {
   onAuthStateChanged(FirebaseAuth, (user) => {
-    if (!user) {
+    if (!user || !currEmail) {
       return setSession({
         status: 'no-authenticated',
         userId: null,

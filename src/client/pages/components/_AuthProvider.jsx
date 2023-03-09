@@ -4,10 +4,13 @@ import React, {
 import {
   googleSignUpAndLogIn, emailSignUp, emailLogIn, emailLogOut, authStateChange,
 } from '../../../config/provider';
+import { getSession, setSession } from './sessionStorage';
 
 const initialState = {
   status: 'checking',
+  currEmail: '',
   userId: null,
+  userName: '',
 };
 
 export const AuthContext = createContext({
@@ -16,60 +19,84 @@ export const AuthContext = createContext({
   handleLogInWithEmail: () => { },
   handleSignUpWithEmail: () => { },
   handleLogOut: () => { },
+  setSession: () => { },
 });
 
 function AuthProvider({ children }) {
-  const [session, setSession] = useState(initialState);
+  const [session, setSessionState] = useState(getSession());
+
+  // useEffect(() => {
+  //   const data = window.localStorage.getItem('session');
+  //   if (data !== 'undefined') {
+  //     const newSession = JSON.parse(data);
+  //     setSession(newSession);
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   window.localStorage.setItem('session', JSON.stringify(session));
+  // }, [session]);
 
   useEffect(() => {
-    authStateChange(setSession);
+    setSession(session);
+  }, [session]);
+
+  useEffect(() => {
+    if (session?.currEmail?.length) return;
+    authStateChange(setSessionState, session?.currEmail);
   }, []);
 
   const handleLogOut = async () => {
     emailLogOut();
-    setSession({
+    setSessionState({
       userId: null,
+      currEmail: '',
+      userName: '',
       status: 'no-authenticated',
     });
   };
 
-  const validateAuth = (userId) => {
+  const validateAuth = (userId, currEmail, userName) => {
     if (userId) {
-      return setSession({
+      return setSessionState({
+        ...session,
         userId,
+        currEmail,
+        userName,
         status: 'authenticated',
       });
     }
-
     return handleLogOut();
   };
 
   const checking = () => {
-    setSession((prev) => ({ ...prev, status: 'checking' }));
+    setSessionState((prev) => ({ ...prev, status: 'checking' }));
   };
 
-  const handleLogInWithGoogle = async () => {
+  const handleLogInWithGoogle = async (userName) => {
     checking();
-    const userId = await googleSignUpAndLogIn();
-    validateAuth(userId);
+    const user = await googleSignUpAndLogIn();
+    validateAuth(user?.uid, user?.email, userName);
+    return user.email;
   };
 
-  const handleLogInWithEmail = async (email, password) => {
+  const handleLogInWithEmail = async (email, password, userName) => {
     checking();
     const userId = await emailLogIn({
       email,
       password,
     });
-    validateAuth(userId);
+
+    validateAuth(userId, email, userName);
   };
 
-  const handleSignUpWithEmail = async (email, password) => {
+  const handleSignUpWithEmail = async (email, password, userName) => {
     checking();
     const userId = await emailSignUp({
       email,
       password,
     });
-    validateAuth(userId);
+    validateAuth(userId, email, userName);
   };
 
   return (
@@ -81,6 +108,7 @@ function AuthProvider({ children }) {
         handleLogInWithEmail,
         handleSignUpWithEmail,
         handleLogOut,
+        setSession: setSessionState,
       }}
     >
       {children}
