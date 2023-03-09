@@ -42,8 +42,8 @@ function AuthProvider({ children }) {
   }, [session]);
 
   useEffect(() => {
-    if (session.currEmail?.length) return;
-    authStateChange(setSessionState, session.currEmail);
+    if (session?.currEmail?.length) return;
+    authStateChange(setSessionState, session?.currEmail);
   }, []);
 
   const handleLogOut = async () => {
