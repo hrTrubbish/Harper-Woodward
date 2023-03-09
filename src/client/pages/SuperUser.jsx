@@ -3,6 +3,7 @@ import StatsList from './components/super_user/StatsList.jsx';
 import VideosTab from './components/super_user/VideosTab.jsx';
 import ScheduleStreams from './components/super_user/ScheduleStreams.jsx';
 import AddTourDates from './components/super_user/AddTourDates.jsx';
+import AddVideoForm from './components/super_user/AddVideoForm';
 
 export default function SuperUser() {
   return (
@@ -23,7 +24,10 @@ export default function SuperUser() {
           <AddTourDates />
         </div>
       </div>
-      <VideosTab />
+      <div className='flex h-4/6 justify-between gap-3 p-12'>
+        <VideosTab />
+        <AddVideoForm />
+      </div>
     </div>
   );
 }

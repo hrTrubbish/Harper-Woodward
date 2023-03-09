@@ -37,11 +37,11 @@ export default function VideosTab() {
   };
 
   return (
-    <section className="w-2/3 max-h-full border-solid border-2 border-current overflow-y-scroll">
+    <section className="w-2/3 h-1/2 max-h-fit border-solid border-2 border-current overflow-y-scroll">
       <h1 className="border-solid border-2 border-red">VIDEOS TAB</h1>
-      <ul>
+      <ul className="">
         {videos?.map((video) => (
-          <li className="flex gap-5 border-solid border-2 border-blue-500">
+          <li className="flex gap-5 border-solid border-2 border-current-500">
             <p>{`title: ${video?.data.title}`}</p>
             <p>{`description: ${video?.data.description}`}</p>
             <p>{`date uploaded: ${video?.data.createdAt.toDate().toDateString()}`}</p>
