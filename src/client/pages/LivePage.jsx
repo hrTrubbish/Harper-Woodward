@@ -3,9 +3,9 @@ import io from 'socket.io-client';
 import * as mediasoupClient from 'mediasoup-client';
 import AddMessage from './components/live/AddMessage.jsx';
 import ViewerMessageList from './components/live/ViewerMessageList.jsx';
-import Chat from './components/chat/Chat.jsx';
+// import Chat from './components/chat/Chat.jsx';
 
-const SERVER = 'http://localhost:3000';
+// const SERVER = 'http://localhost:3000';
 
 export default function LivePage() {
   // STATE DATA
@@ -120,36 +120,36 @@ export default function LivePage() {
     };
   }, []);
 
-  // TYLERS CHAT FEATURE IMPLEMENTATION
-  const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([]);
-  const [socketNum, setSocketNum] = useState(null);
+  // // TYLERS CHAT FEATURE IMPLEMENTATION
+  // const [input, setInput] = useState('');
+  // const [messages, setMessages] = useState([]);
+  // const [socketNum, setSocketNum] = useState(null);
 
-  useEffect(() => {
-    const socket = io(SERVER);
+  // useEffect(() => {
+  //   const chatSocket = io(SERVER);
 
-    socket.on('connection', () => {
-      socket.emit('new-user', { id: socket.id, name: 'tyler' });
-    });
+  //   chatSocket.on('connection', () => {
+  //     chatSocket.emit('new-user', { id: chatSocket.id, name: 'tyler' });
+  //   });
 
-    setSocketNum(socket);
+  //   setSocketNum(chatSocket);
 
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  //   return () => {
+  //     chatSocket.disconnect();
+  //   };
+  // }, []);
 
-  socketNum?.on('user-connected', (name) => {
-    setMessages(() => [...messages, `new user: ${name}`]);
-  });
+  // socketNum?.on('user-connected', (name) => {
+  //   setMessages(() => [...messages, `new user: ${name}`]);
+  // });
 
-  socketNum?.on('chat-message', (data) => {
-    setMessages(() => [...messages, `${data.name}: ${data.message}`]);
-  });
+  // socketNum?.on('chat-message', (data) => {
+  //   setMessages(() => [...messages, `${data.name}: ${data.message}`]);
+  // });
 
-  socketNum?.on('user-disconnected', (name) => {
-    setMessages(() => [...messages, `${name} disconnected`]);
-  });
+  // socketNum?.on('user-disconnected', (name) => {
+  //   setMessages(() => [...messages, `${name} disconnected`]);
+  // });
 
   return (
     <div className="flex h-screen w-screen">
@@ -169,7 +169,7 @@ export default function LivePage() {
           <AddMessage />
         </div>
       </div>
-      <div id="chat-box">
+      {/* <div id="chat-box">
         <Chat
           input={input}
           setInput={setInput}
@@ -177,7 +177,7 @@ export default function LivePage() {
           setMessages={setMessages}
           socketNum={socketNum}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
