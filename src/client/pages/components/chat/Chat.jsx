@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MessagePanel from './MessagePanel.jsx';
 
 export default function Chat({
-  socket, messages, input, setInput,
+  socket, messages,
 }) {
+  // STATE DATA
+  const [input, setInput] = useState('');
+
+  // EVENT HANDLERS
   const handleSubmit = (event) => {
     event.preventDefault();
     socket.emit('new-message', { id: socket.id, message: input });

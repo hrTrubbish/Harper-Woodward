@@ -12,9 +12,6 @@ module.exports = {
         garthbeige: 'hsl(52, 37%, 74%)',
         garthbrown: 'hsl(0, 16%, 13%)',
       },
-      backgroundImage: {
-        'hero-pattern': "url('./src/client/styles/img/campfire.jpg')",
-      },
       cursor: {
         fancy: 'url(hand.cur), pointer',
       },

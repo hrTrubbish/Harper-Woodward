@@ -29,10 +29,7 @@ export default function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/live" element={<LivePage messages={messages} setMessages={setMessages} />} />
           <Route path="/videos" element={<AllVideos />} />
-          <Route
-            path="/video-player"
-            element={<VideoPlayer />}
-          />
+          <Route path="/video-player" element={<VideoPlayer />} />
           <Route
             path="/superuser/*"
             element={

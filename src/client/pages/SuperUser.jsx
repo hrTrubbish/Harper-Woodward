@@ -10,6 +10,8 @@ import NavigationDrawer from './components/super_user/NavigationDrawer.jsx';
 import LiveStream from './components/super_user/LiveStream.jsx';
 import AddVideoForm from './components/super_user/AddVideoForm.jsx';
 
+const SERVER = 'http://localhost:3001';
+
 export default function SuperUser({ messages, setMessages }) {
   // STATE DATA
   const [socket, setSocket] = useState(null);
@@ -160,10 +162,10 @@ export default function SuperUser({ messages, setMessages }) {
 
   // ESTABLISHES SOCKET CONNECTION
   useEffect(() => {
-    const newSocket = io('http://localhost:3001');
+    const newSocket = io(SERVER);
 
     newSocket.on('connection-success', ({ socketId, allMessages }) => {
-      console.log(socketId);
+      // console.log(socketId);
       setMessages(allMessages);
       newSocket.emit('new-user', { id: socketId, name: 'test' });
     });
@@ -191,7 +193,18 @@ export default function SuperUser({ messages, setMessages }) {
       </div>
       <div className="w-3/4 items-center">
         <Routes>
-          <Route exact path="/" element={<LiveStream />} />
+          <Route
+            exact
+            path="/"
+            element={(
+              <LiveStream
+                handleStream={handleStream}
+                messages={messages}
+                setMessages={setMessages}
+                socket={socket}
+              />
+            )}
+          />
           <Route exact path="/stats" element={<StatsList />} />
           <Route exact path="/add-tour-dates" element={<AddTourDates />} />
           <Route exact path="/add-video-form" element={<AddVideoForm />} />
