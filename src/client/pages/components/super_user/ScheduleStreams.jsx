@@ -37,7 +37,7 @@ export default function ScheduleStreams() {
   };
 
   return (
-    <div className="md:max-w-xl">
+    <div className="md:max-w-xl mx-auto text-center">
       <div className="text-center">
         Add your next stream
       </div>

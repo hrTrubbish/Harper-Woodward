@@ -6,7 +6,7 @@ import ScheduleStreams from './components/super_user/ScheduleStreams.jsx';
 import AddTourDates from './components/super_user/AddTourDates.jsx';
 import NavigationDrawer from './components/super_user/NavigationDrawer.jsx';
 import LiveStream from './components/super_user/LiveStream.jsx';
-import AddVideoForm from './components/super_user/AddVideoForm';
+import AddVideoForm from './components/super_user/AddVideoForm.jsx';
 
 export default function SuperUser() {
   return (
@@ -19,6 +19,9 @@ export default function SuperUser() {
           <Route exact path="/" element={<LiveStream />} />
           <Route exact path="/stats" element={<StatsList />} />
           <Route exact path="/add-tour-dates" element={<AddTourDates />} />
+          <Route exact path="/add-video-form" element={<AddVideoForm />} />
+          <Route exact path="/schedule-streams" element={<ScheduleStreams />} />
+          <Route exact path="/videos" element={<VideosTab />} />
         </Routes>
       </div>
     </div>
