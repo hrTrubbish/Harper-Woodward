@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import {
   getDocs, collection, deleteDoc, doc,
 } from 'firebase/firestore';
+import { useDispatch } from 'react-redux';
 import { db } from '../../../../config/firebaseFE';
 import AddVideoForm from './AddVideoForm.jsx';
-import { useDispatch } from 'react-redux';
 import { updateFeaturedVideo } from '../../../redux/global';
+import { get, update } from '../../../api/firestore-services.js';
 
 // renders list of all videos from DB collection and allows superuser CRUD functionality
 export default function VideosTab() {
@@ -32,8 +33,9 @@ export default function VideosTab() {
     fetchVideos();
   };
 
-  const setFeatured = (url) => {
-    dispatch(updateFeaturedVideo(url));
+  const setFeatured = async (video) => {
+    const featuredVideo = await get('featured');
+    await update(featuredVideo.res[0]?.id, video.data, 'featured');
   };
 
   return (
@@ -53,7 +55,7 @@ export default function VideosTab() {
               delete video
             </button>
             <button
-              onClick={() => setFeatured(video?.data.url)}
+              onClick={() => setFeatured(video)}
               type="button"
             >
               select this video as featured
