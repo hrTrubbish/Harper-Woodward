@@ -40,7 +40,7 @@ export default function VideosTab() {
   };
 
   return (
-    <section className="max-w-2/3 h-1/2 max-h-fit border-solid border-2 border-current overflow-y-scroll rounded-xl">
+    <section className="mr-5 max-w-4/5 h-2/3 md:h-5/6 max-h-fit border-solid border-2 border-current overflow-auto rounded-xl">
       <h1 className="headers border-solid border-2 border-red grid grid-cols-3 sm:grid-cols-5">
         <div className="font-bold">videos</div>
         <div className="font-bold">date uploaded</div>
