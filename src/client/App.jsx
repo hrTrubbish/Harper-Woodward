@@ -29,7 +29,7 @@ export default function App() {
             element={<VideoPlayer />}
           />
           <Route
-            path="/superuser"
+            path="/superuser/*"
             element={currEmail === import.meta.env.VITE_ADMIN_EMAIL || currEmail === import.meta.env.VITE_ADMIN_EMAIL_ALT ? <SuperUser /> : <div className="flex justify-center">No Authorization</div>}
           />
           <Route path="/checkout" element={<Payment />} />
