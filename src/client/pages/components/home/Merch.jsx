@@ -3,7 +3,7 @@ import React from 'react';
 export default function Merch() {
   return (
     <div>
-      <div className="merch flex flex-col p-10 border-t-2 border-current">
+      <div className="merch flex flex-col p-10">
         <span className="text-3xl self-center mb-8">merch</span>
         <div className="flex justify-around flex-wrap gap-4 mb-20 p-5">
           <div className="flex group justify-center align-center w-48 relative z-2 cursor-pointer hover:scale-105 transition-transform border-solid">

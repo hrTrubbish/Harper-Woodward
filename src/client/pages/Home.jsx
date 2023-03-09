@@ -45,7 +45,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+
       <img src="src/client/styles/img/Flourish.png" alt="styled text divider" className="divider" />
+
       <div className="info flex flex-col p-10 w-screen self-center border-t-2 border-b-2 border-current">
         <span className="text-3xl self-center mb-4">
           info
@@ -53,7 +55,7 @@ export default function Home() {
         <div className="flex justify-around">
           <img
             src="src/client/styles/img/BrooksGarth1.png"
-            className="w-1/2 border-solid border-2 border-current"
+            className=" brooks w-1/2 border-solid border-2 border-current"
             alt="good ole cowboy"
           />
           <div className="flex flex-col self-center">
@@ -74,7 +76,7 @@ export default function Home() {
 
       <img src="src/client/styles/img/Flourish.png" alt="styled text divider" className="divider" />
 
-      <div className="tour flex flex-col p-10">
+      <div className="tour flex flex-col w-screen self-center border-t-2 border-b-2 border-current p-10">
         <span className="text-3xl self-center">tours</span>
         <TourDateList tours={tours} />
       </div>

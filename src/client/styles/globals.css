@@ -294,3 +294,7 @@ table {
 .divider {
   transform: scale(.3);
 }
+
+.brooks {
+  transform: scale(.8);
+}
