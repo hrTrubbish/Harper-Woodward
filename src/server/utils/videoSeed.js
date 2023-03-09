@@ -28,4 +28,15 @@ async function seedVideos(videos) {
   });
 }
 
+async function seedFeatured(videos) {
+  const featuredCollection = collection(db, 'featured');
+  try {
+    await addDoc(featuredCollection, videos[1]);
+    console.log(`Added video "${videos[0].title}" to Firestore collection featured}`);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 seedVideos(exampleVideos);
+seedFeatured(exampleVideos);

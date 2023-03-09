@@ -9,7 +9,7 @@ const initialState = {
   isLoading: true,
   tours: [],
   streams: [],
-  featuredVideo: 'https://www.youtube.com/embed/HydiRr_EOYU',
+  featuredVideo: [],
 };
 
 export const getTours = createAsyncThunk(
@@ -29,6 +29,18 @@ export const getStreams = createAsyncThunk(
   async () => {
     try {
       const res = await get('schedules');
+      return res;
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+);
+
+export const getFeatured = createAsyncThunk(
+  'global/fetchFeatured',
+  async () => {
+    try {
+      const res = await get('featured');
       return res;
     } catch (err) {
       throw new Error(err);
@@ -56,6 +68,13 @@ const globalSlice = createSlice({
       getStreams.fulfilled,
       (state, action) => {
         state.streams = action.payload.res;
+        state.isLoading = false;
+      },
+    );
+    builder.addCase(
+      getFeatured.fulfilled,
+      (state, action) => {
+        state.featuredVideo = action.payload.res;
         state.isLoading = false;
       },
     );
