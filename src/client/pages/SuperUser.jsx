@@ -7,7 +7,7 @@ import ScheduleStreams from './components/super_user/ScheduleStreams.jsx';
 import AddTourDates from './components/super_user/AddTourDates.jsx';
 import AddVideoForm from './components/super_user/AddVideoForm';
 
-export default function SuperUser() {
+export default function SuperUser({ messages, setMessages }) {
   // STATE DATA
   const [socket, setSocket] = useState(null);
   const [streaming, setStreaming] = useState(false);
@@ -159,8 +159,10 @@ export default function SuperUser() {
   useEffect(() => {
     const newSocket = io('http://localhost:3001');
 
-    newSocket.on('connection-success', ({ socketId }) => {
-      console.log(`host: ${socketId}`);
+    newSocket.on('connection-success', ({ socketId, allMessages }) => {
+      console.log(socketId);
+      setMessages(allMessages);
+      newSocket.emit('new-user', { id: socketId, name: 'test' });
     });
     setSocket(newSocket);
 
@@ -169,6 +171,15 @@ export default function SuperUser() {
       newSocket.disconnect();
     };
   }, []);
+
+  // CHAT FEATURE SOCKET LISTENERS
+  socket?.on('user-connected', (name) => {
+    setMessages(() => [...messages, `new user: ${name}`]);
+  });
+
+  socket?.on('chat-message', (message) => {
+    setMessages(() => [...messages, message]);
+  });
 
   return (
     <div className="flex ">

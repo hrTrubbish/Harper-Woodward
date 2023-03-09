@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import Header from './pages/components/common/Header.jsx';
@@ -11,6 +11,9 @@ import { LogIn } from './pages/components/_LogIn.jsx';
 import { SignUp } from './pages/components/_SignUp.jsx';
 
 export default function App() {
+  // STATE DATA
+  const [messages, setMessages] = useState([]);
+
   return (
     <>
       <Header />
@@ -19,7 +22,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/live" element={<LivePage />} />
+          <Route path="/live" element={<LivePage messages={messages} setMessages={setMessages} />} />
           <Route path="/videos" element={<AllVideos />} />
           <Route
             path="/video-player"
@@ -27,7 +30,7 @@ export default function App() {
           />
           <Route
             path="/superuser"
-            element={<SuperUser />}
+            element={<SuperUser messages={messages} setMessages={setMessages} />}
           />
           <Route path="/checkout" element={<Payment />} />
         </Routes>

@@ -12,12 +12,25 @@ const io = socketIO(server, {
   },
 });
 
+// COUNTS NUMBER OF CONNECTIONS
+let peers = 0;
+
+// CHAT FUNCTION VARIABLES
+let users = {};
+let messages = [];
+
+const checkPeers = () => {
+  if (!peers) {
+    messages = [];
+    users = {};
+  }
+};
+
 // SUPPORTING MEDIASOUP VARIABLES
 let worker;
 let router;
 let producerTransport;
 let producer;
-// let newConsumer;
 const consumerTransports = [];
 const consumers = [];
 
@@ -94,11 +107,30 @@ const findConsumer = (id) => consumers.filter((consumer) => consumer.id === id);
 io.on('connection', async (socket) => {
   console.log('A user connected');
 
+  // add one to connection count
+  peers += 1;
+
   socket.emit('connection-success', {
     socketId: socket.id,
+    allMessages: messages,
   });
 
-  socket.on('disconnect', () => {
+  // adds new user to user storage
+  socket.on('new-user', ({ id, name }) => {
+    users[id] = name;
+    socket.emit('user-connected', name);
+  });
+
+  socket.on('new-message', ({ id, message }) => {
+    const newMessage = `${users[id]}: ${message}`;
+    messages.push(newMessage);
+    io.emit('chat-message', newMessage);
+  });
+
+  socket.on('disconnect', (id) => {
+    checkPeers();
+
+    delete users[id];
     console.log('A user has disconnected');
   });
 

@@ -30,7 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Merriweather', serif;
   color: #D5CEA3;
 }
 ol, ul {
@@ -59,7 +59,7 @@ table {
 
 #header {
   align-items: center;
-  background-color: #251B1B;
+  background-color: #3C1F11;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   display: flex;
   flex-direction: column;
@@ -75,7 +75,7 @@ table {
 
 .header-top {
   align-items: center;
-  background-color: #251B1B;
+  background-color: #3C1F11;
   color: #D5CEA3;
   display: flex;
   height: 60%;
@@ -101,10 +101,10 @@ table {
 
 #logo {
   align-items: center;
-  color: #D5CEA3;
+
   display: flex;
-  font-family: 'Rye', cursive;
-  font-size: 5em;
+  font-family: 'Great Vibes', cursive;
+  font-size: 6em;
   justify-content: center;
   width: 50%;
 }

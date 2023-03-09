@@ -9,8 +9,7 @@ const router = require('./routes');
 
 // ====== CONSTANTS =========================
 const app = express();
-// const chat_server = require('./chatServer');
-const signaling_server = require('./signaling_server');
+require('./signaling_server');
 
 // ====== MIDDLEWARE ========================
 app.use(cors());

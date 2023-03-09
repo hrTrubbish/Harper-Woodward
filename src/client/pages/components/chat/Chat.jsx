@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import React from 'react';
 import MessagePanel from './MessagePanel.jsx';
 
-const SERVER = 'http://localhost:8000';
-
-export default function Chat({ socketNum, messages, input, setInput }) {
+export default function Chat({
+  socket, messages, input, setInput,
+}) {
   const handleSubmit = (event) => {
     event.preventDefault();
-    socketNum.emit('send-message', input);
+    socket.emit('new-message', { id: socket.id, message: input });
     setInput('');
   };
 
