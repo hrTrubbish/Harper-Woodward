@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTours, getStreams } from '../redux/global';
+import { getTours, getStreams, getFeatured } from '../redux/global';
 import YouTubeEmbed from './components/video_player/YouTubeEmbed.jsx';
 import {
   TourDateList,
@@ -21,6 +21,7 @@ export default function Home() {
     Promise.all([
       dispatch(getTours()),
       dispatch(getStreams()),
+      dispatch(getFeatured()),
     ]);
   }, []);
 
@@ -31,7 +32,7 @@ export default function Home() {
           Featured Video
         </span>
         <YouTubeEmbed
-          src={featuredVideo}
+          src={featuredVideo[0]?.url}
           title="Dancing in a Bar"
         />
         <div className="flex justify-between mr-5 ml-5" id="feat-vid-info">

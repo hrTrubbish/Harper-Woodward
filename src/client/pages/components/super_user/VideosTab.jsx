@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import {
   getDocs, collection, deleteDoc, doc,
 } from 'firebase/firestore';
+import { useDispatch } from 'react-redux';
 import { db } from '../../../../config/firebaseFE';
 import AddVideoForm from './AddVideoForm.jsx';
-import { useDispatch } from 'react-redux';
 import { updateFeaturedVideo } from '../../../redux/global';
+import { get, update } from '../../../api/firestore-services.js';
 
 // renders list of all videos from DB collection and allows superuser CRUD functionality
 export default function VideosTab() {
@@ -32,16 +33,17 @@ export default function VideosTab() {
     fetchVideos();
   };
 
-  const setFeatured = (url) => {
-    dispatch(updateFeaturedVideo(url));
+  const setFeatured = async (video) => {
+    const featuredVideo = await get('featured');
+    await update(featuredVideo.res[0]?.id, video.data, 'featured');
   };
 
   return (
-    <section className="w-2/3 max-h-full border-solid border-2 border-current overflow-y-scroll">
+    <section className="w-2/3 h-1/2 max-h-fit border-solid border-2 border-current overflow-y-scroll">
       <h1 className="border-solid border-2 border-red">VIDEOS TAB</h1>
-      <ul>
+      <ul className="">
         {videos?.map((video) => (
-          <li className="flex gap-5 border-solid border-2 border-blue-500">
+          <li className="flex gap-5 border-solid border-2 border-current-500">
             <p>{`title: ${video?.data.title}`}</p>
             <p>{`description: ${video?.data.description}`}</p>
             <p>{`date uploaded: ${video?.data.createdAt.toDate().toDateString()}`}</p>
@@ -53,10 +55,10 @@ export default function VideosTab() {
               delete video
             </button>
             <button
-              onClick={() => setFeatured(video?.data.url)}
+              onClick={() => setFeatured(video)}
               type="button"
             >
-              select this video as featured
+              select video as featured
             </button>
           </li>
         ))}
