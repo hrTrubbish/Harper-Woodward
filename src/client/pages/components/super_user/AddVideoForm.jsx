@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import {
+  collection, doc, addDoc, serverTimestamp,
+} from 'firebase/firestore';
 import FormInput from '../common/FormInput.jsx';
-import { collection, doc, addDoc, serverTimestamp } from 'firebase/firestore';
+import FormTextarea from '../common/FormTextarea.jsx';
 import { post } from '../../../api/firestore-services';
 
 const initialFormValues = {
@@ -53,13 +56,13 @@ export default function AddVideoForm() {
   };
 
   return (
-    <div className="w-1/3">
+    <div className="md:max-w-xl">
       <form
         aria-label="form"
         onSubmit={handleSubmit}
       >
         <FormInput
-          labelText="title"
+          labelText="Title"
           type="text"
           name="title"
           value={formInput.title}
@@ -74,16 +77,8 @@ export default function AddVideoForm() {
           placeholder="add URL here"
           onChange={handleInputChange}
         />
-        <FormInput
-          labelText="videoLength"
-          type="number"
-          name="videoLength"
-          value={formInput.videoLength}
-          placeholder="add video length here"
-          onChange={handleInputChange}
-        />
-        <FormInput
-          labelText="description"
+        <FormTextarea
+          labelText="Description"
           type="text"
           name="description"
           value={formInput.description}
@@ -91,7 +86,7 @@ export default function AddVideoForm() {
           onChange={handleInputChange}
         />
         <FormInput
-          labelText="event"
+          labelText="Event Name"
           type="text"
           name="event"
           value={formInput.event}
@@ -99,22 +94,34 @@ export default function AddVideoForm() {
           onChange={handleInputChange}
         />
         <FormInput
-          labelText="views"
-          type="number"
-          name="views"
-          value={formInput.views}
-          placeholder="add number of views here"
-          onChange={handleInputChange}
-        />
-        <FormInput
-          labelText="eventDate"
+          labelText="Event Date"
           type="date"
           name="eventDate"
           value={formInput.eventDate}
           placeholder="add event date here"
           onChange={handleInputChange}
         />
-        <button type="submit">add video</button>
+        <div className="flex flex-wrap gap-2">
+          <FormInput
+            labelText="views"
+            type="number"
+            name="views"
+            value={formInput.views}
+            placeholder="add number of views here"
+            onChange={handleInputChange}
+          />
+          <div className="flex-grow">
+            <FormInput
+              labelText="Video Length"
+              type="number"
+              name="videoLength"
+              value={formInput.videoLength}
+              placeholder="add video length here"
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+        <button type="submit">Add video</button>
       </form>
     </div>
   );

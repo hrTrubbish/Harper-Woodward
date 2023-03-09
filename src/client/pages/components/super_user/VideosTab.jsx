@@ -58,7 +58,7 @@ export default function VideosTab() {
               onClick={() => setFeatured(video)}
               type="button"
             >
-              select this video as featured
+              select video as featured
             </button>
           </li>
         ))}
