@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   worker: {
     rtcMinPort: 10000,
@@ -45,7 +47,7 @@ module.exports = {
     listenIps: [
       {
         ip: '0.0.0.0', // allows remote connections from anywhere -- change to '0.0.0.0' when you add your public ip
-        announcedIp: '23.121.155.126', // - run 'curl ifconfig.me'  for publicIp
+        announcedIp: process.env.PUBLIC_IP, // - run 'curl ifconfig.me'  for publicIp
       },
     ],
     enableUdp: true,
