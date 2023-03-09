@@ -49,10 +49,11 @@ export default function Home() {
         <span className="text-3xl self-center mb-4">
           info
         </span>
-        <div className="flex justify-around h-60">
+        <div className="flex justify-around">
           <img
-            className="w-3/12 border-dotted border-2 border-current"
-            alt=""
+            src="src/client/styles/img/BrooksGarth1.png"
+            className="w-1/2 border-solid border-2 border-current"
+            alt="good ole cowboy"
           />
           <div className="flex flex-col self-center">
             <span>
