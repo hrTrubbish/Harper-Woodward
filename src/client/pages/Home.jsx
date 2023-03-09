@@ -52,7 +52,7 @@ export default function Home() {
         <div className="flex justify-around">
           <img
             src="src/client/styles/img/BrooksGarth1.png"
-            className="w-1/2 border-dotted border-2 border-current"
+            className="w-1/2 border-solid border-2 border-current"
             alt="good ole cowboy"
           />
           <div className="flex flex-col self-center">
