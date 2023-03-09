@@ -29,6 +29,7 @@ export default function Header() {
       </header>
       <div className="header-bottom">
         <nav id="main-nav">
+          {status === 'authenticated' && userId === import.meta.env.VITE_SUPERUSER_UID ? <Link to="/superuser">Admin</Link> : null}
           <Link to="/live">livestream</Link>
           <Link to="/videos">videos</Link>
           <a href="www.google.com">tickets</a>
