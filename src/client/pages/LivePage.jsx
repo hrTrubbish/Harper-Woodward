@@ -19,13 +19,12 @@ export default function LivePage() {
   const connectRecvTransport = async () => {
     await socket.emit('consume', {
       rtpCapabilities: device.rtpCapabilities,
+      id: socket.id,
     }, async ({ params }) => {
       if (params.error) {
         console.error(`error connecting recieve transport: ${params.error}`);
         return;
       }
-
-      console.log(`consume params: ${params}`);
 
       consumer = await consumerTransport.consume({
         id: params.id,
@@ -41,18 +40,16 @@ export default function LivePage() {
       stream.srcObject = new MediaStream([track]);
 
       // starts live stream for consumer
-      socket.emit('consumer-resume');
+      socket.emit('consumer-resume', { id: socket.id });
     });
   };
 
   const createRecvTransport = async () => {
-    await socket.emit('createWebRtcTransport', { sender: false }, ({ params }) => {
+    await socket.emit('createWebRtcTransport', { id: socket.id }, ({ params }) => {
       if (params.error) {
         console.error(`error creating recieve transport: ${params.error}`);
         return;
       }
-
-      console.log('recieve transport params: ', params);
 
       consumerTransport = device.createRecvTransport(params);
 
@@ -60,6 +57,7 @@ export default function LivePage() {
         try {
           await socket.emit('transport-recv-connect', {
             dtlsParameters,
+            id: socket.id,
           });
 
           callback();
@@ -68,7 +66,6 @@ export default function LivePage() {
         }
       });
 
-      console.log('consumer transport: ', consumerTransport);
       connectRecvTransport();
     });
   };
@@ -79,19 +76,16 @@ export default function LivePage() {
       await device.load({
         routerRtpCapabilities: rtpCapabilities,
       });
-      console.log('RTP Capabilities', device.rtpCapabilities);
 
       createRecvTransport();
     } catch (error) {
-      console.log('error creating device: ', error);
-      if (error.name === 'UnsupportedError') { console.warn('browser not supported'); }
+      console.error('error creating device: ', error);
+      if (error.name === 'UnsupportedError') console.warn('browser not supported');
     }
   };
 
   const getRtpCapabilites = () => {
     socket.emit('getRtpCapabilities', (data) => {
-      console.log(`Router RTP Capabilities ${data.rtpCapabilities}`);
-
       rtpCapabilities = data.rtpCapabilities;
       createDevice();
     });

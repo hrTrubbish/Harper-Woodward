@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const mediasoup = require('mediasoup');
 const socketIO = require('socket.io');
+const config = require('../../mediasoup.config');
 
 const app = express();
 const server = http.createServer(app);
@@ -14,10 +15,11 @@ const io = socketIO(server, {
 // SUPPORTING MEDIASOUP VARIABLES
 let worker;
 let router;
-let consumerTransport;
 let producerTransport;
 let producer;
-let consumer;
+// let newConsumer;
+const consumerTransports = [];
+const consumers = [];
 
 // MEDIASOUP IMPLEMENTATION
 const mediaCodecs = [
@@ -41,7 +43,7 @@ const mediaCodecs = [
 ];
 
 const createWorker = async () => {
-  worker = await mediasoup.createWorker();
+  worker = await mediasoup.createWorker(config.worker);
 
   worker.on('died', (err) => {
     console.error('mediasoup worker has died: ', err);
@@ -51,21 +53,9 @@ const createWorker = async () => {
   return worker;
 };
 
-const createWebRtcTransport = async (callback) => {
+const createWebRtcTransport = async (callback, id) => {
   try {
-    const webRtcTransport_options = {
-      listenIps: [
-        {
-          ip: '127.0.0.1', // replace with relevant IP address
-          announcedIp: '127.0.0.1',
-        },
-      ],
-      enableUdp: true,
-      enableTcp: true,
-      preferUdp: true,
-    };
-
-    const transport = await router.createWebRtcTransport(webRtcTransport_options);
+    const transport = await router.createWebRtcTransport(config.webRtcOptions);
 
     transport.on('dtlsstatechange', (dtlsState) => {
       if (dtlsState === 'closed') {
@@ -87,7 +77,17 @@ const createWebRtcTransport = async (callback) => {
       },
     });
 
-    return transport;
+    // if id, make a new consumer, else, make the host transport
+    if (id) {
+      const newConsumerTransport = {
+        id,
+        transport,
+      };
+      consumerTransports.push(newConsumerTransport);
+      return;
+    }
+
+    producerTransport = transport;
   } catch (error) {
     console.error(error);
     callback({
@@ -101,8 +101,12 @@ const createWebRtcTransport = async (callback) => {
 // creates a worker and a router
 (async () => {
   worker = await createWorker();
-  router = await worker.createRouter({ mediaCodecs });
+  router = await worker.createRouter(config.router);
 })();
+
+// FINDS CORRECT CONSUMER OR CONSUMER TRANSPORT FOR VARIOUS USES
+const findTransport = (id) => consumerTransports.filter((transport) => transport.id === id);
+const findConsumer = (id) => consumers.filter((consumer) => consumer.id === id);
 
 // SOCKET IO FUNCTIONS
 io.on('connection', async (socket) => {
@@ -118,23 +122,17 @@ io.on('connection', async (socket) => {
 
   socket.on('getRtpCapabilities', (callback) => {
     const { rtpCapabilities } = router;
-    console.log(rtpCapabilities);
 
     // send rtpCapabilities back to client
     callback({ rtpCapabilities });
   });
 
-  socket.on('createWebRtcTransport', async ({ sender }, callback) => {
-    if (sender) {
-      producerTransport = await createWebRtcTransport(callback);
-    } else {
-      consumerTransport = await createWebRtcTransport(callback);
-    }
+  socket.on('createWebRtcTransport', async ({ id }, callback) => {
+    await createWebRtcTransport(callback, id);
   });
 
   // HOST SPECIFIC STREAM SOCKET EVENTS
   socket.on('transport-connect', async ({ dtlsParameters }) => {
-    console.log('DTLS PARAMS: ', { dtlsParameters });
     await producerTransport.connect({ dtlsParameters });
   });
 
@@ -144,8 +142,6 @@ io.on('connection', async (socket) => {
       kind,
       rtpParameters,
     });
-
-    console.log('Producer ID: ', producer.id, producer.kind);
 
     producer.on('transportclose', () => {
       console.log('transport for this producer closed ');
@@ -159,37 +155,40 @@ io.on('connection', async (socket) => {
   });
 
   // AUDIENCE SPECIFIC STREAM SOCKET EVENTS
-  socket.on('transport-recv-connect', async ({ dtlsParameters }) => {
-    console.log('DTLS PARAMS: ', { dtlsParameters });
-    await consumerTransport.connect({ dtlsParameters });
+  socket.on('transport-recv-connect', async ({ dtlsParameters, id }) => {
+    const [target] = findTransport(id);
+    await target.transport.connect({ dtlsParameters });
   });
 
-  socket.on('consume', async ({ rtpCapabilities }, callback) => {
+  socket.on('consume', async ({ rtpCapabilities, id }, callback) => {
     try {
       if (router.canConsume({
         producerId: producer.id,
         rtpCapabilities,
       })) {
-        consumer = await consumerTransport.consume({
+        const [target] = findTransport(id);
+        const newConsumer = await target.transport.consume({
           producerId: producer.id,
           rtpCapabilities,
           paused: true,
         });
 
-        consumer.on('transportclose', () => {
+        newConsumer.on('transportclose', () => {
           console.log('consumer transport closed');
         });
 
-        consumer.on('producerclose', () => {
+        newConsumer.on('producerclose', () => {
           console.log('producer of consumer closed');
         });
 
         const params = {
-          id: consumer.id,
+          id: newConsumer.id,
           producerId: producer.id,
-          kind: consumer.kind,
-          rtpParameters: consumer.rtpParameters,
+          kind: newConsumer.kind,
+          rtpParameters: newConsumer.rtpParameters,
         };
+
+        consumers.push({ id, consumer: newConsumer });
 
         // send new consumer stream to client
         callback({ params });
@@ -204,9 +203,9 @@ io.on('connection', async (socket) => {
     }
   });
 
-  socket.on('consumer-resume', async () => {
-    console.log('resume consumer stream');
-    await consumer.resume();
+  socket.on('consumer-resume', async ({ id }) => {
+    const [target] = findConsumer(id);
+    await target.consumer.resume();
   });
 });
 

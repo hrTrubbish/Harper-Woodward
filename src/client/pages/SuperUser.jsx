@@ -50,12 +50,10 @@ export default function SuperUser() {
     producer.on('transportclose', () => {
       console.log('transport ended');
     });
-
-    console.log('producer: ', producer);
   };
 
   const createSendTransport = async () => {
-    await socket.emit('createWebRtcTransport', { sender: true }, ({ params }) => {
+    await socket.emit('createWebRtcTransport', { id: null }, ({ params }) => {
       if (params.error) {
         console.error('error creating webRTC transport: ', params.error);
         return;
@@ -78,8 +76,6 @@ export default function SuperUser() {
       });
 
       producerTransport.on('produce', async (parameters, callback, errback) => {
-        console.log('transport parameters: ', parameters);
-
         try {
           // tell the server to create a Producer
           await socket.emit('transport-produce', {
@@ -95,7 +91,6 @@ export default function SuperUser() {
         }
       });
 
-      console.log('producerTransport: ', producerTransport);
       connectSendTransport();
     });
   };
@@ -106,19 +101,16 @@ export default function SuperUser() {
       await device.load({
         routerRtpCapabilities: rtpCapabilities,
       });
-      console.log('RTP Capabilities', device.rtpCapabilities);
 
       createSendTransport();
     } catch (error) {
-      console.log('error creating device: ', error);
+      console.error('error creating device: ', error);
       if (error.name === 'UnsupportedError') { console.warn('browser not supported'); }
     }
   };
 
   const getRtpCapabilities = () => {
     socket.emit('getRtpCapabilities', (data) => {
-      console.log(`Router RTP Capabilities ${data.rtpCapabilities}`);
-
       rtpCapabilities = data.rtpCapabilities;
       createDevice();
     });
@@ -136,7 +128,7 @@ export default function SuperUser() {
   };
 
   const startStream = async () => {
-    navigator.getUserMedia({
+    navigator.mediaDevices.getUserMedia({
       audio: false,
       video: {
         width: {
@@ -148,9 +140,9 @@ export default function SuperUser() {
           max: 1080,
         },
       },
-    }, streamSuccess, (err) => {
-      console.error('error getting host stream: ', err);
-    });
+    })
+      .then(streamSuccess)
+      .catch((err) => console.error('error starting host stream: ', err));
   };
 
   // HELPER FUNCTIONS
