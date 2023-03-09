@@ -9,6 +9,7 @@ const initialState = {
   isLoading: true,
   tours: [],
   streams: [],
+  featuredVideo: [],
 };
 
 export const getTours = createAsyncThunk(
@@ -35,12 +36,27 @@ export const getStreams = createAsyncThunk(
   },
 );
 
+export const getFeatured = createAsyncThunk(
+  'global/fetchFeatured',
+  async () => {
+    try {
+      const res = await get('featured');
+      return res;
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+);
+
 const globalSlice = createSlice({
   name: 'global',
   initialState,
   reducers: {
     updateCurrentUser: (state, action) => {
       state.userId = action.payload;
+    },
+    updateFeaturedVideo: (state, action) => {
+      state.featuredVideo = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -55,8 +71,15 @@ const globalSlice = createSlice({
         state.isLoading = false;
       },
     );
+    builder.addCase(
+      getFeatured.fulfilled,
+      (state, action) => {
+        state.featuredVideo = action.payload.res;
+        state.isLoading = false;
+      },
+    );
   },
 });
 
-export const { updateCurrentUser } = globalSlice.actions;
+export const { updateCurrentUser, updateFeaturedVideo } = globalSlice.actions;
 export default globalSlice.reducer;
