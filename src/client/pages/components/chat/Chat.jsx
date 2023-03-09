@@ -16,10 +16,10 @@ export default function Chat({ socketNum, messages, input, setInput }) {
   };
 
   return (
-    <div>
-      <MessagePanel messages={messages} />
-      <form onSubmit={handleSubmit}>
-        <input onChange={handleInput} id="message-input" value={input} />
+    <div className="flex flex-col justify-between h-full">
+      <MessagePanel className="overflow-scroll overscroll-contain h-full max-h-full" messages={messages} />
+      <form className="flex flex-row mt-2 space-x-3 space-y-2 content-center" onSubmit={handleSubmit}>
+        <input className="w-10/12" onChange={handleInput} value={input} />
         <button type="submit">Send</button>
       </form>
     </div>

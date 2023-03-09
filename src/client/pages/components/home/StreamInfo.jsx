@@ -10,7 +10,7 @@ export default function StreamInfo({ streams }) {
   };
   const upcomingStream = streams[0];
   return (
-    <div className="info flex flex-col m-10 px-10">
+    <div className="streaminfo flex flex-col m-10 px-10">
       <span className="text-3xl self-center mb-4">
         upcoming stream
       </span>
