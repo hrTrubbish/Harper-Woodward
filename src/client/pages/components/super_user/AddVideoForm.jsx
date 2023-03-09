@@ -4,6 +4,7 @@ import {
 } from 'firebase/firestore';
 import FormInput from '../common/FormInput.jsx';
 import FormTextarea from '../common/FormTextarea.jsx';
+// import { db } from '../../../../config/firebaseFE';
 import { post } from '../../../api/firestore-services';
 
 const initialFormValues = {

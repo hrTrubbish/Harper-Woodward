@@ -24,7 +24,7 @@ export default function SuperUser() {
           <AddTourDates />
         </div>
       </div>
-      <div className='flex h-4/6 justify-between gap-3 p-12'>
+      <div className="flex h-4/6 justify-between gap-3 p-12">
         <VideosTab />
         <AddVideoForm />
       </div>
