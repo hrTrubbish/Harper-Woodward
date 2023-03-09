@@ -3,7 +3,18 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../_AuthProvider.jsx';
 
 export default function Header() {
-  const { status, userId, handleLogOut } = useContext(AuthContext);
+  const {
+    status, userId, handleLogOut, setSession,
+  } = useContext(AuthContext);
+
+  // const handleLogOutEraseUser = () => {
+  //   setSession({
+  //     status: 'checking',
+  //     currEmail: '',
+  //     userId: null,
+  //   });
+  //   handleLogOut();
+  // };
 
   return (
     <header id="header">

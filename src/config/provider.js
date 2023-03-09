@@ -42,6 +42,7 @@ export const emailLogIn = async ({ email, password }) => {
       email,
       password,
     );
+
     return response.user.uid;
   } catch (e) {
     return console.error(e.message);

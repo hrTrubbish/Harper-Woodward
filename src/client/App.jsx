@@ -14,8 +14,6 @@ import { AuthContext } from './pages/components/_AuthProvider.jsx';
 export default function App() {
   const { currEmail } = useContext(AuthContext);
 
-  console.log(currEmail);
-
   return (
     <>
       <Header />
