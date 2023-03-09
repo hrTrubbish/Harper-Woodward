@@ -7,17 +7,19 @@ export default function Header() {
   return (
     <header id="header">
       <div className="header-top">
-        <a href="www.google.com">tour info</a>
+        <div className="header-left">
+          <a href="www.google.com">tour info</a>
+        </div>
         <Link to="/" id="logo" className="mb-4">Brooks Garth</Link>
         {status === 'authenticated' && userId ? (
           <button type="button" onClick={handleLogOut}>
             <Link to="/">Log Out</Link>
           </button>
         ) : (
-          <>
+          <div className="header-right">
             <Link to="/login" id="login">login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </>
+            {/* <Link to="/signup">sign up</Link>  ----- move signup to login page */}
+          </div>
         )}
       </div>
       <div className="header-bottom">
