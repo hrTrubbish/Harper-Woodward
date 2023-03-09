@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import * as mediasoupClient from 'mediasoup-client';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import StatsList from './components/super_user/StatsList.jsx';
 import VideosTab from './components/super_user/VideosTab.jsx';
 import ScheduleStreams from './components/super_user/ScheduleStreams.jsx';
 import AddTourDates from './components/super_user/AddTourDates.jsx';
-import AddVideoForm from './components/super_user/AddVideoForm';
+import NavigationDrawer from './components/super_user/NavigationDrawer.jsx';
+import LiveStream from './components/super_user/LiveStream.jsx';
+import AddVideoForm from './components/super_user/AddVideoForm.jsx';
 
 export default function SuperUser({ messages, setMessages }) {
   // STATE DATA
@@ -182,25 +185,19 @@ export default function SuperUser({ messages, setMessages }) {
   });
 
   return (
-    <div className="flex ">
-      <div className="flex flex-col w-1/2 h-3/6 ml-8 mr-8 mt-8 border-solid border-2 border-black">
-        <video id="live-stream" className="border-4 border-black" autoPlay />
-        <button
-          id="stream-btn"
-          type="button"
-          className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded m-8 self-center"
-          onClick={handleStream}
-        >
-          Start Livestream
-        </button>
+    <div className="h-screen flex">
+      <div className="w-1/4 max-w-xs">
+        <NavigationDrawer />
       </div>
-      <StatsList />
-      <div>
-        <AddTourDates />
-      </div>
-      <div className="flex h-4/6 justify-between gap-3 p-12">
-        <VideosTab />
-        <AddVideoForm />
+      <div className="w-3/4 items-center">
+        <Routes>
+          <Route exact path="/" element={<LiveStream />} />
+          <Route exact path="/stats" element={<StatsList />} />
+          <Route exact path="/add-tour-dates" element={<AddTourDates />} />
+          <Route exact path="/add-video-form" element={<AddVideoForm />} />
+          <Route exact path="/schedule-streams" element={<ScheduleStreams />} />
+          <Route exact path="/videos" element={<VideosTab />} />
+        </Routes>
       </div>
     </div>
   );
