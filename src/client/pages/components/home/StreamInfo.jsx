@@ -14,7 +14,7 @@ export default function StreamInfo({ streams }) {
       <span className="text-3xl self-center mb-4">
         upcoming stream
       </span>
-      <div className="flex justify-around h-60">
+      <div className="flex flex-row-reverse justify-between h-5/6">
         <div className="flex flex-col self-center">
           <span>{dateConverter(upcomingStream?.date)}</span>
           <span>
@@ -35,7 +35,8 @@ export default function StreamInfo({ streams }) {
           </Link>
         </div>
         <img
-          className="w-3/12 border-dotted border-2 border-current"
+          src="src/client/styles/img/BrooksGarth4.png"
+          className="brooks-stream border-solid border-2 border-current"
           alt=""
         />
       </div>

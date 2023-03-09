@@ -291,10 +291,22 @@ table {
   background-image: url(src/client/styles/img/vintageWood.webp);
 }
 
+.tour {
+  height: 40vh;
+}
+
+.info {
+  height: 60vh;
+}
+
 .divider {
   transform: scale(.3);
 }
 
 .brooks {
   transform: scale(.8);
+}
+
+.brooks-stream {
+  transform: scale(.4);
 }

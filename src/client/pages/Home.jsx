@@ -26,6 +26,7 @@ export default function Home() {
   }, []);
 
   return (
+    // Featured Video
     <div className="flex flex-col max-w-7xl m-auto">
       <div className="featured flex flex-col p-10">
         <span id="feat-header" className="text-3xl self-center">
@@ -52,10 +53,10 @@ export default function Home() {
         <span className="text-3xl self-center mb-4">
           info
         </span>
-        <div className="flex justify-around">
+        <div className="flex flex-row-reverse justify-around">
           <img
             src="src/client/styles/img/BrooksGarth1.png"
-            className=" brooks w-1/2 border-solid border-2 border-current"
+            className=" brooks w-2/5 border-solid border-2 border-current"
             alt="good ole cowboy"
           />
           <div className="flex flex-col self-center">
@@ -70,7 +71,7 @@ export default function Home() {
       <img src="src/client/styles/img/Flourish.png" alt="styled text divider" className="divider" />
 
       {/* Stream section */}
-      <div className="border-t-2 border-b-2 border-current">
+      <div>
         <StreamInfo streams={streams} />
       </div>
 
@@ -80,6 +81,9 @@ export default function Home() {
         <span className="text-3xl self-center">tours</span>
         <TourDateList tours={tours} />
       </div>
+
+      <img src="src/client/styles/img/Flourish.png" alt="styled text divider" className="divider" />
+
       <div>
         <Merch />
       </div>
