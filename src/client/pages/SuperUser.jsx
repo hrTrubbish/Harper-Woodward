@@ -180,9 +180,8 @@ export default function SuperUser({ messages, setMessages }) {
     const newSocket = io(SERVER);
 
     newSocket.on('connection-success', ({ socketId, allMessages }) => {
-      // console.log(socketId);
       setMessages(allMessages);
-      newSocket.emit('new-user', { id: socketId, name: 'test' });
+      newSocket.emit('new-user', { id: socketId, name: 'Brooks Garth' });
     });
     setSocket(newSocket);
 
@@ -197,8 +196,8 @@ export default function SuperUser({ messages, setMessages }) {
   }, []);
 
   // CHAT FEATURE SOCKET LISTENERS
-  socket?.on('user-connected', (name) => {
-    setMessages(() => [...messages, `new user: ${name}`]);
+  socket?.on('user-connected', () => {
+    setMessages(() => [...messages, 'HOST: Brooks Garth']);
   });
 
   socket?.on('chat-message', (message) => {

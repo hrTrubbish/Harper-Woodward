@@ -11,7 +11,7 @@ import SuperUser from '../SuperUser.jsx';
 import { db } from '../../../config/firebaseFE';
 import { AuthContext } from './_AuthProvider.jsx';
 
-export function LogIn() {
+export function LogIn({ messages, setMessages }) {
   const {
     handleLogInWithGoogle,
     handleLogInWithEmail,
@@ -62,18 +62,22 @@ export function LogIn() {
   };
 
   if (
-    status === 'authenticated' &&
-    userId === import.meta.env.VITE_SUPERUSER_UID
+    status === 'authenticated' && userId === import.meta.env.VITE_SUPERUSER_UID
   ) {
     // return (
     //   <Link
-    //     to="../superuser"
+    //     to="../admin"
     //     className="flex justify-center"
     //   >
     //     Click To Go To Admin Page
     //   </Link>
     // );
-    return <SuperUser />;
+    return (
+      <SuperUser
+        messages={messages}
+        setMessages={setMessages}
+      />
+    );
   }
 
   return (
@@ -102,7 +106,7 @@ export function LogIn() {
                   id="log-email"
                   type="email"
                   value={email}
-                  placeholder="Email ..."
+                  placeholder="Email..."
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
@@ -117,7 +121,7 @@ export function LogIn() {
                   id="log-pass"
                   type="password"
                   value={password}
-                  placeholder="Password ..."
+                  placeholder="Password..."
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
@@ -126,15 +130,15 @@ export function LogIn() {
                 type="submit"
                 className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 m-6 self-center"
               >
-                Login With Email
+                Login
               </button>
-              <div className="flex flex-col justify-center mt-12">
+              <div className="flex flex-col justify-center mt-8">
                 <div className="text-center">Don&apos;t have account ?</div>
                 <Link
                   to="/signup"
                   className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 mb-8 mt-2 self-center"
                 >
-                  Create Account With Email and Password
+                  Create Account
                 </Link>
                 <div className="text-center">Or</div>
                 <button
@@ -142,7 +146,7 @@ export function LogIn() {
                   className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 mb-8 mt-2 self-center"
                   onClick={handleGoogleLogIn}
                 >
-                  Sign Up and Log In with Google
+                  Log In with Google
                 </button>
               </div>
             </form>

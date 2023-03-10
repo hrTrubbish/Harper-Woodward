@@ -3,50 +3,137 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	/* border: 0; */
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  /* border: 0; */
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
+
 body {
-	line-height: 1;
+  line-height: 1;
   font-family: 'Merriweather', serif;
   color: #D5CEA3;
 }
-ol, ul {
-	list-style: none;
+
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
 }
+
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 /* AFTER CSS RESET */
@@ -57,7 +144,7 @@ table {
 
 
 body {
-  background-image:  url('./src/client/styles/img/campfire.jpg');
+  background-image: url('./src/client/styles/img/campfire.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: left;
@@ -93,10 +180,11 @@ body {
   width: 100%;
 }
 
+/* Doesn't allow title to be centered?
 .header-left,
 .header-right {
   width: 25%;
-}
+} */
 
 .header-right {
   align-items: center;
@@ -119,9 +207,9 @@ body {
 
 .header-bottom {
   align-items: center;
-  background-color:#D5CEA3;
+  background-color: #D5CEA3;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-  color:#251B1B;
+  color: #251B1B;
   display: flex;
   height: 40px;
   justify-content: center;
@@ -129,6 +217,7 @@ body {
   position: sticky;
   top: 0;
   width: 100%;
+  z-index: 3;
 }
 
 #main-nav {
@@ -188,7 +277,7 @@ body {
     text-align: center;
   }
 
-  #feat-details span{
+  #feat-details span {
     font-size: .75em !important;
     text-align: center;
     width: 100%;
@@ -212,4 +301,58 @@ body {
   .header-bottom {
     padding: 0 20px;
   }
+}
+
+/* Home Page */
+
+.tour,
+.info {
+  background-image: url(src/client/styles/img/vintageWood.webp);
+  height: fit-content;
+}
+
+.divider {
+  transform: scale(.3);
+}
+
+.brooks {
+  max-width: 24rem;
+  background-image: url(https://img.freepik.com/free-vector/stage-illuminated-by-spotlights_107791-694.jpg);
+  background-size: cover;
+}
+
+#info-text,
+#tours-section {
+  background-color: #251b1bb9;
+  padding: 10px;
+}
+
+.merch-background {
+  background-image: url(https://img.freepik.com/premium-photo/background-wooden-stump_180633-293.jpg);
+  background-size: cover;
+  background-position: center;
+  background-color: #251b1bb9
+}
+
+::-webkit-scrollbar-thumb {
+  width: 500px;
+}
+
+/* Stream Page */
+
+#stream-placeholder {
+  height: 65vh;
+  background-image: url(src/client/styles/img/BrooksGarth5.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60rem;
+}
+
+#placeholder-heading {
+  background-color: #251B1B;
+  padding: 10px;
+}
+
+#message-background {
+  background-color: #251b1bb9;
 }

@@ -30,6 +30,7 @@ export default function Home() {
   }, []);
 
   return (
+    // Featured Video
     <div className="flex flex-col max-w-7xl m-auto">
       <div className="featured flex flex-col p-10">
         <YouTubeEmbed
@@ -52,17 +53,20 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="info flex flex-col p-10">
+
+      <img src="src/client/styles/img/Flourish.png" alt="styled text divider" className="divider" />
+
+      <div className="info flex flex-col p-10 w-screen self-center border-t-2 border-b-2 border-current">
         <span className="text-3xl self-center mb-4">
           info
         </span>
-        <div className="flex justify-around">
+        <div className="flex flex-row-reverse justify-around">
           <img
-            src="src/client/styles/img/BrooksGarth1.png"
-            className="w-1/2 border-solid border-2 border-current"
+            src="src/client/styles/img/BrooksGarth4.png"
+            className=" brooks w-2/5 border-solid border-2 border-current"
             alt="good ole cowboy"
           />
-          <div className="flex flex-col self-center">
+          <div id="info-text" className="flex flex-col self-center">
             <span>
               THIS IS SOME INFO ABOUT BROOKS GARTH
             </span>
@@ -71,13 +75,22 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Stream section */}
-      <StreamInfo streams={streams} />
+      <img src="src/client/styles/img/Flourish.png" alt="styled text divider" className="divider" />
 
-      <div className="tour flex flex-col p-10 border-t-2 border-current">
+      {/* Stream section */}
+      <div className="w-screen self-center">
+        <StreamInfo streams={streams} />
+      </div>
+
+      <img src="src/client/styles/img/Flourish.png" alt="styled text divider" className="divider" />
+
+      <div className="tour flex flex-col w-screen self-center border-t-2 border-b-2 border-current p-10">
         <span className="text-3xl self-center">tours</span>
         <TourDateList tours={tours} />
       </div>
+
+      <img src="src/client/styles/img/Flourish.png" alt="styled text divider" className="divider" />
+
       <div>
         <Merch />
       </div>
