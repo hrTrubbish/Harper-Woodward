@@ -12,6 +12,7 @@ export default function LivePage({ messages, setMessages }) {
   const [streamLive, setStream] = useState(false);
   const [watching, setWatching] = useState(false);
   const { userName } = useContext(AuthContext);
+  const [viewerCount, setViewers] = useState(0);
 
   // SUPPORTING MEDIASOUP VARIABLES
   let rtpCapabilities;
@@ -131,15 +132,17 @@ export default function LivePage({ messages, setMessages }) {
       setMessages(allMessages);
       newSocket.emit('new-user', { id: socketId, name: 'user' });
 
-      newSocket.emit('check-stream-status', (streamStatus) => {
+      newSocket.emit('check-stream-status', (streamStatus, viewers) => {
         if (streamStatus && !watching) {
           setStream(true);
+          setViewers(viewers);
         }
       });
     });
 
-    newSocket.on('stream-started', () => {
+    newSocket.on('stream-started', (viewers) => {
       setStream(true);
+      setViewers(viewers);
     });
 
     newSocket.on('stream-stopped', () => {
@@ -167,6 +170,10 @@ export default function LivePage({ messages, setMessages }) {
     setMessages(() => [...messages, message]);
   });
 
+  socket?.on('update-views', (viewers) => {
+    setViewers(viewers);
+  });
+
   return (
     <div id="live-background" className="flex h-[78vh] w-screen">
       <div className="flex flex-col w-8/12 h-3/6 ml-8 mr-8 border-solid border-2 border-transparent mt-2">
@@ -187,9 +194,9 @@ export default function LivePage({ messages, setMessages }) {
         <h4 className="text-3xl">
           *Live* Brooks Garth free show to raise awareness about dangling commas
         </h4>
-        <span>{`Views: ${500000}`}</span>
+        <span>{`Viewers: ${viewerCount}`}</span>
       </div>
-      <div className="flex flex-col justify-between border-solid border-2 border-current mt-4 mb-2 w-3/12 p-6">
+      <div className="chat-comp flex flex-col justify-between border-solid border-2 border-current mt-4 mb-2 w-3/12 p-6">
         <Chat
           socket={socket}
           messages={messages}
