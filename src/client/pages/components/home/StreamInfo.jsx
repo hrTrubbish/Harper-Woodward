@@ -22,12 +22,12 @@ export default function StreamInfo({ streams }) {
   );
 
   return (
-    <div className="info flex flex-col m-10 px-10">
+    <div className="streaminfo flex flex-col m-10 px-10">
       <span className="text-3xl self-center mb-4">
         upcoming stream
       </span>
-      <div className="flex justify-around h-60">
-        <div className="flex flex-col self-center">
+      <div className="flex flex-row-reverse justify-between h-5/6">
+        <div className="flex flex-col self-center w-1/2">
           <span>{dateConverter(upcomingStream?.date)}</span>
           <span>
             {`NEXT EVENT: ${upcomingStream?.eventName}`}
@@ -49,7 +49,8 @@ export default function StreamInfo({ streams }) {
           )}
         </div>
         <img
-          className="w-3/12 border-dotted border-2 border-current"
+          src="src/client/styles/img/BrooksGarth3.png"
+          className="brooks border-solid border-2 border-current w-1/2 mt-10 mx-20"
           alt=""
         />
       </div>

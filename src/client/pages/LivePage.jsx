@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import * as mediasoupClient from 'mediasoup-client';
-// import AddMessage from './components/live/AddMessage.jsx';
-// import ViewerMessageList from './components/live/ViewerMessageList.jsx';
+import AddMessage from './components/live/AddMessage.jsx';
+import ViewerMessageList from './components/live/ViewerMessageList.jsx';
 import Chat from './components/chat/Chat.jsx';
 
 const SERVER = 'http://localhost:3001';
@@ -168,19 +168,19 @@ export default function LivePage({ messages, setMessages }) {
   });
 
   return (
-    <div className="flex h-screen w-screen">
+    <div id="live-background" className="flex h-[78vh] w-screen">
       <div className="flex flex-col w-8/12 h-3/6 ml-8 mr-8 border-solid border-2 border-transparent mt-2">
         <div id="live-stream-container">
           {streamLive
             ? (
               <>
                 <video id="watch-stream" className="hide-stream border-solid border-2 border-current mt-2" autoPlay />
-                <button id="stream-btn" type="button" onClick={handleStream}>Watch Live Stream</button>
+                <button id="stream-btn" type="button">Watch Live Stream</button>
               </>
             )
             : (
-              <div id="stream-placeholder">
-                <h3>Check Back Later</h3>
+              <div id="stream-placeholder" className="flex flex-col border-solid border-2 border-current">
+                <h1 id="placeholder-heading" className="self-center text-3xl">Check Back Later</h1>
               </div>
             )}
         </div>
@@ -189,14 +189,11 @@ export default function LivePage({ messages, setMessages }) {
         </h4>
         <span>{`Views: ${500000}`}</span>
       </div>
-      <div className="flex flex-col justify-start border-solid border-2 border-current mt-4 mb-2 w-3/12 p-6">
-        <div id="chat-box">
-          <Chat
-            messages={messages}
-            setMessages={setMessages}
-            socket={socket}
-          />
-        </div>
+      <div className="flex flex-col justify-between border-solid border-2 border-current mt-4 mb-2 w-3/12 p-6">
+        <Chat
+          messages={messages}
+          setMessages={setMessages}
+        />
       </div>
     </div>
   );

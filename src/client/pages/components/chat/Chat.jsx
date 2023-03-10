@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import MessagePanel from './MessagePanel.jsx';
+import { AuthContext } from '../_AuthProvider.jsx';
 
 export default function Chat({
   socket, messages,
 }) {
   // STATE DATA
   const [input, setInput] = useState('');
+  const { userName } = useContext(AuthContext);
 
   // EVENT HANDLERS
   const handleSubmit = (event) => {
@@ -19,12 +21,18 @@ export default function Chat({
   };
 
   return (
-    <div>
-      <MessagePanel messages={messages} />
-      <form onSubmit={handleSubmit}>
-        <input onChange={handleInput} id="message-input" value={input} />
-        <button type="submit">Send</button>
-      </form>
+    <div className="flex flex-col justify-between h-full">
+      {userId
+        ? (
+          <div>
+            <MessagePanel className="overflow-auto overscroll-contain h-full max-h-full" messages={messages} />
+            <form className="flex flex-row mt-2 space-x-3 space-y-2 content-center" onSubmit={handleSubmit}>
+              <input className="w-10/12" onChange={handleInput} value={input} />
+              <button type="submit">Send</button>
+            </form>
+          </div>
+        )
+        : <h3 className="self-center text-3xl">Chat Disabled</h3>}
     </div>
   );
 }

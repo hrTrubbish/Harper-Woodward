@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import * as mediasoupClient from 'mediasoup-client';
+// import * as mediasoupClient from 'mediasoup-client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import StatsList from './components/super_user/StatsList.jsx';
 import VideosTab from './components/super_user/VideosTab.jsx';
@@ -47,133 +47,133 @@ export default function SuperUser({ messages, setMessages }) {
   };
 
   // STREAM FUNCTIONS
-  const connectSendTransport = async () => {
-    producer = await producerTransport.produce(streamParams);
+  // const connectSendTransport = async () => {
+  //   producer = await producerTransport.produce(streamParams);
 
-    producer.on('trackended', () => {
-      console.log('track ended');
-    });
+  //   producer.on('trackended', () => {
+  //     console.log('track ended');
+  //   });
 
-    producer.on('transportclose', () => {
-      console.log('transport ended');
-    });
+  //   producer.on('transportclose', () => {
+  //     console.log('transport ended');
+  //   });
 
-    socket.emit('stream-start');
+  //   socket.emit('stream-start');
 
-    setStreaming(true);
-    document.getElementById('start-live-btn').innerHTML = 'Stop Stream';
-  };
+  //   setStreaming(true);
+  //   document.getElementById('start-live-btn').innerHTML = 'Stop Stream';
+  // };
 
-  const createSendTransport = async () => {
-    await socket.emit('createWebRtcTransport', { id: false }, ({ params }) => {
-      if (params.error) {
-        console.error('error creating webRTC transport: ', params.error);
-        return;
-      }
+  // const createSendTransport = async () => {
+  //   await socket.emit('createWebRtcTransport', { id: false }, ({ params }) => {
+  //     if (params.error) {
+  //       console.error('error creating webRTC transport: ', params.error);
+  //       return;
+  //     }
 
-      producerTransport = device.createSendTransport(params);
+  //     producerTransport = device.createSendTransport(params);
 
-      producerTransport.on('connect', async ({ dtlsParameters }, callback, errback) => {
-        try {
-          // Send DTLS parameters to server side transport
-          await socket.emit('transport-connect', {
-            dtlsParameters,
-          });
+  //     producerTransport.on('connect', async ({ dtlsParameters }, callback, errback) => {
+  //       try {
+  //         // Send DTLS parameters to server side transport
+  //         await socket.emit('transport-connect', {
+  //           dtlsParameters,
+  //         });
 
-          // Tell the transport that parameters were transmitted.
-          callback();
-        } catch (error) {
-          errback(error);
-        }
-      });
+  //         // Tell the transport that parameters were transmitted.
+  //         callback();
+  //       } catch (error) {
+  //         errback(error);
+  //       }
+  //     });
 
-      producerTransport.on('produce', async (parameters, callback, errback) => {
-        try {
-          // tell the server to create a Producer
-          await socket.emit('transport-produce', {
-            kind: parameters.kind,
-            rtpParameters: parameters.rtpParameters,
-            appData: parameters.appData,
-          }, ({ id }) => {
-            // Tell the transport that parameters were transmitted
-            callback({ id });
-          });
-        } catch (error) {
-          errback(error);
-        }
-      });
+  //     producerTransport.on('produce', async (parameters, callback, errback) => {
+  //       try {
+  //         // tell the server to create a Producer
+  //         await socket.emit('transport-produce', {
+  //           kind: parameters.kind,
+  //           rtpParameters: parameters.rtpParameters,
+  //           appData: parameters.appData,
+  //         }, ({ id }) => {
+  //           // Tell the transport that parameters were transmitted
+  //           callback({ id });
+  //         });
+  //       } catch (error) {
+  //         errback(error);
+  //       }
+  //     });
 
-      connectSendTransport();
-    });
-  };
+  //     connectSendTransport();
+  //   });
+  // };
 
-  const createDevice = async () => {
-    try {
-      device = new mediasoupClient.Device();
-      await device.load({
-        routerRtpCapabilities: rtpCapabilities,
-      });
+  // const createDevice = async () => {
+  //   try {
+  //     device = new mediasoupClient.Device();
+  //     await device.load({
+  //       routerRtpCapabilities: rtpCapabilities,
+  //     });
 
-      createSendTransport();
-    } catch (error) {
-      console.error('error creating device: ', error);
-      if (error.name === 'UnsupportedError') { console.warn('browser not supported'); }
-    }
-  };
+  //     createSendTransport();
+  //   } catch (error) {
+  //     console.error('error creating device: ', error);
+  //     if (error.name === 'UnsupportedError') { console.warn('browser not supported'); }
+  //   }
+  // };
 
-  const getRtpCapabilities = () => {
-    socket.emit('getRtpCapabilities', (data) => {
-      rtpCapabilities = data.rtpCapabilities;
-      createDevice();
-    });
-  };
+  // const getRtpCapabilities = () => {
+  //   socket.emit('getRtpCapabilities', (data) => {
+  //     rtpCapabilities = data.rtpCapabilities;
+  //     createDevice();
+  //   });
+  // };
 
-  const streamSuccess = (stream) => {
-    const videoPlayer = document.getElementById('live-stream');
-    videoPlayer.srcObject = stream;
-    const track = stream.getVideoTracks()[0];
-    streamParams = {
-      track,
-      ...streamParams,
-    };
-    getRtpCapabilities();
-  };
+  // const streamSuccess = (stream) => {
+  //   const videoPlayer = document.getElementById('live-stream');
+  //   videoPlayer.srcObject = stream;
+  //   const track = stream.getVideoTracks()[0];
+  //   streamParams = {
+  //     track,
+  //     ...streamParams,
+  //   };
+  //   getRtpCapabilities();
+  // };
 
-  const startStream = async () => {
-    navigator.mediaDevices.getUserMedia({
-      audio: false,
-      video: {
-        width: {
-          min: 640,
-          max: 1920,
-        },
-        height: {
-          min: 400,
-          max: 1080,
-        },
-      },
-    })
-      .then(streamSuccess)
-      .catch((err) => console.error('error starting host stream: ', err));
-  };
+  // const startStream = async () => {
+  //   navigator.mediaDevices.getUserMedia({
+  //     audio: false,
+  //     video: {
+  //       width: {
+  //         min: 640,
+  //         max: 1920,
+  //       },
+  //       height: {
+  //         min: 400,
+  //         max: 1080,
+  //       },
+  //     },
+  //   })
+  //     .then(streamSuccess)
+  //     .catch((err) => console.error('error starting host stream: ', err));
+  // };
 
-  // HELPER FUNCTIONS
-  const stopStream = () => {
-    setStreaming(false);
-    document.getElementById('start-live-btn').innerHTML = 'Start Livestream';
-    const videoPlayer = document.getElementById('live-stream');
-    videoPlayer.srcObject = null;
+  // // HELPER FUNCTIONS
+  // const stopStream = () => {
+  //   setStreaming(false);
+  //   document.getElementById('start-live-btn').innerHTML = 'Start Livestream';
+  //   const videoPlayer = document.getElementById('live-stream');
+  //   videoPlayer.srcObject = null;
 
-    socket.emit('stop-live-stream');
-  };
+  //   socket.emit('stop-live-stream');
+  // };
 
-  const handleStream = () => {
-    if (!streaming) {
-      startStream();
-    } else {
-      stopStream();
-    }
-  };
+  // const handleStream = () => {
+  //   if (!streaming) {
+  //     startStream();
+  //   } else {
+  //     stopStream();
+  //   }
+  // };
 
   // ESTABLISHES SOCKET CONNECTION
   useEffect(() => {
@@ -217,7 +217,7 @@ export default function SuperUser({ messages, setMessages }) {
             path="/"
             element={(
               <LiveStream
-                handleStream={handleStream}
+                // handleStream={handleStream}
                 messages={messages}
                 setMessages={setMessages}
                 socket={socket}
