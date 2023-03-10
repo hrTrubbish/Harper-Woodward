@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import Header from './pages/components/common/Header.jsx';
@@ -11,7 +11,12 @@ import { LogIn } from './pages/components/_LogIn.jsx';
 import { SignUp } from './pages/components/_SignUp.jsx';
 import { AuthContext } from './pages/components/_AuthProvider.jsx';
 
+const admin = import.meta.env.VITEVITE_ADMIN_EMAIL;
+const altAdmin = import.meta.env.VITE_ADMIN_EMAIL_ALT;
+
 export default function App() {
+  // STATE DATA
+  const [messages, setMessages] = useState([]);
   const { currEmail } = useContext(AuthContext);
 
   return (
@@ -22,15 +27,16 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/live" element={<LivePage />} />
+          <Route path="/live" element={<LivePage messages={messages} setMessages={setMessages} />} />
           <Route path="/videos" element={<AllVideos />} />
-          <Route
-            path="/video-player"
-            element={<VideoPlayer />}
-          />
+          <Route path="/video-player" element={<VideoPlayer />} />
           <Route
             path="/superuser/*"
-            element={currEmail === import.meta.env.VITE_ADMIN_EMAIL || currEmail === import.meta.env.VITE_ADMIN_EMAIL_ALT ? <SuperUser /> : <div className="flex justify-center">No Authorization</div>}
+            element={
+              currEmail === admin || currEmail === altAdmin
+                ? <SuperUser messages={messages} setMessages={setMessages} />
+                : <div className="flex justify-center">No Authorization</div>
+            }
           />
           <Route path="/checkout" element={<Payment />} />
         </Routes>

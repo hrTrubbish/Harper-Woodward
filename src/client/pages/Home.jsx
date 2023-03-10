@@ -28,9 +28,6 @@ export default function Home() {
   return (
     <div className="flex flex-col max-w-7xl m-auto">
       <div className="featured flex flex-col p-10">
-        <span id="feat-header" className="text-3xl self-center">
-          Featured Video
-        </span>
         <YouTubeEmbed
           src={featuredVideo[0]?.url}
           title="Dancing in a Bar"
