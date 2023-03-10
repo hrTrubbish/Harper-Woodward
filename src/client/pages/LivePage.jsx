@@ -175,14 +175,22 @@ export default function LivePage({ messages, setMessages }) {
   });
 
   return (
-    <div id="live-background" className="flex h-[78vh] w-screen">
+    <div id="live-background" className="flex-col md:flex md:flex-row h-screen w-screen">
       <div className="flex flex-col w-8/12 h-3/6 ml-8 mr-8 border-solid border-2 border-transparent mt-2">
         <div id="live-stream-container">
           {streamLive
             ? (
               <>
-                <video id="watch-stream" className="hide-stream border-solid border-2 border-current mt-2" autoPlay />
-                <button id="stream-btn" type="button" onClick={handleStream}>Watch Live Stream</button>
+                <video id="watch-stream" className="hide-stream border-solid border-2 border-current mt-2 w-11/12" autoPlay />
+                <button
+                  id="stream-btn"
+                  type="button"
+                  onClick={handleStream}
+                  className="hover:bg-garthbeige hover:text-garthbrown"
+                >
+                  Watch Live Stream
+
+                </button>
               </>
             )
             : (
@@ -191,12 +199,12 @@ export default function LivePage({ messages, setMessages }) {
               </div>
             )}
         </div>
-        <h4 className="text-3xl">
+        <h4 className="text-sm md:text-3xl">
           *Live* Brooks Garth free show to raise awareness about dangling commas
         </h4>
         <span>{`Viewers: ${viewerCount}`}</span>
       </div>
-      <div className="chat-comp flex flex-col justify-between border-solid border-2 border-current mt-4 mb-2 w-3/12 p-6">
+      <div className="flex flex-col justify-between border-solid border-2 border-current md:h-[78vh] md:mt-4 md:mb-2 md:w-3/12 md:p-6">
         <Chat
           socket={socket}
           messages={messages}

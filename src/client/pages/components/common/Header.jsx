@@ -4,11 +4,9 @@ import { HashLink } from 'react-router-hash-link';
 import { AuthContext } from '../_AuthProvider.jsx';
 
 export default function Header() {
-  const { status, userId, handleLogOut } =
-    useContext(AuthContext);
+  const { status, userId, handleLogOut } = useContext(AuthContext);
 
-  const isAuthenticated =
-    userId === import.meta.env.VITE_SUPERUSER_UID;
+  const isAuthenticated = userId === import.meta.env.VITE_SUPERUSER_UID;
 
   return (
     <>
@@ -47,7 +45,9 @@ export default function Header() {
         <nav id="main-nav">
           <Link to="/live">livestream</Link>
           <Link to="/videos">videos</Link>
-          <a href="www.google.com">tickets</a>
+          <HashLink smooth to="/#upcoming-stream">
+            tickets
+          </HashLink>
         </nav>
       </div>
     </>

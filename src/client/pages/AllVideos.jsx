@@ -17,7 +17,7 @@ export default function AllVideos() {
   }, []);
 
   return (
-    <div className="p-6 w-screen">
+    <div className="p-6 h-screen w-screen">
       <div className="max-w-7xl m-auto">
         <div className="grid gap-24 grid-cols-2 grid-rows-auto">
           <div className="hover:scale-105 transition-transform">
