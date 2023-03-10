@@ -28,7 +28,15 @@ export default function App() {
       >
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LogIn />} />
+          <Route
+            path="/login"
+            element={(
+              <LogIn
+                messages={messages}
+                setMessages={setMessages}
+              />
+)}
+          />
           <Route path="/signup" element={<SignUp />} />
           <Route
             path="/live"

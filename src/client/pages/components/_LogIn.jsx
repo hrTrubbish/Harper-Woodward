@@ -11,7 +11,7 @@ import SuperUser from '../SuperUser.jsx';
 import { db } from '../../../config/firebaseFE';
 import { AuthContext } from './_AuthProvider.jsx';
 
-export function LogIn() {
+export function LogIn({ messages, setMessages }) {
   const {
     handleLogInWithGoogle,
     handleLogInWithEmail,
@@ -72,7 +72,12 @@ export function LogIn() {
     //     Click To Go To Admin Page
     //   </Link>
     // );
-    return <SuperUser />;
+    return (
+      <SuperUser
+        messages={messages}
+        setMessages={setMessages}
+      />
+    );
   }
 
   return (
