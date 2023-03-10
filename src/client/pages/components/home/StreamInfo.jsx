@@ -8,7 +8,10 @@ export default function StreamInfo({ streams }) {
     const newDate = DateTime.fromISO(date);
     return newDate.toFormat('yyyy • MM • dd');
   };
-  const upcomingStream = streams[0];
+
+  const filtered = streams?.filter((i) => i.isAvailable);
+  const [upcomingStream, ...otherStreams] = filtered;
+
   return (
     <div className="info flex flex-col m-10 px-10">
       <span className="text-3xl self-center mb-4">
@@ -20,7 +23,7 @@ export default function StreamInfo({ streams }) {
           <span>
             {`NEXT EVENT: ${upcomingStream?.eventName}`}
           </span>
-          <div>{`${upcomingStream?.startTime} - ${upcomingStream?.endTime}`}</div>
+          <div>{`(${upcomingStream?.startTime} - ${upcomingStream?.endTime})`}</div>
           <div>{`${upcomingStream?.maxAttendees} attendees`}</div>
           <div className="w-3/4 flex flex-wrap text-sm">
             {upcomingStream?.description}
@@ -39,6 +42,18 @@ export default function StreamInfo({ streams }) {
           alt=""
         />
       </div>
+      {otherStreams?.length > 0 && (
+        <div className="px-10">
+          <p>Other events to look out for</p>
+          {otherStreams.map((event) => (
+            <div>
+              {`${dateConverter(event?.date)} - ${
+                event?.eventName
+              } (${event?.startTime} - ${event?.endTime})`}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

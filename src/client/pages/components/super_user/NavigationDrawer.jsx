@@ -6,28 +6,52 @@ function NavigationDrawer() {
     <nav className="flex flex-col">
       <ul className="mx-auto">
         <li className="my-5">
-          <NavLink to="/admin">Live Stream</NavLink>
+          <NavLink
+            to="/admin"
+            activeClassName="active-link"
+          >
+            Live Stream
+          </NavLink>
         </li>
         <li className="my-5">
-          <NavLink to="/admin/stats">Stats List</NavLink>
+          <NavLink
+            to="/admin/stats"
+            activeClassName="active-link"
+          >
+            Stats List
+          </NavLink>
         </li>
         <li className="my-5">
-          <NavLink to="/admin/add-tour-dates">
+          <NavLink
+            to="/admin/add-tour-dates"
+            activeClassName="active-link"
+          >
             Add Tour Dates
           </NavLink>
         </li>
         <li className="my-5">
-          <NavLink to="/admin/add-video-form">
+          <NavLink
+            to="/admin/add-video-form"
+            activeClassName="active-link"
+          >
             Add Video Form
           </NavLink>
         </li>
         <li className="my-5">
-          <NavLink to="/admin/schedule-streams">
+          <NavLink
+            to="/admin/schedule-streams"
+            activeClassName="active-link"
+          >
             Schedule Streams
           </NavLink>
         </li>
         <li className="my-5">
-          <NavLink to="/admin/videos">Videos</NavLink>
+          <NavLink
+            to="/admin/videos"
+            activeClassName="active-link"
+          >
+            Videos
+          </NavLink>
         </li>
       </ul>
     </nav>

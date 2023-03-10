@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { DateTime } from 'luxon';
+import { getStreams } from '../../../redux/global';
 import { FormInput, FormTextarea } from '../common';
-import { post } from '../../../api/firestore-services';
+import {
+  post,
+  remove,
+  update,
+} from '../../../api/firestore-services';
 
 const initialForm = {
   eventName: '',
@@ -13,35 +20,149 @@ const initialForm = {
 };
 
 export default function ScheduleStreams() {
+  const dispatch = useDispatch();
   const [form, setForm] = useState(initialForm);
+  const { streams } = useSelector((state) => state.global);
+  const [formMode, setFormMode] = useState('Add');
+  const [currStreamId, setCurrStreamId] = useState('');
+
+  const dateConverter = (date) => {
+    if (!date) return 'Date not available';
+    const newDate = DateTime.fromISO(date);
+    return newDate.toFormat('yyyy • MM • dd');
+  };
 
   const handleInput = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  const handleAddEvent = async (e) => {
+  const formHandler = async (e) => {
     e.preventDefault();
+
     const { maxAttendees, pricing, ...fields } = form;
     const payload = {
       maxAttendees: Number(maxAttendees),
       pricing: Number(pricing),
       ...fields,
       attendees: 0,
-      isAvailable: true,
     };
-    const res = await post(payload, 'schedules');
+
+    let res;
+    if (formMode === 'Add') {
+      payload.isAvailable = true;
+      res = await post(payload, 'schedules');
+    } else if (formMode === 'Update') {
+      res = await update(
+        currStreamId,
+        payload,
+        'schedules',
+      );
+    }
     if (res.success) {
+      payload.isAvailable = form.isAvailable;
       setForm(initialForm);
+      dispatch(getStreams());
+      setFormMode('Add');
     }
   };
 
+  const onSelectStream = (currStream) => {
+    setFormMode('Update');
+    setForm({
+      eventName: currStream?.eventName,
+      description: currStream?.description,
+      startTime: currStream?.startTime,
+      date: currStream?.date,
+      endTime: currStream?.endTime,
+      maxAttendees: currStream?.maxAttendees,
+      pricing: currStream?.pricing,
+      isAvailable: currStream?.isAvailable,
+    });
+    setCurrStreamId(currStream?.id);
+  };
+
+  const onRemoveStream = async (id) => {
+    const res = await remove(id, 'schedules');
+    if (res.success) {
+      dispatch(getStreams());
+    }
+  };
+
+  useEffect(() => {
+    dispatch(getStreams());
+  }, []);
+
+  const scheduleDisplay = (params) =>
+    `${params?.eventName} (${dateConverter(
+      params?.date,
+    )} - ${params?.maxAttendees} Attendees): ${
+      params?.isAvailable ? 'Still available' : 'Closed'
+    } `;
+
   return (
-    <div className="md:max-w-xl">
-      <div className="text-center">
-        Add your next stream
+    <div className="md:max-w-2xl">
+      {/* Streams section */}
+      {streams?.length > 0 && <div>Current streams</div>}
+      <ul className="divide-y divide-gray-200 text-sm mb-6">
+        {streams.map((event) => (
+          <li key={event?.id} className="py-2 flex">
+            <div className="w-full flex justify-between">
+              <p>{scheduleDisplay(event)}</p>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => onSelectStream(event)}
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onRemoveStream(event?.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+      {/* Forms section */}
+      <div className="mb-2 flex justify-between">
+        <p>Add your next stream</p>
+        {formMode === 'Update' && (
+          <button
+            type="button"
+            className="cursor-pointer"
+            onClick={() => {
+              setFormMode('Add');
+              setCurrStreamId('');
+              setForm(initialForm);
+            }}
+          >
+            Add new
+          </button>
+        )}
       </div>
-      <form aria-label="form" onSubmit={handleAddEvent}>
+      <form aria-label="form" onSubmit={formHandler}>
+        {formMode === 'Update' && (
+          <div>
+            <p>Currently displaying</p>
+            <select
+              value={form.isAvailable ? 'yes' : 'no'}
+              className="w-20"
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  isAvailable: e.target.value === 'yes',
+                })
+              }
+            >
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        )}
         <FormInput
           labelText="Event"
           type="text"
@@ -109,10 +230,10 @@ export default function ScheduleStreams() {
             />
           </div>
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-end mt-2">
           <input
             type="submit"
-            value="Add"
+            value={formMode}
             className="cursor-pointer"
           />
         </div>

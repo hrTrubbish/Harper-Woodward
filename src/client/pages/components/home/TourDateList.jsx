@@ -12,9 +12,9 @@ export default function TourDateList({ tours }) {
   return (
     <div id="tours-section" className="sm:w-3/4 sm:m-auto">
       {tours.map((tour) => (
-        <div>
+        <div key={tour?.id}>
           {tour?.isAvailable && (
-            <ul key={tour?.id} className="my-2">
+            <ul className="my-2">
               <div className="flex justify-between items-center">
                 <section className="flex gap-8 items-center">
                   <div className="text-sm">
