@@ -217,6 +217,7 @@ body {
   position: sticky;
   top: 0;
   width: 100%;
+  z-index: 3;
 }
 
 #main-nav {
@@ -307,25 +308,51 @@ body {
 .tour,
 .info {
   background-image: url(src/client/styles/img/vintageWood.webp);
-}
-
-.tour {
-  height: 40vh;
-}
-
-.info {
-  height: 60vh;
+  height: fit-content;
 }
 
 .divider {
   transform: scale(.3);
 }
 
-.brooks,
-.brooks-stream {
+.brooks {
   max-width: 24rem;
+  background-image: url(https://img.freepik.com/free-vector/stage-illuminated-by-spotlights_107791-694.jpg);
+  background-size: cover;
+}
+
+#info-text,
+#tours-section {
+  background-color: #251b1bb9;
+  padding: 10px;
+}
+
+.merch-background {
+  background-image: url(https://img.freepik.com/premium-photo/background-wooden-stump_180633-293.jpg);
+  background-size: cover;
+  background-position: center;
+  background-color: #251b1bb9
 }
 
 ::-webkit-scrollbar-thumb {
   width: 500px;
+}
+
+/* Stream Page */
+
+#stream-placeholder {
+  height: 65vh;
+  background-image: url(src/client/styles/img/BrooksGarth5.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60rem;
+}
+
+#placeholder-heading {
+  background-color: #251B1B;
+  padding: 10px;
+}
+
+#message-background {
+  background-color: #251b1bb9;
 }

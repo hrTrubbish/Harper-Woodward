@@ -52,11 +52,11 @@ export default function Home() {
         </span>
         <div className="flex flex-row-reverse justify-around">
           <img
-            src="src/client/styles/img/BrooksGarth1.png"
+            src="src/client/styles/img/BrooksGarth4.png"
             className=" brooks w-2/5 border-solid border-2 border-current"
             alt="good ole cowboy"
           />
-          <div className="flex flex-col self-center">
+          <div id="info-text" className="flex flex-col self-center">
             <span>
               THIS IS SOME INFO ABOUT BROOKS GARTH
             </span>

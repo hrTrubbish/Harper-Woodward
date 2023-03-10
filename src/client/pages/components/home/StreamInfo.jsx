@@ -35,8 +35,8 @@ export default function StreamInfo({ streams }) {
           </Link>
         </div>
         <img
-          src="src/client/styles/img/BrooksGarth4.png"
-          className="brooks-stream border-solid border-2 border-current w-1/2 mt-10 mx-20"
+          src="src/client/styles/img/BrooksGarth3.png"
+          className="brooks border-solid border-2 border-current w-1/2 mt-10 mx-20"
           alt=""
         />
       </div>
