@@ -139,7 +139,10 @@ io.on('connection', async (socket) => {
   });
 
   socket.on('new-message', ({ id, message }) => {
-    const newMessage = `${users[id]}: ${message}`;
+    const newMessage = {
+      id: users[id],
+      message,
+    };
     messages.push(newMessage);
     io.emit('chat-message', newMessage);
   });
