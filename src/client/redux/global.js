@@ -15,9 +15,9 @@ const initialState = {
 
 export const getTours = createAsyncThunk(
   'global/fetchTours',
-  async () => {
+  async (order = 'desc') => {
     try {
-      const res = await get('tours');
+      const res = await get('tours', order);
       return res;
     } catch (err) {
       throw new Error(err);

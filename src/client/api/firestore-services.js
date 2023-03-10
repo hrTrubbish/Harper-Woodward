@@ -47,6 +47,7 @@ export const createOrUpdate = async (table, payload) => {
 
 export const get = async (
   table,
+  order = 'desc',
   count = 10,
   start = null,
 ) => {
@@ -55,14 +56,14 @@ export const get = async (
     if (start) {
       dbRef = query(
         collection(db, table),
-        orderBy('createdAt', 'desc'),
+        orderBy('createdAt', order),
         startAfter(start),
         limit(count),
       );
     } else {
       dbRef = query(
         collection(db, table),
-        orderBy('createdAt', 'desc'),
+        orderBy('createdAt', order),
         limit(count),
       );
     }

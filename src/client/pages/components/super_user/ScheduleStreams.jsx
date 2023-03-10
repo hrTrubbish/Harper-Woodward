@@ -59,6 +59,8 @@ export default function ScheduleStreams() {
       payload.isAvailable = true;
       res = await post(payload, 'schedules');
     } else if (formMode === 'Update') {
+      if (featuredStream === currStreamId) return;
+
       res = await update(
         currStreamId,
         payload,

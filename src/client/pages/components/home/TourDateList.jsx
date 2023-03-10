@@ -17,7 +17,7 @@ export default function TourDateList({ tours }) {
             <ul className="my-2">
               <div className="flex justify-between items-center">
                 <section className="flex gap-8 items-center">
-                  <div className="text-sm">
+                  <div className="text-sm w-32">
                     {dateConverter(tour?.date)}
                   </div>
                   <div>

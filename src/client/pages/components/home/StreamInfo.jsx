@@ -37,14 +37,16 @@ export default function StreamInfo({ streams }) {
           <div className="w-3/4 flex flex-wrap text-sm">
             {upcomingStream?.description}
           </div>
-          <Link
-            to={{
-              pathname: '/checkout',
-              search: `?stream=${upcomingStream?.id}`,
-            }}
-          >
-            Purchase Access
-          </Link>
+          {upcomingStream?.pricing > 0 && (
+            <Link
+              to={{
+                pathname: '/checkout',
+                search: `?stream=${upcomingStream?.id}`,
+              }}
+            >
+              Purchase Access
+            </Link>
+          )}
         </div>
         <img
           className="w-3/12 border-dotted border-2 border-current"
