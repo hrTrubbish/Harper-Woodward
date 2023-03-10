@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-// import * as mediasoupClient from 'mediasoup-client';
-// import AddMessage from './components/live/AddMessage.jsx';
-// import ViewerMessageList from './components/live/ViewerMessageList.jsx';
+import * as mediasoupClient from 'mediasoup-client';
+import AddMessage from './components/live/AddMessage.jsx';
+import ViewerMessageList from './components/live/ViewerMessageList.jsx';
 import Chat from './components/chat/Chat.jsx';
 
 const SERVER = 'http://localhost:3001';
@@ -20,108 +20,108 @@ export default function LivePage({ messages, setMessages }) {
   let consumer;
 
   // STREAM FUNCTIONS
-  // const connectRecvTransport = async () => {
-  //   await socket.emit('consume', {
-  //     rtpCapabilities: device.rtpCapabilities,
-  //     id: socket.id,
-  //   }, async ({ params }) => {
-  //     if (params.error) {
-  //       console.error(`error connecting recieve transport: ${params.error}`);
-  //       return;
-  //     }
+  const connectRecvTransport = async () => {
+    await socket.emit('consume', {
+      rtpCapabilities: device.rtpCapabilities,
+      id: socket.id,
+    }, async ({ params }) => {
+      if (params.error) {
+        console.error(`error connecting recieve transport: ${params.error}`);
+        return;
+      }
 
-  //     consumer = await consumerTransport.consume({
-  //       id: params.id,
-  //       producerId: params.producerId,
-  //       kind: params.kind,
-  //       rtpParameters: params.rtpParameters,
-  //     });
+      consumer = await consumerTransport.consume({
+        id: params.id,
+        producerId: params.producerId,
+        kind: params.kind,
+        rtpParameters: params.rtpParameters,
+      });
 
-  //     // get tracks from the producer
-  //     const { track } = consumer;
+      // get tracks from the producer
+      const { track } = consumer;
 
-  //     const stream = document.getElementById('watch-stream');
-  //     stream.srcObject = new MediaStream([track]);
+      const stream = document.getElementById('watch-stream');
+      stream.srcObject = new MediaStream([track]);
 
-  //     // starts live stream for consumer
-  //     socket.emit('consumer-resume', { id: socket.id });
+      // starts live stream for consumer
+      socket.emit('consumer-resume', { id: socket.id });
 
-  //     document.getElementById('stream-btn').innerHTML = 'Stop Stream';
-  //     setWatching(true);
-  //   });
-  // };
+      document.getElementById('stream-btn').innerHTML = 'Stop Stream';
+      setWatching(true);
+    });
+  };
 
-  // const createRecvTransport = async () => {
-  //   await socket.emit('createWebRtcTransport', { id: socket.id }, ({ params }) => {
-  //     if (params.error) {
-  //       console.error(`error creating recieve transport: ${params.error}`);
-  //       return;
-  //     }
+  const createRecvTransport = async () => {
+    await socket.emit('createWebRtcTransport', { id: socket.id }, ({ params }) => {
+      if (params.error) {
+        console.error(`error creating recieve transport: ${params.error}`);
+        return;
+      }
 
-  //     consumerTransport = device.createRecvTransport(params);
+      consumerTransport = device.createRecvTransport(params);
 
-  //     consumerTransport.on('connect', async ({ dtlsParameters }, callback, errback) => {
-  //       try {
-  //         await socket.emit('transport-recv-connect', {
-  //           dtlsParameters,
-  //           id: socket.id,
-  //         });
+      consumerTransport.on('connect', async ({ dtlsParameters }, callback, errback) => {
+        try {
+          await socket.emit('transport-recv-connect', {
+            dtlsParameters,
+            id: socket.id,
+          });
 
-  //         callback();
-  //       } catch (error) {
-  //         errback(error);
-  //       }
-  //     });
+          callback();
+        } catch (error) {
+          errback(error);
+        }
+      });
 
-  //     connectRecvTransport();
-  //   });
-  // };
+      connectRecvTransport();
+    });
+  };
 
-  // const createDevice = async () => {
-  //   try {
-  //     device = new mediasoupClient.Device();
-  //     await device.load({
-  //       routerRtpCapabilities: rtpCapabilities,
-  //     });
+  const createDevice = async () => {
+    try {
+      device = new mediasoupClient.Device();
+      await device.load({
+        routerRtpCapabilities: rtpCapabilities,
+      });
 
-  //     createRecvTransport();
-  //   } catch (error) {
-  //     console.error('error creating device: ', error);
-  //     if (error.name === 'UnsupportedError') console.warn('browser not supported');
-  //   }
-  // };
+      createRecvTransport();
+    } catch (error) {
+      console.error('error creating device: ', error);
+      if (error.name === 'UnsupportedError') console.warn('browser not supported');
+    }
+  };
 
-  // const getRtpCapabilites = () => {
-  //   socket.emit('getRtpCapabilities', (data) => {
-  //     rtpCapabilities = data.rtpCapabilities;
-  //     createDevice();
-  //   });
-  // };
+  const getRtpCapabilites = () => {
+    socket.emit('getRtpCapabilities', (data) => {
+      rtpCapabilities = data.rtpCapabilities;
+      createDevice();
+    });
+  };
 
-  // // HELPER FUNCTIONS
-  // const stopWatching = () => {
-  //   const stream = document.getElementById('watch-stream');
-  //   stream.srcObject = null;
-  //   document.getElementById('stream-btn').innerHTML = 'Watch Live Stream';
-  //   setWatching(false);
+  // HELPER FUNCTIONS
+  const stopWatching = () => {
+    const stream = document.getElementById('watch-stream');
+    stream.srcObject = null;
+    document.getElementById('stream-btn').innerHTML = 'Watch Live Stream';
+    setWatching(false);
 
-  //   socket.emit('stop-watching', { id: socket.id });
-  // };
+    socket.emit('stop-watching', { id: socket.id });
+  };
 
-  // const closeStream = () => {
-  //   const stream = document.getElementById('watch-stream');
-  //   stream.srcObject = null;
-  //   document.getElementById('stream-btn').innerHTML = 'Watch Live Stream';
-  //   setWatching(false);
-  // };
+  const closeStream = () => {
+    const stream = document.getElementById('watch-stream');
+    stream.srcObject = null;
+    document.getElementById('stream-btn').innerHTML = 'Watch Live Stream';
+    setWatching(false);
+  };
 
-  // const handleStream = () => {
-  //   if (!watching) {
-  //     getRtpCapabilites();
-  //   } else {
-  //     stopWatching();
-  //   }
-  // };
+  const handleStream = () => {
+    if (!watching) {
+      getRtpCapabilites();
+    } else {
+      stopWatching();
+    }
+  };
 
   // ESTABLISH SOCKET CONNECTION
   useEffect(() => {
@@ -143,7 +143,7 @@ export default function LivePage({ messages, setMessages }) {
     });
 
     newSocket.on('stream-stopped', () => {
-      // closeStream();
+      closeStream();
       setStream(false);
     });
 
