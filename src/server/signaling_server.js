@@ -32,8 +32,8 @@ let worker;
 let router;
 let producerTransport;
 let producer;
-const consumerTransports = [];
-const consumers = [];
+let consumerTransports = [];
+let consumers = [];
 
 // MEDIASOUP IMPLEMENTATION
 const { mediaCodecs } = config.router;
@@ -103,6 +103,16 @@ const createWebRtcTransport = async (callback, id) => {
 // FINDS CORRECT CONSUMER OR CONSUMER TRANSPORT FOR VARIOUS USES
 const findTransport = (id) => consumerTransports.filter((transport) => transport.id === id);
 const findConsumer = (id) => consumers.filter((consumer) => consumer.id === id);
+const removeConsumer = (id) => {
+  const targetIndex = consumers.findIndex((consumer) => consumer.id === id);
+  const target = consumers.splice(targetIndex, 1);
+  return target[0].consumer;
+};
+const removeTransport = (id) => {
+  const targetIndex = consumerTransports.findIndex((transport) => transport.id === id);
+  const target = consumerTransports.splice(targetIndex, 1);
+  return target[0].transport;
+};
 
 // SOCKET IO FUNCTIONS
 io.on('connection', async (socket) => {
@@ -180,6 +190,28 @@ io.on('connection', async (socket) => {
     });
   });
 
+  socket.on('stop-live-stream', () => {
+    console.log('stopping stream');
+    streaming = false;
+
+    // Stop the producer and close the producer transport
+    producer?.close();
+    producerTransport?.close();
+    producer = null;
+    producerTransport = null;
+    // Stop all consumers and close their transports
+    consumers.forEach((consumerObj) => {
+      consumerObj.consumer?.close();
+      const [transportObj] = findTransport(consumerObj.id);
+      transportObj?.transport?.close();
+    });
+
+    consumers = [];
+    consumerTransports = [];
+
+    io.emit('stream-stopped');
+  });
+
   // AUDIENCE SPECIFIC STREAM SOCKET EVENTS
   socket.on('transport-recv-connect', async ({ dtlsParameters, id }) => {
     const [target] = findTransport(id);
@@ -232,6 +264,13 @@ io.on('connection', async (socket) => {
   socket.on('consumer-resume', async ({ id }) => {
     const [target] = findConsumer(id);
     await target.consumer.resume();
+  });
+
+  socket.on('stop-watching', async ({ id }) => {
+    const consumer = removeConsumer(id);
+    const transport = removeTransport(id);
+    await consumer.close();
+    await transport.close();
   });
 });
 

@@ -45,6 +45,9 @@ export default function LivePage({ messages, setMessages }) {
 
       // starts live stream for consumer
       socket.emit('consumer-resume', { id: socket.id });
+
+      document.getElementById('stream-btn').innerHTML = 'Stop Stream';
+      setWatching(true);
     });
   };
 
@@ -96,9 +99,28 @@ export default function LivePage({ messages, setMessages }) {
   };
 
   // HELPER FUNCTIONS
-  const watchStream = () => {
-    setWatching(true);
-    getRtpCapabilites();
+  const stopWatching = () => {
+    const stream = document.getElementById('watch-stream');
+    stream.srcObject = null;
+    document.getElementById('stream-btn').innerHTML = 'Watch Live Stream';
+    setWatching(false);
+
+    socket.emit('stop-watching', { id: socket.id });
+  };
+
+  const closeStream = () => {
+    const stream = document.getElementById('watch-stream');
+    stream.srcObject = null;
+    document.getElementById('stream-btn').innerHTML = 'Watch Live Stream';
+    setWatching(false);
+  };
+
+  const handleStream = () => {
+    if (!watching) {
+      getRtpCapabilites();
+    } else {
+      stopWatching();
+    }
   };
 
   // ESTABLISH SOCKET CONNECTION
@@ -120,10 +142,19 @@ export default function LivePage({ messages, setMessages }) {
       setStream(true);
     });
 
+    newSocket.on('stream-stopped', () => {
+      closeStream();
+      setStream(false);
+    });
+
     setSocket(newSocket);
 
     return () => {
       newSocket.disconnect();
+      rtpCapabilities = undefined;
+      device = undefined;
+      consumerTransport = undefined;
+      consumer = undefined;
     };
   }, []);
 
@@ -144,7 +175,7 @@ export default function LivePage({ messages, setMessages }) {
             ? (
               <>
                 <video id="watch-stream" className="hide-stream border-solid border-2 border-current mt-2" autoPlay />
-                <button type="button" onClick={watchStream}>Watch Live Stream</button>
+                <button id="stream-btn" type="button" onClick={handleStream}>Watch Live Stream</button>
               </>
             )
             : (

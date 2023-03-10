@@ -59,6 +59,9 @@ export default function SuperUser({ messages, setMessages }) {
     });
 
     socket.emit('stream-start');
+
+    setStreaming(true);
+    document.getElementById('start-live-btn').innerHTML = 'Stop Stream';
   };
 
   const createSendTransport = async () => {
@@ -67,7 +70,6 @@ export default function SuperUser({ messages, setMessages }) {
         console.error('error creating webRTC transport: ', params.error);
         return;
       }
-      console.log('params: ', params);
 
       producerTransport = device.createSendTransport(params);
 
@@ -156,8 +158,21 @@ export default function SuperUser({ messages, setMessages }) {
   };
 
   // HELPER FUNCTIONS
+  const stopStream = () => {
+    setStreaming(false);
+    document.getElementById('start-live-btn').innerHTML = 'Start Livestream';
+    const videoPlayer = document.getElementById('live-stream');
+    videoPlayer.srcObject = null;
+
+    socket.emit('stop-live-stream');
+  };
+
   const handleStream = () => {
-    startStream();
+    if (!streaming) {
+      startStream();
+    } else {
+      stopStream();
+    }
   };
 
   // ESTABLISHES SOCKET CONNECTION
@@ -174,6 +189,10 @@ export default function SuperUser({ messages, setMessages }) {
     // cleans up connection on page change
     return () => {
       newSocket.disconnect();
+      rtpCapabilities = undefined;
+      device = undefined;
+      producerTransport = undefined;
+      producer = undefined;
     };
   }, []);
 
