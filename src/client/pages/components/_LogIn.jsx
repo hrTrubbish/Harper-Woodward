@@ -79,66 +79,75 @@ export function LogIn() {
   return (
     <div className="flex justify-center h-screen">
       {status === 'authenticated' && userId ? (
-        <div className="m-4 flex items-center justify-start">
-          Successfully Log In!
+        <div className="flex text-3xl justify-center mt-12">
+          Successfully Logged In!
         </div>
       ) : (
-        <form
-          className="flex flex-col items-left"
-          onSubmit={handleEmailLogIn}
-        >
-          <label
-            htmlFor="log-email"
-            className="mt-2 p-1 tracking-wider"
-          >
-            Email:
-            <input
-              className="w-full"
-              id="log-email"
-              type="email"
-              value={email}
-              placeholder="Email ..."
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </label>
-          <label
-            htmlFor="log-pass"
-            className="mb-2 mt-2 p-1 tracking-wider"
-          >
-            Password:
-            <input
-              className="w-full"
-              id="log-pass"
-              type="password"
-              value={password}
-              placeholder="Password ..."
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
-          <button
-            type="submit"
-            className="text-1xl mb-4 mt-2 tracking-wider bg-garthbeige text-garthbrown"
-          >
-            Login With Email
-          </button>
-          <div>Don&apos;t have account ?</div>
-          <Link
-            to="/signup"
-            className="mb-2 mt-2  bg-garthbeige text-garthbrown"
-          >
-            Create Account With Email and Password
-          </Link>
-          <div className="my-1">Or you can</div>
-          <button
-            type="button"
-            className="text-1xl mb-2 bg-garthbeige text-garthbrown"
-            onClick={handleGoogleLogIn}
-          >
-            Sign Up and Log In with Google
-          </button>
-        </form>
+        <div>
+          <div className="bg-[#1c1111] py-8 px-10 rounded-lg mt-12 shadow-md">
+            <div className="flex text-3xl justify-center">
+              Sign In
+            </div>
+            <form
+              className="flex flex-col items-left mt-4"
+              onSubmit={handleEmailLogIn}
+            >
+              <label
+                htmlFor="log-email"
+                className="mt-2 p-1 tracking-wider"
+              >
+                Email:
+                <input
+                  className="w-full mt-2 py-2 px-3 rounded text-garthbrown"
+                  id="log-email"
+                  type="email"
+                  value={email}
+                  placeholder="Email ..."
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </label>
+              <label
+                htmlFor="log-pass"
+                className="mb-2 mt-2 p-1 tracking-wider"
+              >
+                Password:
+                <input
+                  className="w-full mt-2 py-2 px-3 rounded text-garthbrown"
+                  id="log-pass"
+                  type="password"
+                  value={password}
+                  placeholder="Password ..."
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </label>
+              <button
+                type="submit"
+                className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 m-6 self-center"
+              >
+                Login With Email
+              </button>
+              <div className="flex flex-col justify-center mt-12">
+                <div className="text-center">Don&apos;t have account ?</div>
+                <Link
+                  to="/signup"
+                  className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 mb-8 mt-2 self-center"
+                >
+                  Create Account With Email and Password
+                </Link>
+                <div className="text-center">Or</div>
+                <button
+                  type="button"
+                  className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 mb-8 mt-2 self-center"
+                  onClick={handleGoogleLogIn}
+                >
+                  Sign Up and Log In with Google
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       )}
     </div>
   );
