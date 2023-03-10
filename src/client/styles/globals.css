@@ -171,10 +171,11 @@ table {
   width: 100%;
 }
 
+/* Doesn't allow title to be centered?
 .header-left,
 .header-right {
   width: 25%;
-}
+} */
 
 .header-right {
   align-items: center;
@@ -303,10 +304,11 @@ table {
   transform: scale(.3);
 }
 
-.brooks {
-  transform: scale(.8);
+.brooks,
+.brooks-stream {
+  max-width: 24rem;
 }
 
-.brooks-stream {
-  transform: scale(.4);
+::-webkit-scrollbar-thumb {
+  width: 500px;
 }

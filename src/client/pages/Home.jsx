@@ -71,7 +71,7 @@ export default function Home() {
       <img src="src/client/styles/img/Flourish.png" alt="styled text divider" className="divider" />
 
       {/* Stream section */}
-      <div>
+      <div className="w-screen self-center">
         <StreamInfo streams={streams} />
       </div>
 
