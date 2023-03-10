@@ -1,18 +1,18 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import { AuthContext } from '../_AuthProvider.jsx';
 
 export default function Header() {
   const {
     status, userId, handleLogOut,
   } = useContext(AuthContext);
-
   return (
     <>
       <header id="header">
         <div className="header-top">
           <div className="header-left">
-            <a href="www.google.com">tour info</a>
+           <HashLink smooth to="/#tours-section">tour info</HashLink>
           </div>
           <Link to="/" id="logo" className="mb-4">Brooks Garth</Link>
           {status === 'authenticated' && userId ? (
