@@ -147,7 +147,7 @@ body {
   background-image: url('./src/client/styles/img/campfire.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: left;
+  background-position: 12%;
   min-height: 100%;
 }
 
@@ -295,7 +295,7 @@ body {
   #feat-vid-info {
     display: flex;
     flex-direction: column;
-    justify-content: center
+    justify-content: center;
   }
 
   .header-bottom {
@@ -312,7 +312,7 @@ body {
 }
 
 .divider {
-  transform: scale(.3);
+  transform: scale(.45);
 }
 
 .brooks {
@@ -355,4 +355,84 @@ body {
 
 #message-background {
   background-color: #251b1bb9;
+}
+
+/* MANUAL STYLING OVERHAUL */
+#info-title {
+  text-shadow: 1px 1px 10px black;
+}
+
+.info,
+.tour {
+  padding: 70px 0 80px;
+}
+
+.merch {
+  padding-top: 0;
+}
+
+.info-div {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+#info-text {
+  max-width: 50%;
+  padding: 35px 20px 10px;
+  text-align: center;
+  text-shadow: 1px 1px 10px black;
+}
+
+.info-bottom {
+  margin-top: 20px;
+}
+
+.featured {
+  padding-bottom: 0;
+}
+
+.streaminfo {
+  margin: 0 40px !important;
+}
+
+.divider {
+  margin: 50px 0;
+}
+
+#upcoming-title {
+  text-shadow: 1px 1px 10px black;
+}
+
+#upcoming-info {
+  justify-content: space-around;
+}
+
+#upcoming-img {
+  margin-bottom: 20px;
+}
+
+#other-streams {
+  padding-left: 80px;
+}
+
+.other-event {
+  font-size: .75em;
+}
+
+#tour-title {
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 10px black;
+}
+
+#tours-section {
+  padding: 20px;
+  text-shadow: 1px 1px 10px black;
+}
+
+.chat-comp {
+  margin-top: 10px;
+}
+
+.feat {
+  padding-top: 20px;
 }

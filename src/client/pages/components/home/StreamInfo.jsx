@@ -23,11 +23,11 @@ export default function StreamInfo({ streams }) {
 
   return (
     <div className="streaminfo flex flex-col m-10 px-10" id="upcoming-stream">
-      <span className="text-3xl self-center mb-4">
+      <span id="upcoming-title" className="text-3xl self-center mb-4">
         upcoming stream
       </span>
       <div className="flex flex-row-reverse justify-between h-5/6">
-        <div className="flex flex-col self-center w-1/2">
+        <div id="upcoming-info" className="flex flex-col self-center w-1/2">
           <span>{dateConverter(upcomingStream?.date)}</span>
           <span>
             {`NEXT EVENT: ${upcomingStream?.eventName}`}
@@ -49,16 +49,17 @@ export default function StreamInfo({ streams }) {
           )}
         </div>
         <img
+          id="upcoming-img"
           src="src/client/styles/img/BrooksGarth3.png"
           className="brooks border-solid border-2 border-current w-1/2 mt-10 mx-20"
           alt=""
         />
       </div>
       {otherStreams?.length > 0 && (
-        <div className="px-10">
+        <div id="other-streams" className="px-10">
           <p>Other events to look out for</p>
           {otherStreams.map((event) => (
-            <div key={event?.id}>
+            <div className="other-event" key={event?.id}>
               {`${dateConverter(event?.date)} - ${
                 event?.eventName
               } (${event?.startTime} - ${event?.endTime})`}

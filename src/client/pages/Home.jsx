@@ -38,7 +38,7 @@ export default function Home() {
           title="Dancing in a Bar"
         />
         <div
-          className="flex justify-between mr-5 ml-5"
+          className="feat flex justify-between mr-5 ml-5"
           id="feat-vid-info"
         >
           <span
@@ -48,8 +48,8 @@ export default function Home() {
             Dancing in a Bar
           </span>
           <div id="feat-details" className="flex gap-2">
-            <span>{`Views: ${500000}`}</span>
-            <span>{`Likes: ${100000}`}</span>
+            <span>Views: 22,106,351</span>
+            <span>Likes: 2,594,308</span>
           </div>
         </div>
       </div>
@@ -57,10 +57,10 @@ export default function Home() {
       <img src="src/client/styles/img/Flourish.png" alt="styled text divider" className="divider" />
 
       <div className="info flex flex-col p-10 w-screen self-center border-t-2 border-b-2 border-current">
-        <span className="text-3xl self-center mb-4">
+        <span id="info-title" className="text-3xl self-center mb-4">
           info
         </span>
-        <div className="flex flex-row-reverse justify-around">
+        <div className="info-div flex flex-row-reverse justify-around">
           <img
             src="src/client/styles/img/BrooksGarth4.png"
             className=" brooks w-2/5 border-solid border-2 border-current"
@@ -68,9 +68,9 @@ export default function Home() {
           />
           <div id="info-text" className="flex flex-col self-center">
             <span>
-              THIS IS SOME INFO ABOUT BROOKS GARTH
+              Brooks Garth is a legendary country singer with a soulful voice and electrifying stage presence. With over three decades of experience, he's one of the most recognizable figures in the music industry, earning multiple Grammy Awards and countless accolades. His iconic hits like "Friends in Low Places" continue to resonate with fans of all ages.
             </span>
-            <span>NEXT EVENT: 3/10/23</span>
+            <span className="info-bottom">NEXT EVENT: 3/15/23</span>
           </div>
         </div>
       </div>
@@ -78,14 +78,14 @@ export default function Home() {
       <img src="src/client/styles/img/Flourish.png" alt="styled text divider" className="divider" />
 
       {/* Stream section */}
-      <div className="w-screen self-center">
+      <div id="upcoming" className="w-screen self-center">
         <StreamInfo streams={streams} />
       </div>
 
       <img src="src/client/styles/img/Flourish.png" alt="styled text divider" className="divider" />
 
       <div className="tour flex flex-col w-screen self-center border-t-2 border-b-2 border-current p-10">
-        <span className="text-3xl self-center">tours</span>
+        <span id="tour-title" className="text-3xl self-center">tours</span>
         <TourDateList tours={tours} />
       </div>
 

@@ -129,13 +129,14 @@ io.on('connection', async (socket) => {
   socket.on('stream-start', () => {
     console.log('starting stream');
     streaming = true;
-    io.emit('stream-started');
+    io.emit('stream-started', peers);
   });
 
   // adds new user to user storage
   socket.on('new-user', ({ id, name }) => {
     users[id] = name;
     socket.emit('user-connected', name);
+    io.emit('update-views', peers);
   });
 
   socket.on('new-message', ({ id, message }) => {
@@ -146,7 +147,7 @@ io.on('connection', async (socket) => {
 
   socket.on('check-stream-status', (callback) => {
     console.log('checking stream');
-    callback(streaming);
+    callback(streaming, peers);
   });
 
   socket.on('disconnect', (id) => {
