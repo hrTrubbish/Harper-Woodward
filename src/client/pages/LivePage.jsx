@@ -130,7 +130,7 @@ export default function LivePage({ messages, setMessages }) {
 
     newSocket.on('connection-success', ({ socketId, allMessages }) => {
       setMessages(allMessages);
-      newSocket.emit('new-user', { id: socketId, name: 'user' });
+      newSocket.emit('new-user', { id: socketId, name: userName });
 
       newSocket.emit('check-stream-status', (streamStatus, viewers) => {
         if (streamStatus && !watching) {
@@ -206,9 +206,10 @@ export default function LivePage({ messages, setMessages }) {
       </div>
       <div className="flex flex-col justify-between border-solid border-2 border-current md:h-[78vh] md:mt-4 md:mb-2 md:w-3/12 md:p-6">
         <Chat
-          socket={socket}
+          streamLive={streamLive}
           messages={messages}
           setMessages={setMessages}
+          socket={socket}
         />
       </div>
     </div>
