@@ -17,7 +17,7 @@ function LiveStream({
           Start Livestream
         </button>
       </div>
-      <Chat messages={messages} setMessages={setMessages} socket={socket} />
+      <Chat messages={messages} setMessages={setMessages} socket={socket} streamLive={true} />
     </div>
   );
 }
