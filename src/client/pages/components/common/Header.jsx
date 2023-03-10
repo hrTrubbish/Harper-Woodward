@@ -23,13 +23,15 @@ export default function Header() {
             Brooks Garth
           </Link>
           {status === 'authenticated' && userId ? (
-            <div className="flex flex-col space-y-2">
-              {isAuthenticated && (
-                <Link to="/admin">admin</Link>
-              )}
-              <button type="button" onClick={handleLogOut}>
-                <Link to="/">log out</Link>
-              </button>
+            <div className="header-right">
+              <div className="flex flex-col space-y-2">
+                {isAuthenticated && (
+                  <Link to="/admin">admin</Link>
+                )}
+                <button type="button" onClick={handleLogOut}>
+                  <Link to="/">log out</Link>
+                </button>
+              </div>
             </div>
           ) : (
             <div className="header-right">
