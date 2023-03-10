@@ -46,8 +46,8 @@ module.exports = {
   webRtcOptions: {
     listenIps: [
       {
-        ip: '0.0.0.0', // allows remote connections from anywhere -- change to '0.0.0.0' when you add your public ip
-        announcedIp: process.env.PUBLIC_IP, // - run 'curl ifconfig.me'  for publicIp
+        ip: '127.0.0.1', // allows remote connections from anywhere -- change to '0.0.0.0' when you add your public ip
+        // announcedIp: <your_public_ip>, // - run 'curl ifconfig.me'  for publicIp
       },
     ],
     enableUdp: true,

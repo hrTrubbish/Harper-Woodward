@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import * as mediasoupClient from 'mediasoup-client';
-import AddMessage from './components/live/AddMessage.jsx';
-import ViewerMessageList from './components/live/ViewerMessageList.jsx';
+// import AddMessage from './components/live/AddMessage.jsx';
+// import ViewerMessageList from './components/live/ViewerMessageList.jsx';
 import Chat from './components/chat/Chat.jsx';
 
 const SERVER = 'http://localhost:3001';
 
 export default function LivePage({ messages, setMessages }) {
-  // STATE DATA
+  // IMPORTANT VARIABLES
   const [socket, setSocket] = useState(null);
+  const [streamLive, setStream] = useState(false);
   const [watching, setWatching] = useState(false);
 
   // SUPPORTING MEDIASOUP VARIABLES
@@ -94,16 +95,10 @@ export default function LivePage({ messages, setMessages }) {
     });
   };
 
-  const startStream = () => {
-    getRtpCapabilites();
-  };
-
   // HELPER FUNCTIONS
   const watchStream = () => {
-    if (!watching) {
-      startStream();
-      setWatching(true);
-    }
+    setWatching(true);
+    getRtpCapabilites();
   };
 
   // ESTABLISH SOCKET CONNECTION
@@ -111,10 +106,20 @@ export default function LivePage({ messages, setMessages }) {
     const newSocket = io(SERVER);
 
     newSocket.on('connection-success', ({ socketId, allMessages }) => {
-      // console.log(socketId);
       setMessages(allMessages);
       newSocket.emit('new-user', { id: socketId, name: 'test' });
+
+      newSocket.emit('check-stream-status', (streamStatus) => {
+        if (streamStatus && !watching) {
+          setStream(true);
+        }
+      });
     });
+
+    newSocket.on('stream-started', () => {
+      setStream(true);
+    });
+
     setSocket(newSocket);
 
     return () => {
@@ -134,14 +139,24 @@ export default function LivePage({ messages, setMessages }) {
   return (
     <div className="flex h-screen w-screen">
       <div className="flex flex-col w-8/12 h-3/6 ml-8 mr-8 border-solid border-2 border-transparent mt-2">
-        <video id="watch-stream" className="border-solid border-2 border-current mt-2" autoPlay />
-        <button className="border-solid border-2 border-current" type="button" onClick={watchStream}>Watch Stream</button>
-        <div className="text-3xl">
+        <div id="live-stream-container">
+          {streamLive
+            ? (
+              <>
+                <video id="watch-stream" className="hide-stream border-solid border-2 border-current mt-2" autoPlay />
+                <button type="button" onClick={watchStream}>Watch Live Stream</button>
+              </>
+            )
+            : (
+              <div id="stream-placeholder">
+                <h3>Check Back Later</h3>
+              </div>
+            )}
+        </div>
+        <h4 className="text-3xl">
           *Live* Brooks Garth free show to raise awareness about dangling commas
-        </div>
-        <div>
-          <p>{`Views: ${500000}`}</p>
-        </div>
+        </h4>
+        <span>{`Views: ${500000}`}</span>
       </div>
       <div className="flex flex-col justify-start border-solid border-2 border-current mt-4 mb-2 w-3/12 p-6">
         <div id="chat-box">

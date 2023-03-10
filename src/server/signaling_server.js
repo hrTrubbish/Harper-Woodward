@@ -27,6 +27,7 @@ const checkPeers = () => {
 };
 
 // SUPPORTING MEDIASOUP VARIABLES
+let streaming = false;
 let worker;
 let router;
 let producerTransport;
@@ -115,6 +116,12 @@ io.on('connection', async (socket) => {
     allMessages: messages,
   });
 
+  socket.on('stream-start', () => {
+    console.log('starting stream');
+    streaming = true;
+    io.emit('stream-started');
+  });
+
   // adds new user to user storage
   socket.on('new-user', ({ id, name }) => {
     users[id] = name;
@@ -125,6 +132,11 @@ io.on('connection', async (socket) => {
     const newMessage = `${users[id]}: ${message}`;
     messages.push(newMessage);
     io.emit('chat-message', newMessage);
+  });
+
+  socket.on('check-stream-status', (callback) => {
+    console.log('checking stream');
+    callback(streaming);
   });
 
   socket.on('disconnect', (id) => {

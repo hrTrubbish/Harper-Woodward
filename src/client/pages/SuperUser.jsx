@@ -57,14 +57,17 @@ export default function SuperUser({ messages, setMessages }) {
     producer.on('transportclose', () => {
       console.log('transport ended');
     });
+
+    socket.emit('stream-start');
   };
 
   const createSendTransport = async () => {
-    await socket.emit('createWebRtcTransport', { id: null }, ({ params }) => {
+    await socket.emit('createWebRtcTransport', { id: false }, ({ params }) => {
       if (params.error) {
         console.error('error creating webRTC transport: ', params.error);
         return;
       }
+      console.log('params: ', params);
 
       producerTransport = device.createSendTransport(params);
 
@@ -154,10 +157,7 @@ export default function SuperUser({ messages, setMessages }) {
 
   // HELPER FUNCTIONS
   const handleStream = () => {
-    if (!streaming) {
-      startStream();
-      setStreaming(true);
-    }
+    startStream();
   };
 
   // ESTABLISHES SOCKET CONNECTION
