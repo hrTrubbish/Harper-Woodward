@@ -45,7 +45,9 @@ export default function Header() {
         <nav id="main-nav">
           <Link to="/live">livestream</Link>
           <Link to="/videos">videos</Link>
-          <a href="www.google.com">tickets</a>
+          <HashLink smooth to="/#upcoming-stream">
+            tickets
+          </HashLink>
         </nav>
       </div>
     </>
