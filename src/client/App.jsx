@@ -22,20 +22,42 @@ export default function App() {
   return (
     <>
       <Header />
-      <div id="App" className="bg-hero-pattern bg-no-repeat bg-cover bg-center bg-fixed">
+      <div
+        id="App"
+        className="bg-hero-pattern bg-no-repeat bg-cover bg-center bg-fixed"
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/live" element={<LivePage messages={messages} setMessages={setMessages} />} />
-          <Route path="/videos" element={<AllVideos />} />
-          <Route path="/video-player" element={<VideoPlayer />} />
           <Route
-            path="/superuser/*"
+            path="/live"
             element={
-              currEmail === admin || currEmail === altAdmin
-                ? <SuperUser messages={messages} setMessages={setMessages} />
-                : <div className="flex justify-center">No Authorization</div>
+              <LivePage
+                messages={messages}
+                setMessages={setMessages}
+              />
+            }
+          />
+          <Route path="/videos" element={<AllVideos />} />
+          <Route
+            path="/video-player"
+            element={<VideoPlayer />}
+          />
+          <Route
+            path="/admin/*"
+            element={
+              currEmail === admin ||
+              currEmail === altAdmin ? (
+                <SuperUser
+                  messages={messages}
+                  setMessages={setMessages}
+                />
+              ) : (
+                <div className="flex justify-center">
+                  No Authorization
+                </div>
+              )
             }
           />
           <Route path="/checkout" element={<Payment />} />

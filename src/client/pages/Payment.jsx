@@ -41,6 +41,8 @@ export default function Payment() {
     }
   }, []);
 
+  const port = import.meta.env.VITE_STRIPE_PORT;
+
   const streamPurchaseRender = () => (
     <section className="h-screen w-screen flex justify-center p-10">
       <div className="product">
@@ -53,7 +55,7 @@ export default function Payment() {
           <h5>{`$${event?.pricing?.toFixed(2)}`}</h5>
         </div>
         <form
-          action={`http://localhost:8080/api/checkout?amount=${event?.pricing}&type=stream`}
+          action={`http://localhost:${port}/api/checkout?amount=${event?.pricing}&type=stream`}
           method="POST"
         >
           <button type="submit">Checkout</button>
@@ -67,7 +69,7 @@ export default function Payment() {
       <div className="flex gap-4">
         {event?.pricing?.map((tier) => (
           <div
-            key={tier?.id}
+            key={tier?.tierName}
             className="w-40 h-48 bg-white rounded-md text-center p-2 flex flex-col justify-between items-center"
           >
             <div>
@@ -75,7 +77,7 @@ export default function Payment() {
               <div>{tier?.price}</div>
             </div>
             <form
-              action={`http://localhost:8080/api/checkout?amount=${tier?.price}&type=tour`}
+              action={`http://localhost:${port}/api/checkout?amount=${tier?.price}&type=tour`}
               method="POST"
             >
               <button type="submit">Checkout</button>
