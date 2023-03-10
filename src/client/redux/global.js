@@ -10,13 +10,14 @@ const initialState = {
   tours: [],
   streams: [],
   featuredVideo: [],
+  featuredStream: '',
 };
 
 export const getTours = createAsyncThunk(
   'global/fetchTours',
-  async () => {
+  async (order = 'desc') => {
     try {
-      const res = await get('tours');
+      const res = await get('tours', order);
       return res;
     } catch (err) {
       throw new Error(err);
@@ -74,12 +75,19 @@ const globalSlice = createSlice({
     builder.addCase(
       getFeatured.fulfilled,
       (state, action) => {
-        state.featuredVideo = action.payload.res;
+        // hijacking your function for featured stream
+        state.featuredVideo = action.payload.res.filter(
+          (item) => item.id !== 'current',
+        );
+        state.featuredStream = action.payload.res.find(
+          (item) => item.id === 'current',
+        )?.streamId;
         state.isLoading = false;
       },
     );
   },
 });
 
-export const { updateCurrentUser, updateFeaturedVideo } = globalSlice.actions;
+export const { updateCurrentUser, updateFeaturedVideo } =
+  globalSlice.actions;
 export default globalSlice.reducer;

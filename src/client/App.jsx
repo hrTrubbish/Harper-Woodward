@@ -11,7 +11,7 @@ import { LogIn } from './pages/components/_LogIn.jsx';
 import { SignUp } from './pages/components/_SignUp.jsx';
 import { AuthContext } from './pages/components/_AuthProvider.jsx';
 
-const admin = import.meta.env.VITEVITE_ADMIN_EMAIL;
+const admin = import.meta.env.VITE_ADMIN_EMAIL;
 const altAdmin = import.meta.env.VITE_ADMIN_EMAIL_ALT;
 
 export default function App() {
@@ -22,20 +22,42 @@ export default function App() {
   return (
     <>
       <Header />
-      <div id="App" className="bg-hero-pattern bg-no-repeat bg-cover bg-center bg-fixed">
+      <div
+        id="App"
+        className="bg-hero-pattern bg-no-repeat bg-cover bg-center bg-fixed"
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/live" element={<LivePage messages={messages} setMessages={setMessages} />} />
-          <Route path="/videos" element={<AllVideos />} />
-          <Route path="/video-player" element={<VideoPlayer />} />
           <Route
-            path="/superuser/*"
+            path="/live"
             element={
-              currEmail === admin || currEmail === altAdmin
-                ? <SuperUser messages={messages} setMessages={setMessages} />
-                : <div className="flex justify-center">No Authorization</div>
+              <LivePage
+                messages={messages}
+                setMessages={setMessages}
+              />
+            }
+          />
+          <Route path="/videos" element={<AllVideos />} />
+          <Route
+            path="/video-player"
+            element={<VideoPlayer />}
+          />
+          <Route
+            path="/admin/*"
+            element={
+              currEmail === admin ||
+              currEmail === altAdmin ? (
+                <SuperUser
+                  messages={messages}
+                  setMessages={setMessages}
+                />
+              ) : (
+                <div className="flex justify-center">
+                  No Authorization
+                </div>
+              )
             }
           />
           <Route path="/checkout" element={<Payment />} />

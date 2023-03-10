@@ -14,8 +14,40 @@ import {
 } from 'firebase/firestore';
 import { db } from './firestore-instance';
 
+export const createOrUpdate = async (table, payload) => {
+  const dbRef = doc(db, table, 'current');
+
+  try {
+    const res = await updateDoc(dbRef, {
+      ...payload,
+      updatedAt: serverTimestamp(),
+    });
+
+    return {
+      success: true,
+      message: `Successfully updated ${table}`,
+      res,
+    };
+  } catch (error) {
+    if (error.code === 'not-found') {
+      const res = await setDoc(dbRef, {
+        ...payload,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+      return {
+        success: true,
+        message: `Successfully added ${table}`,
+        res,
+      };
+    }
+    return { success: false, message: error };
+  }
+};
+
 export const get = async (
   table,
+  order = 'desc',
   count = 10,
   start = null,
 ) => {
@@ -24,19 +56,24 @@ export const get = async (
     if (start) {
       dbRef = query(
         collection(db, table),
-        orderBy('createdAt', 'desc'),
+        orderBy('createdAt', order),
         startAfter(start),
         limit(count),
       );
     } else {
       dbRef = query(
         collection(db, table),
-        orderBy('createdAt', 'desc'),
+        orderBy('createdAt', order),
         limit(count),
       );
     }
 
     const dbSnapShot = await getDocs(dbRef);
+
+    if (dbSnapShot.empty) {
+      throw new Error('Collection does not exist');
+    }
+
     const res = dbSnapShot.docs.map((d) => ({
       id: d.id,
       ...d.data(),
