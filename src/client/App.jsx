@@ -11,7 +11,7 @@ import { LogIn } from './pages/components/_LogIn.jsx';
 import { SignUp } from './pages/components/_SignUp.jsx';
 import { AuthContext } from './pages/components/_AuthProvider.jsx';
 
-const admin = import.meta.env.VITEVITE_ADMIN_EMAIL;
+const admin = import.meta.env.VITE_ADMIN_EMAIL;
 const altAdmin = import.meta.env.VITE_ADMIN_EMAIL_ALT;
 
 export default function App() {
