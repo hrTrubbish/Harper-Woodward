@@ -127,6 +127,10 @@ table {
   width: 50%;
 }
 
+/* TEXT */
+#text-shadow {
+  text-shadow: 1px 1px 2px #251B1B;
+}
 
 @layer base {
   .font-outline-2 {

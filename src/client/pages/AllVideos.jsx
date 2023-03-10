@@ -25,7 +25,7 @@ export default function AllVideos() {
               src={featuredVideo[0]?.url}
               title="*FEATURE VIDEO*"
             />
-            <div className="p-2 text-2xl text-center font-outline-2">
+            <div id="text-shadow" className="p-2 text-2xl text-center">
               <h2>*FEATURE VIDEO*</h2>
             </div>
           </div>
@@ -34,7 +34,7 @@ export default function AllVideos() {
               src="https://www.youtube.com/embed/mvCgSqPZ4EM"
               title="Friends in Low Places"
             />
-            <div className="p-2 text-xl text-center font-outline-2">
+            <div id="text-shadow" className="p-2 text-xl text-center">
               <h2>Friends in Low Places</h2>
             </div>
           </div>
@@ -43,7 +43,7 @@ export default function AllVideos() {
               src="https://www.youtube.com/embed/0MS3OUyOnyo"
               title="Rodeo"
             />
-            <div className="p-2 text-xl text-center font-outline-2">
+            <div id="text-shadow" className="p-2 text-xl text-center">
               <h2>Rodeo</h2>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function AllVideos() {
               src="https://www.youtube.com/embed/mT56hZhmP9E"
               title="The Thunder Rolls"
             />
-            <div className="p-2 text-xl text-center font-outline-2">
+            <div id="text-shadow" className="p-2 text-xl text-center">
               <h2>The Thunder Rolls</h2>
             </div>
           </div>
