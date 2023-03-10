@@ -32,12 +32,12 @@ export default function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route
             path="/live"
-            element={
+            element={(
               <LivePage
                 messages={messages}
                 setMessages={setMessages}
               />
-            }
+            )}
           />
           <Route path="/videos" element={<AllVideos />} />
           <Route
@@ -47,17 +47,17 @@ export default function App() {
           <Route
             path="/admin/*"
             element={
-              currEmail === admin ||
-              currEmail === altAdmin ? (
+              currEmail === admin
+              || currEmail === altAdmin ? (
                 <SuperUser
                   messages={messages}
                   setMessages={setMessages}
                 />
-              ) : (
-                <div className="flex justify-center">
-                  No Authorization
-                </div>
-              )
+                ) : (
+                  <div className="flex justify-center">
+                    No Authorization
+                  </div>
+                )
             }
           />
           <Route path="/checkout" element={<Payment />} />

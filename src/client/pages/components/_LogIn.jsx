@@ -62,12 +62,11 @@ export function LogIn() {
   };
 
   if (
-    status === 'authenticated' &&
-    userId === import.meta.env.VITE_SUPERUSER_UID
+    status === 'authenticated' && userId === import.meta.env.VITE_SUPERUSER_UID
   ) {
     // return (
     //   <Link
-    //     to="../superuser"
+    //     to="../admin"
     //     className="flex justify-center"
     //   >
     //     Click To Go To Admin Page
