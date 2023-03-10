@@ -7,6 +7,7 @@ import { db } from '../../../../config/firebaseFE';
 import AddVideoForm from './AddVideoForm.jsx';
 import { updateFeaturedVideo } from '../../../redux/global';
 import { get, update } from '../../../api/firestore-services.js';
+import VideoTabEntry from './VideoTabEntry.jsx';
 
 // renders list of all videos from DB collection and allows superuser CRUD functionality
 export default function VideosTab() {
@@ -39,28 +40,20 @@ export default function VideosTab() {
   };
 
   return (
-    <section className="w-2/3 h-1/2 max-h-fit border-solid border-2 border-current overflow-y-scroll">
-      <h1 className="border-solid border-2 border-red">VIDEOS TAB</h1>
+    <section className="mr-5 max-w-4/5 h-2/3 md:h-5/6 max-h-fit border-solid border-2 border-current overflow-auto rounded-xl">
+      <h1 className="headers border-solid border-2 border-red grid grid-cols-3 sm:grid-cols-5">
+        <div className="font-bold">videos</div>
+        <div className="font-bold">date uploaded</div>
+        <div className="font-bold">views</div>
+      </h1>
       <ul className="">
         {videos?.map((video) => (
-          <li className="flex gap-5 border-solid border-2 border-current-500">
-            <p>{`title: ${video?.data.title}`}</p>
-            <p>{`description: ${video?.data.description}`}</p>
-            <p>{`date uploaded: ${video?.data.createdAt.toDate().toDateString()}`}</p>
-            <p>{`views: ${video?.data.views}`}</p>
-            <button
-              onClick={() => deleteVideo(video?.id)}
-              type="submit"
-            >
-              delete video
-            </button>
-            <button
-              onClick={() => setFeatured(video)}
-              type="button"
-            >
-              select video as featured
-            </button>
-          </li>
+          <VideoTabEntry
+            video={video}
+            key={video.id}
+            deleteVideo={deleteVideo}
+            setFeatured={setFeatured}
+          />
         ))}
       </ul>
     </section>

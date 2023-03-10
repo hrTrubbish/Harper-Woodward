@@ -10,7 +10,7 @@ export default function TourDateList({ tours }) {
   };
 
   return (
-    <div className="sm:w-3/4 sm:m-auto">
+    <div id="tours-section" className="sm:w-3/4 sm:m-auto">
       {tours.map((tour) => (
         <ul key={tour?.id} className="my-2">
           <div className="flex justify-between items-center">
