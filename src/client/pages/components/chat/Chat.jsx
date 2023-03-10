@@ -22,7 +22,7 @@ export default function Chat({
 
   return (
     <div className="flex flex-col justify-between h-full">
-      {userId
+      {userName
         ? (
           <div>
             <MessagePanel className="overflow-auto overscroll-contain h-full max-h-full" messages={messages} />

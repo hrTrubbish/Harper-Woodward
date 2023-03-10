@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import io from 'socket.io-client';
 import * as mediasoupClient from 'mediasoup-client';
-import AddMessage from './components/live/AddMessage.jsx';
-import ViewerMessageList from './components/live/ViewerMessageList.jsx';
 import Chat from './components/chat/Chat.jsx';
+import { AuthContext } from './components/_AuthProvider.jsx';
 
 const SERVER = 'http://localhost:3001';
 
@@ -12,6 +11,7 @@ export default function LivePage({ messages, setMessages }) {
   const [socket, setSocket] = useState(null);
   const [streamLive, setStream] = useState(false);
   const [watching, setWatching] = useState(false);
+  const { userName } = useContext(AuthContext);
 
   // SUPPORTING MEDIASOUP VARIABLES
   let rtpCapabilities;
@@ -129,7 +129,7 @@ export default function LivePage({ messages, setMessages }) {
 
     newSocket.on('connection-success', ({ socketId, allMessages }) => {
       setMessages(allMessages);
-      newSocket.emit('new-user', { id: socketId, name: 'test' });
+      newSocket.emit('new-user', { id: socketId, name: 'user' });
 
       newSocket.emit('check-stream-status', (streamStatus) => {
         if (streamStatus && !watching) {
@@ -175,7 +175,7 @@ export default function LivePage({ messages, setMessages }) {
             ? (
               <>
                 <video id="watch-stream" className="hide-stream border-solid border-2 border-current mt-2" autoPlay />
-                <button id="stream-btn" type="button">Watch Live Stream</button>
+                <button id="stream-btn" type="button" onClick={handleStream}>Watch Live Stream</button>
               </>
             )
             : (
@@ -191,6 +191,7 @@ export default function LivePage({ messages, setMessages }) {
       </div>
       <div className="flex flex-col justify-between border-solid border-2 border-current mt-4 mb-2 w-3/12 p-6">
         <Chat
+          socket={socket}
           messages={messages}
           setMessages={setMessages}
         />
