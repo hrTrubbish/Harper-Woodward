@@ -85,7 +85,7 @@ export function LogIn() {
       ) : (
         <div>
           <div className="flex text-3xl justify-center mt-12">
-            Sign in
+            Sign In
           </div>
           <form
             className="flex flex-col items-left mt-4"
@@ -97,7 +97,7 @@ export function LogIn() {
             >
               Email:
               <input
-                className="w-full"
+                className="w-full mt-2"
                 id="log-email"
                 type="email"
                 value={email}
@@ -112,7 +112,7 @@ export function LogIn() {
             >
               Password:
               <input
-                className="w-full"
+                className="w-full mt-2"
                 id="log-pass"
                 type="password"
                 value={password}
@@ -131,14 +131,14 @@ export function LogIn() {
               <div className="text-center">Don&apos;t have account ?</div>
               <Link
                 to="/signup"
-                className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 m-8 self-center"
+                className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 mb-8 mt-2 self-center"
               >
                 Create Account With Email and Password
               </Link>
-              <div className="text-center">Or you can</div>
+              <div className="text-center">Or</div>
               <button
                 type="button"
-                className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 m-8 self-center"
+                className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 mb-8 mt-2 self-center"
                 onClick={handleGoogleLogIn}
               >
                 Sign Up and Log In with Google
