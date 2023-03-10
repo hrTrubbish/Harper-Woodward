@@ -1,57 +1,33 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function NavigationDrawer() {
   return (
     <nav className="flex flex-col">
       <ul className="mx-auto">
         <li className="my-5">
-          <NavLink
-            to="/admin"
-            activeClassName="active-link"
-          >
-            Live Stream
-          </NavLink>
+          <Link to="/admin">Live Stream</Link>
         </li>
         <li className="my-5">
-          <NavLink
-            to="/admin/stats"
-            activeClassName="active-link"
-          >
-            Stats List
-          </NavLink>
+          <Link to="/admin/stats">Stats List</Link>
         </li>
         <li className="my-5">
-          <NavLink
-            to="/admin/add-tour-dates"
-            activeClassName="active-link"
-          >
+          <Link to="/admin/add-tour-dates">
             Add Tour Dates
-          </NavLink>
+          </Link>
         </li>
         <li className="my-5">
-          <NavLink
-            to="/admin/add-video-form"
-            activeClassName="active-link"
-          >
+          <Link to="/admin/add-video-form">
             Add Video Form
-          </NavLink>
+          </Link>
         </li>
         <li className="my-5">
-          <NavLink
-            to="/admin/schedule-streams"
-            activeClassName="active-link"
-          >
+          <Link to="/admin/schedule-streams">
             Schedule Streams
-          </NavLink>
+          </Link>
         </li>
         <li className="my-5">
-          <NavLink
-            to="/admin/videos"
-            activeClassName="active-link"
-          >
-            Videos
-          </NavLink>
+          <Link to="/admin/videos">Videos</Link>
         </li>
       </ul>
     </nav>

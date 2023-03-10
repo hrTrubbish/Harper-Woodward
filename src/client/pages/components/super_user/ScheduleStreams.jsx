@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DateTime } from 'luxon';
-import { getStreams } from '../../../redux/global';
+import {
+  getStreams,
+  getFeatured,
+} from '../../../redux/global';
 import { FormInput, FormTextarea } from '../common';
 import {
+  createOrUpdate,
   post,
   remove,
   update,
@@ -22,7 +26,9 @@ const initialForm = {
 export default function ScheduleStreams() {
   const dispatch = useDispatch();
   const [form, setForm] = useState(initialForm);
-  const { streams } = useSelector((state) => state.global);
+  const { streams, featuredStream } = useSelector(
+    (state) => state.global,
+  );
   const [formMode, setFormMode] = useState('Add');
   const [currStreamId, setCurrStreamId] = useState('');
 
@@ -89,26 +95,43 @@ export default function ScheduleStreams() {
     }
   };
 
+  const setFeaturedStream = async () => {
+    createOrUpdate('featured', {
+      streamId: currStreamId,
+    });
+    dispatch(getFeatured());
+  };
+
   useEffect(() => {
-    dispatch(getStreams());
+    Promise.all([
+      dispatch(getStreams()),
+      dispatch(getFeatured()),
+    ]);
   }, []);
 
   const scheduleDisplay = (params) =>
     `${params?.eventName} (${dateConverter(
       params?.date,
     )} - ${params?.maxAttendees} Attendees): ${
-      params?.isAvailable ? 'Still available' : 'Closed'
+      params?.isAvailable ? 'Open' : 'Closed'
     } `;
 
   return (
-    <div className="md:max-w-2xl">
+    <div className="md:max-w-3xl">
       {/* Streams section */}
       {streams?.length > 0 && <div>Current streams</div>}
       <ul className="divide-y divide-gray-200 text-sm mb-6">
         {streams.map((event) => (
-          <li key={event?.id} className="py-2 flex">
+          <li key={event?.id} className="flex py-2">
             <div className="w-full flex justify-between">
-              <p>{scheduleDisplay(event)}</p>
+              <div className="flex gap-2 items-center">
+                <p>{scheduleDisplay(event)}</p>
+                {event?.id === featuredStream && (
+                  <div className="border px-2 rounded-md">
+                    Featured
+                  </div>
+                )}
+              </div>
               <div className="flex gap-2">
                 <button
                   type="button"
@@ -146,21 +169,29 @@ export default function ScheduleStreams() {
       </div>
       <form aria-label="form" onSubmit={formHandler}>
         {formMode === 'Update' && (
-          <div>
-            <p>Currently displaying</p>
-            <select
-              value={form.isAvailable ? 'yes' : 'no'}
-              className="w-20"
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  isAvailable: e.target.value === 'yes',
-                })
-              }
+          <div className="flex items-start justify-between">
+            <div>
+              <p>Currently displaying</p>
+              <select
+                value={form.isAvailable ? 'yes' : 'no'}
+                className="w-20"
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    isAvailable: e.target.value === 'yes',
+                  })
+                }
+              >
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <button
+              type="button"
+              onClick={setFeaturedStream}
             >
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
+              Set as featured
+            </button>
           </div>
         )}
         <FormInput
