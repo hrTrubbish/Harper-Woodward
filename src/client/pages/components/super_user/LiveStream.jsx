@@ -4,6 +4,8 @@ import Chat from '../chat/Chat.jsx';
 function LiveStream({
   handleStream, messages, setMessages, socket,
 }) {
+  const host = true;
+
   return (
     <div className="flex flex-col gap-2 md:flex md:flex-row">
       <div className="flex flex-col justify-center w-11/12 md:w-3/4">
@@ -17,7 +19,13 @@ function LiveStream({
           Start Livestream
         </button>
       </div>
-      <Chat messages={messages} setMessages={setMessages} socket={socket} streamLive={true} />
+      <Chat
+        messages={messages}
+        setMessages={setMessages}
+        socket={socket}
+        userName={host}
+        streamLive={host}
+      />
     </div>
   );
 }

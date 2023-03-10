@@ -195,7 +195,7 @@ export default function LivePage({ messages, setMessages }) {
             )
             : (
               <div id="stream-placeholder" className="flex flex-col border-solid border-2 border-current">
-                <h1 id="placeholder-heading" className="self-center text-3xl">Check Back Later</h1>
+                <h1 id="placeholder-heading" className="self-center text-3xl">Check Back Later Y'all!</h1>
               </div>
             )}
         </div>
