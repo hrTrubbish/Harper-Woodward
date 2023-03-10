@@ -102,7 +102,7 @@ export function LogIn() {
                   id="log-email"
                   type="email"
                   value={email}
-                  placeholder="Email ..."
+                  placeholder="Email..."
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
@@ -117,7 +117,7 @@ export function LogIn() {
                   id="log-pass"
                   type="password"
                   value={password}
-                  placeholder="Password ..."
+                  placeholder="Password..."
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
@@ -126,15 +126,15 @@ export function LogIn() {
                 type="submit"
                 className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 m-6 self-center"
               >
-                Login With Email
+                Login
               </button>
-              <div className="flex flex-col justify-center mt-12">
+              <div className="flex flex-col justify-center mt-8">
                 <div className="text-center">Don&apos;t have account ?</div>
                 <Link
                   to="/signup"
                   className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 mb-8 mt-2 self-center"
                 >
-                  Create Account With Email and Password
+                  Create Account
                 </Link>
                 <div className="text-center">Or</div>
                 <button
@@ -142,7 +142,7 @@ export function LogIn() {
                   className="bg-garthbeige hover:bg-white text-garthbrown font-bold py-2 px-4 rounded p-6 mb-8 mt-2 self-center"
                   onClick={handleGoogleLogIn}
                 >
-                  Sign Up and Log In with Google
+                  Log In with Google
                 </button>
               </div>
             </form>
