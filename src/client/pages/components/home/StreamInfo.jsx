@@ -22,7 +22,7 @@ export default function StreamInfo({ streams }) {
   );
 
   return (
-    <div className="streaminfo flex flex-col m-10 px-10">
+    <div className="streaminfo flex flex-col m-10 px-10" id="upcoming-stream">
       <span className="text-3xl self-center mb-4">
         upcoming stream
       </span>

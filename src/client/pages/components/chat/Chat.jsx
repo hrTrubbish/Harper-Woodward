@@ -24,11 +24,21 @@ export default function Chat({
     <div className="flex flex-col justify-between h-full">
       {userName
         ? (
-          <div>
+          <div className="border-current border-2 rounded-lg mr-auto h-80 md:h-max overflow-y-auto">
             <MessagePanel className="overflow-auto overscroll-contain h-full max-h-full" messages={messages} />
-            <form className="flex flex-row mt-2 space-x-3 space-y-2 content-center" onSubmit={handleSubmit}>
-              <input className="w-10/12" onChange={handleInput} value={input} />
-              <button type="submit">Send</button>
+            <form className="flex flex-row mt-2 space-x-3 space-y-2 content-center" onSubmit={handleSubmit} className="flex flex-col">
+              <input
+                className="w-10/12"
+                onChange={handleInput}
+                value={input}
+                className="rounded-lg"
+              />
+              <button
+                className="rounded-md bg-garthbeige text-garthbrown hover:bg-white p-2 justify-self-end"
+                type="submit"
+              >
+                Send
+              </button>
             </form>
           </div>
         )
