@@ -14,7 +14,7 @@ A web application for holding live stream concerts with live chat between the vi
 ![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)
 ![WebRTC](https://img.shields.io/static/v1?style=for-the-badge&message=WebRTC&color=333333&logo=WebRTC&logoColor=FFFFFF&label=)
 
-**Database:**
+**Database**
 <br>
 ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 
@@ -23,15 +23,15 @@ A web application for holding live stream concerts with live chat between the vi
 
 ## Features
 
-#### Live streaming of concerts
+### Live streaming of concerts
 
 * Implemented Web RTC and Socket.io to provide a scalable solution for real-time video and audio streaming of concerts.
 
-#### Live chat with fans
+### Live chat with fans
 
 * Designed a chat feature using Socket.io and authentication services, which allowed fans to interact with each other and with the musician during concerts.
 
-#### User authentication and authorization
+### User authentication and authorization
 
 * Established a secure authentication system utilizing Firebase, which allowed users to create accounts, log in securely, and interact with chat.
 
@@ -77,12 +77,6 @@ npm install
 npm run dev
 ```
 
-
-
-#### Start webpack
-```bash
-npm run dev
-```
 
 The app is ready at http://localhost:3000/
 
