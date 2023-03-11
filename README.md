@@ -2,6 +2,15 @@
 
 A web application for holding live stream concerts with live chat between the viewers and country artist, Harper Woodward. The app will require authentication and be a secure space for the artist to reach out to their audience. Past concerts will be viewable on the site for those who were not there for the live stream performance.
 
+## Authors
+- [Brett Eastman](https://github.com/BrettEastman)
+- [David Zhang](https://github.com/davidzny195)
+- [George Khoury](https://github.com/khouryg)
+- [Jerrod Varney](https://github.com/jerrodvarney)
+- [Kevin Le](https://github.com/kevinleaves)
+- [Tyler Towery](https://github.com/tylertowery)
+- [Zhixiang Peng](https://github.com/VesLan)
+
 ## Tech Stack
 
  **Frontend**
@@ -56,12 +65,12 @@ git clone  https://github.com/hrTrubbish/Brooks-Garth.git
 #### Go to the project directory
 
 ```bash
-cd
+cd Brooks-Garth
 ```
 
 - Create a `.env` file like `example.env`
 
-
+#### Jerrod's instructions for WebRTC setup
 
 #### Install dependencies
 
