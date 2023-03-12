@@ -54,9 +54,9 @@ A web application for holding live stream concerts with live chat between the vi
 #### Dev Environment Setup and Support For Mediasoup
 
 In order to run mediasoup, you must ensure your development environment has the following dependencies:
-1: C++ Compiler
-2: Python Version 3.6+
-3: GNU Make
+* C++ Compiler
+* Python Version 3.6+
+* GNU Make
 
 For more details and specifics for your OS and the exact dependencies required, please visit the following link which will take you to the Mediasoup installation instructions:
 Link: https://mediasoup.org/documentation/v3/mediasoup/installation/
