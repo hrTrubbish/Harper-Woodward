@@ -58,8 +58,7 @@ In order to run mediasoup, you must ensure your development environment has the 
 * Python Version 3.6+
 * GNU Make
 
-For more details and specifics for your OS and the exact dependencies required, please visit the following link which will take you to the Mediasoup installation instructions:
-Link: https://mediasoup.org/documentation/v3/mediasoup/installation/
+For more details and specifics for your OS and the exact dependencies required, please visit the following link which will take you to the Mediasoup installation instructions: https://mediasoup.org/documentation/v3/mediasoup/installation/
 
 
 ## Run Locally
