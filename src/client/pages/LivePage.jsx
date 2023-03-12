@@ -194,13 +194,13 @@ export default function LivePage({ messages, setMessages }) {
               </>
             )
             : (
-              <div id="stream-placeholder" className="flex flex-col border-solid border-2 border-current">
+              <div id="stream-placeholder" className="flex flex-col">
                 <h1 id="placeholder-heading" className="self-center text-3xl">Check Back Later Y'all!</h1>
               </div>
             )}
         </div>
         <h4 className="text-sm md:text-3xl">
-          *Live* Brooks Garth free show to raise awareness about dangling commas
+          *Live* Harper Woodward
         </h4>
         <span>{`Viewers: ${viewerCount}`}</span>
       </div>

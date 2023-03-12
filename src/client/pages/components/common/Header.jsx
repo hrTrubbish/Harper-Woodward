@@ -18,7 +18,7 @@ export default function Header() {
             </HashLink>
           </div>
           <Link to="/" id="logo" className="mb-4">
-            Brooks Garth
+            Harper Woodward
           </Link>
           {status === 'authenticated' && userId ? (
             <div className="header-right">

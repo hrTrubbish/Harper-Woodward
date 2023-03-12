@@ -50,7 +50,7 @@ export default function StreamInfo({ streams }) {
         </div>
         <img
           id="upcoming-img"
-          src="src/client/styles/img/BrooksGarth3.png"
+          src="src/client/styles/img/pretty-woman-playing-guitar-field.jpg"
           className="brooks border-solid border-2 border-current w-1/2 mt-10 mx-20"
           alt=""
         />
