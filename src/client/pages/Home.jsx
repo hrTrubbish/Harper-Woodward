@@ -62,13 +62,14 @@ export default function Home() {
         </span>
         <div className="info-div flex flex-row-reverse justify-around">
           <img
-            src="src/client/styles/img/BrooksGarth4.png"
+            src="src/client/styles/img/beautiful-woman-with-guitar-nature.jpg"
             className=" brooks w-2/5 border-solid border-2 border-current"
             alt="good ole cowboy"
           />
           <div id="info-text" className="flex flex-col self-center">
             <span>
-              Brooks Garth is a legendary country singer with a soulful voice and electrifying stage presence. With over three decades of experience, he's one of the most recognizable figures in the music industry, earning multiple Grammy Awards and countless accolades. His iconic hits like "Friends in Low Places" continue to resonate with fans of all ages.
+              {/* eslint-disable-next-line max-len */}
+              Harper Woodward is a legendary country singer with a soulful voice and electrifying stage presence. With over a decade of experience, she's one of the most recognizable figures in the country music, releasing multiple albums and receiving countless accolades from her peers. Her iconic hits like "Down and Out in Luckenbach" continue to resonate with fans of all ages.
             </span>
             <span className="info-bottom">NEXT EVENT: 3/15/23</span>
           </div>
