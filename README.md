@@ -81,7 +81,7 @@ For more details and specifics for your OS and the exact dependencies required, 
 ## Run Locally
 
 ```bash
-git clone  https://github.com/hrTrubbish/Brooks-Garth.git
+git clone  https://github.com/hrTrubbish/Harper-Woodward.git
 ```
 
 
@@ -89,7 +89,7 @@ git clone  https://github.com/hrTrubbish/Brooks-Garth.git
 #### Go to the project directory
 
 ```bash
-cd Brooks-Garth
+cd Harper-Woodward
 ```
 
 - Create a `.env` file like `example.env`
