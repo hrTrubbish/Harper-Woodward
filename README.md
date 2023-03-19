@@ -51,23 +51,18 @@ A web application for holding live stream concerts with live chat between the vi
 
 ## Preview
 <p float="left">
-  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150506-4cc02b3c-812c-4e5e-a301-cae044e86b2d.gif" width="45%"/>
-  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150762-e5a97282-8f9d-46b7-801a-75c1ea49b6f6.gif" width="45%"/>
+  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150506-4cc02b3c-812c-4e5e-a301-cae044e86b2d.gif" width="49%"/>
+  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150762-e5a97282-8f9d-46b7-801a-75c1ea49b6f6.gif" width="49%"/>
 </p>
 
 <p float="left">
-  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150511-43a410f8-00df-48c0-8730-4b01ee7a92b0.gif" width="45%"/>
-  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150503-0f3d9016-6da6-4f2a-8c5e-f82bba1b8bd2.gif" width="45%"/>
+  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150511-43a410f8-00df-48c0-8730-4b01ee7a92b0.gif" width="49%"/>
+  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150503-0f3d9016-6da6-4f2a-8c5e-f82bba1b8bd2.gif" width="49%"/>
 </p>
 
 <p float="left">
-  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150266-15c1c6cf-1619-465f-a528-899ab39ad764.gif" width="45%"/>
-  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150276-e4f8477c-2ee9-46d5-b099-aeba1194852f.gif" width="45%"/>
-</p>
-
-<p float="left">
-  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150787-458b65cb-677c-4ca6-82ae-f4eb2ac01a47.gif" width="45%"/>
-  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150793-303ad3d5-862e-439b-a15a-959ab07ac44f.gif" width="45%"/>
+  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150266-15c1c6cf-1619-465f-a528-899ab39ad764.gif" width="49%"/>
+  <img alt="demo image" src="https://user-images.githubusercontent.com/76603041/226150276-e4f8477c-2ee9-46d5-b099-aeba1194852f.gif" width="49%"/>
 </p>
 
 
